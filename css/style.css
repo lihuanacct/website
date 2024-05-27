@@ -4159,7 +4159,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   text-align: center;
   cursor: pointer;
   z-index: 1;
-  bottom: 20px;
+  bottom: 50px;
   right: 17px;
   border-radius: 50%;
   color: #fff;
@@ -4173,6 +4173,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
     width: 30px;
     height: 30px;
     line-height: 30px;
+    bottom: 80px;
     right: 0;
   }
 }
@@ -4553,7 +4554,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   background-color: #222;
   position: fixed;
   right: 0;
-  bottom: 80px;
+  bottom: 130px;
   right: 17px;
   width: 50px;
   height: 50px;
@@ -4575,7 +4576,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
     width: 30px;
     height: 30px;
     line-height: 30px;
-    bottom: 60px;
+    bottom: 120px;
     right: 0;
   }
 }
