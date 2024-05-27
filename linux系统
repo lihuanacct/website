@@ -702,7 +702,7 @@
 
 <p>5、环境变量的设置</p>
 <p>export  变量名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">将 name 变量 在其他子程序中执行，需要设置环境变量，其他进程才会获取到值。</span><br><span class="line">[root@localhost /]# name=lihuan</span><br><span class="line">[root@localhost /]# bash 开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# 获取不到</span><br><span class="line">[root@localhost /]# exit 退出子进程</span><br><span class="line">[root@localhost /]# export name 设置环境变量</span><br><span class="line">[root@localhost /]# bash 重新开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# lihuan</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">将 name 变量 在其他子程序中执行，需要设置环境变量，其他进程才会获取到值。</span><br><span class="line">[root@localhost /]# name=***</span><br><span class="line">[root@localhost /]# bash 开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# 获取不到</span><br><span class="line">[root@localhost /]# exit 退出子进程</span><br><span class="line">[root@localhost /]# export name 设置环境变量</span><br><span class="line">[root@localhost /]# bash 重新开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# ***</span><br></pre></td></tr></table></figure>
 
 
 
@@ -825,7 +825,7 @@ echo 字符串&gt;&gt;文件名
         <div class="copyright">
   <ul class="post-copyright">
     <li class="post-copyright-author">
-    <strong>author:  </strong>lihuan</a>
+    <strong>author:  </strong>夜来风</a>
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
@@ -1566,7 +1566,7 @@ echo 字符串&gt;&gt;文件名
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2023 - 2025 <a target="_blank" rel="noopener" href="https://www.baidu.com">百度</a> | Powered by <a target="_blank" rel="noopener" href="https://www.baidu.com">lihuan</a></p>
+            <p>Copyright © 2023 - 2025 <a target="_blank" rel="noopener" href="https://www.baidu.com">百度</a> | Powered by <a target="_blank" rel="noopener" href="https://www.baidu.com">夜来风</a></p>
 
           </div>
         
