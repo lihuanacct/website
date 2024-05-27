@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>linux系统的网络配置文档 | 星猫博客</title>
+  <title>linux系统的安装文档 | 星猫博客</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -370,14 +370,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        linux系统的网络配置文档
+        linux系统的安装文档
       </span>
     </div>
     
@@ -417,74 +417,47 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>进入虚拟网络编辑器</p>
-<p>选择vmnet8模式，设置子网ip  子网掩码</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
+        <p>安装虚拟机，vmware</p>
+<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
+<p>进入 debian官网 <a target="_blank" rel="noopener" href="https://www.debian.org/">https://www.debian.org/</a></p>
+<p>点击其他下载链接</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"/>
 
 
 
-<p>DHCP设置 ，</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291541604.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291541604.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329154114539" style="zoom:67%;" />
+<p>点击获取完整镜</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329160514227" style="zoom:67%;" />
 
-<p>NAT设置</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631742.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631742.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
+<p>通过 HTTP 下载 CD&#x2F;DVD 映像文件</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329160619964" style="zoom:67%;" />
 
+<p>选择DVD，amd64</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329160702026"></p>
+<p>点击下载镜像</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329160733488" style="zoom:67%;" />
 
+<p>进入vmware安装镜像</p>
+<p>第一步选择安装图像化界面 ，graphic install</p>
+<p>网络配置选择暂不配置</p>
+<p>磁盘分区，选择最大连续空间</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329162800220" style="zoom:67%;" />
 
-<p>网络共享中心  &gt;  更改适配器设置  &gt; 选择vmnet8，点击属性，选择ipv4，点击属性</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051629178.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051629178.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
+<p>boot (启动)200M， swap (交换区) (虚拟机配置的内存大小，如配置了2G，这里写2G)&#x2F;  ，&#x2F; (根目录，数据存放，依据虚拟机配置的空间)</p>
+<p>也可以设置将所有文件放入同一个分区</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329161729770" style="zoom:67%;" />
 
-<p>ip与NAT设置中网关IP一致</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051627606.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051627606.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-202403291545658" style="zoom:67%;" />
+<p>是否使用网络镜像点，选择否，系统自带默认镜像源为阿里云镜像源</p>
+<p>软件选择，桌面选KDE或GNOME</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329161852601" style="zoom:67%;" />
 
-
-
-<p>查看网卡名称</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
-
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632488.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632488.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
-
-<p>显示为 ens33</p>
-<h3 id="centos7网络配置"><a href="#centos7网络配置" class="headerlink" title="centos7网络配置"></a>centos7网络配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">在root用户下： su </span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br><span class="line">TYPE=&quot;Ethernet&quot;</span><br><span class="line">PROXY_METHOD=&quot;none&quot;</span><br><span class="line">BROWSER_ONLY=&quot;no&quot;</span><br><span class="line">DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV4_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6INIT=&quot;yes&quot;</span><br><span class="line">IPV6_AUTOCONF=&quot;yes&quot;</span><br><span class="line">IPV6_DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV6_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6_ADDR_GEN_MODE=&quot;stable-privacy&quot;</span><br><span class="line">NAME=&quot;ens33&quot;</span><br><span class="line">UUID=&quot;febd5220-8d5d-30a8-a668-fcdd922512e0&quot;</span><br><span class="line">DEVICE=&quot;ens33&quot;</span><br><span class="line"></span><br><span class="line">//需要修改的地方</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">BOOTPROTO=&quot;static&quot;</span><br><span class="line"></span><br><span class="line">//需要添加的地方</span><br><span class="line">IPADDR=&quot;192.168.2.128&quot;  </span><br><span class="line">GATEWAY=&quot;192.168.2.1&quot;  </span><br><span class="line">NETMASK=255.255.255.0&quot; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>配置DNS服务器</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS=114.114.114.114</span><br></pre></td></tr></table></figure>
-
-<p>配置完成后，重启网络</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>注意：如果 ens33 网卡为DOWN，意味着它目前处于禁用状态，可能没有被正确配置或者启动。需要确保ens33接口已启用并配置了IP地址。 </p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291756769.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291756769.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329175622648"></p>
-<p>可以通过以下命令启用ens33接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set ens33 up</span><br><span class="line">sudo ip addr add &lt;ip_address&gt;/&lt;subnet_mask&gt; dev ens33</span><br><span class="line">	如：sudo ip addr add 192.168.2.128/24 dev ens33</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Debian12系统网络配置"><a href="#Debian12系统网络配置" class="headerlink" title="Debian12系统网络配置"></a>Debian12系统网络配置</h3><p>编辑网络配置文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/network/interfaces</span><br></pre></td></tr></table></figure>
-
-<p>默认</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632405.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632405.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
-<p>在后面添加</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto ens33</span><br><span class="line">iface ens33 inet static</span><br><span class="line">address 192.168.2.128</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.2.1</span><br></pre></td></tr></table></figure>
-
-<p>保存退出，重启网络</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart networking</span><br></pre></td></tr></table></figure>
-
-<p>设置dns</p>
-<p>debian 12安装后默认没有&#x2F;etc&#x2F;resolv.conf 文件，需要先创建</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br></pre></td></tr></table></figure>
-
-<p>添加内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.8.4</span><br></pre></td></tr></table></figure>
-
-<p>保存退出，重启网络</p>
+<p>是否添加GRUB启动，选择是</p>
+<p>重启</p>
+<h3 id="U盘做启动盘安装CentOS7"><a href="#U盘做启动盘安装CentOS7" class="headerlink" title="U盘做启动盘安装CentOS7"></a>U盘做启动盘安装CentOS7</h3><p>镜像下载完毕后，插入U盘，用软碟通打开</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/akk9mwe4/pic_4/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
+<p>确认U盘后，选择写入，制作完毕后开始安装。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>插入U盘，进入BIOS设置，将启动顺序设置为USB启动。</p>
+<p>选择Install Centos 7 安装</p>
+<p><a target="_blank" rel="noopener" href="https://post.smzdm.com/p/akk9mwe4/pic_6/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
 
       </div>
       <div class="post-tags-categories">
@@ -506,7 +479,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/linux系统的网络配置文档" target="_blank" title="linux系统的网络配置文档">http://example.com/linux系统的网络配置文档</a>
+    <a href="/linux系统的安装文档/" target="_blank" title="linux系统的安装文档">http://example.com/linux系统的安装文档/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -528,19 +501,30 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-nav-link">
+    <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">MySQL安装配置文档</div>
+        <div class="title-text">linux系统的网络配置文档</div>
       </div>
       
       <!-- <div class="content">
-        
-安装环境:Win10 64位软件版本:MySQL 5.7.24 解压版
+        进入虚拟网络编辑器
+选择vmnet8模式，设置子网ip  子网掩码
 
-一、下载点开下面的链接：https://do
+
+
+
+DHCP设置 ，
+
+
+NAT设置
+
+
+
+
+网
       </div> -->
     </a>
   </div>
@@ -551,17 +535,16 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3" class="post-nav-link">
+    <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">linux系统的安装文档</div>
+        <div class="title-text">kubernetes+gitlab+gitlab-runner自动化部署</div>
       </div>
       <!-- <div class="content">
-        安装虚拟机，vmware
-Debian 安装下载debian iso镜像
-进入 debian官网 https://www
+        1、kubernetes 、组件安装及集群搭建教程
+https://gitee.com/yooome/golang/bl
       </div> -->
     </a>
   </div>
@@ -777,7 +760,7 @@ Debian 安装下载debian iso镜像
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">centos7网络配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Debian12%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">Debian12系统网络配置</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Debian-%E5%AE%89%E8%A3%85"><span class="toc-text">Debian 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#U%E7%9B%98%E5%81%9A%E5%90%AF%E5%8A%A8%E7%9B%98%E5%AE%89%E8%A3%85CentOS7"><span class="toc-text">U盘做启动盘安装CentOS7</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -810,7 +793,7 @@ Debian 安装下载debian iso镜像
             
 
             <div class="post-img-box">
-              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -821,7 +804,7 @@ Debian 安装下载debian iso镜像
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">MySQL安装配置文档</a>
+              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">MySQL安装配置文档</a>
             </div>
           </div>
         
@@ -831,7 +814,7 @@ Debian 安装下载debian iso镜像
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -842,7 +825,7 @@ Debian 安装下载debian iso镜像
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">linux系统的网络配置文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">linux系统的网络配置文档</a>
             </div>
           </div>
         
@@ -852,7 +835,7 @@ Debian 安装下载debian iso镜像
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -863,7 +846,7 @@ Debian 安装下载debian iso镜像
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3">linux系统的安装文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/">linux系统的安装文档</a>
             </div>
           </div>
         
@@ -873,7 +856,7 @@ Debian 安装下载debian iso镜像
             
 
             <div class="post-img-box">
-              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -884,7 +867,7 @@ Debian 安装下载debian iso镜像
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2">kubernetes+gitlab+gitlab-runner自动化部署</a>
+              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">kubernetes+gitlab+gitlab-runner自动化部署</a>
             </div>
           </div>
         
@@ -894,7 +877,7 @@ Debian 安装下载debian iso镜像
             
 
             <div class="post-img-box">
-              <a href="/GitLab%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/GitLab%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -905,7 +888,7 @@ Debian 安装下载debian iso镜像
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2">GitLab部署</a>
+              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2/">GitLab部署</a>
             </div>
           </div>
         

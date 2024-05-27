@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>kubernetes+gitlab+gitlab-runner自动化部署 | 星猫博客</title>
+  <title>Docker+gitlab+gitlab-runner实现CI | 星猫博客</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -370,14 +370,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        kubernetes+gitlab+gitlab-runner自动化部署
+        Docker+gitlab+gitlab-runner实现CI
       </span>
     </div>
     
@@ -417,79 +417,214 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>1、kubernetes 、组件安装及集群搭建教程</p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</a></p>
-<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
-<p>访问路径 <a target="_blank" rel="noopener" href="https://192.168.223.129:30009/">https://192.168.223.129:30009</a></p>
-<p>3、gitlab安装</p>
-<p>访问路径 <a target="_blank" rel="noopener" href="http://192.168.223.129:30080/">http://192.168.223.129:30080</a></p>
-<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
-<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
+        <p>下面是在master虚拟机进行<br>安装jdk<br>安装maven</p>
+<p>在docker 中创建卷<br>在 Docker 中，卷是一种用于持久化数据的机制。它允许容器内的数据在容器被删除后仍然保留，并且可以被其他容器共享使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create gitlab-etc</span><br><span class="line">docker volume create gitlab-log</span><br><span class="line">docker volume create gitlab-opt</span><br></pre></td></tr></table></figure>
+
+<p>gitlab-etc：可能用于存储 GitLab 容器的配置文件。GitLab 是一个基于Web的Git代码仓库管理工具，配置文件通常包含了GitLab的设置、参数、密钥等信息。</p>
+<p>gitlab-log：可能用于存储 GitLab 容器的日志文件。在这个卷中，GitLab 容器将把日志文件写入到这个位置，你可以随时查看这些日志以了解 GitLab 容器的运行情况。</p>
+<p>gitlab-opt：可能用于存储 GitLab 容器的其他数据。这可能包括一些持久化的存储数据、插件、脚本等。</p>
+<p>启动gitlab容器，并通过挂载卷、端口映射等方式实现持久化存储和网络配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker run --name gitlab \    </span><br><span class="line">--hostname 192.168.223.129 \    </span><br><span class="line">--restart=always \          </span><br><span class="line">-p 80:80 \                     </span><br><span class="line">-p 443:443 \				     			</span><br><span class="line">-v gitlab-etc:/etc/gitlab \</span><br><span class="line">-v gitlab-log:/var/log/gitlab \</span><br><span class="line">-v gitlab-opt:/var/opt/gitlab \</span><br><span class="line">-d gitlab/gitlab-ce:17.0.0-ce.0	</span><br><span class="line">												</span><br><span class="line">指定容器名称。</span><br><span class="line">设置容器主机名。</span><br><span class="line">设置容器遇到异常退出时总是重新启动。相当于开机时自启。</span><br><span class="line">将主机的 80 端口映射到容器的 80 端口，以及将主机的 443 端口映射到容器的 443 端口。这是为了让GitLab 的 Web 服务（HTTP 和 HTTPS）可以从外部访问。 前面为主机端口，后面为容器端口。</span><br><span class="line">将之前创建的三个卷 gitlab-etc、gitlab-log 和 gitlab-opt 分别挂载到容器的 /etc/gitlab、/var/log/gitlab 和 /var/opt/gitlab 目录，实现了持久化存储。</span><br><span class="line">以后台守护进程的方式运行容器。指定要运行的 Docker 镜像，这里是 GitLab CE 的版本号为 17.0.0-ce.0 的镜像。</span><br></pre></td></tr></table></figure>
+
+<p>查看gitlab日志文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f gitlab</span><br></pre></td></tr></table></figure>
+
+<p>查找GitLab 容器初始化时生成的管理员密码。用户名为root</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it gitlab grep &#x27;Password:&#x27; /etc/gitlab/initial_root_password</span><br></pre></td></tr></table></figure>
+
+<p>登录官网，修改密码</p>
+<p>下面是在node虚拟机</p>
+<p>安装jdk<br>安装maven<br>上面的版本个master相同</p>
+<p>添加安装源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner//script.rpm.sh | sudo bash</span><br></pre></td></tr></table></figure>
+
+<p>安装gitlab-runner</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y gitlab-runner-17.0.0</span><br></pre></td></tr></table></figure>
+
+<p>#查看所有用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -d: -f1 /etc/passwd</span><br></pre></td></tr></table></figure>
+
+
+<p>#删除gitlab-runner配置信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner uninstall</span><br></pre></td></tr></table></figure>
+
+<p>这一步是为了下面配置某些用户执行某些命令的权限，而不是所有人都可以执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner install --working-directory /home/gitlab-runner --user root</span><br></pre></td></tr></table></figure>
+
+<p>设置gitlab下载的代码放在&#x2F;home&#x2F;gitlab-runner 目录下，同时让这条命令由root用户执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload  重新加载守护进程的配置文件</span><br><span class="line">systemctl start gitlab-runner  开启gitlab-runner</span><br><span class="line">systemctl enable gitlab-runner  将gitlab-runner 设置为开机自启</span><br></pre></td></tr></table></figure>
 
 
 
-<p>4、gitlab-runner 安装</p>
-<p>vi docker-compose.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
+<p>创建一个runner</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193157972.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193157972.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193157972"></p>
+<p>添加标签,相当于给这个runner起了个名字。</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193127185.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193127185.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193127185"></p>
+<p>将这段代码复制到node虚拟机执行。将gitlab-runner注册到master</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193501370.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193501370.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193501370"></p>
+<p>执行器选择 shell</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193644637.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193644637.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193644637"></p>
+<p>创建代码仓库</p>
+<p>上传代码</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193948828.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193948828.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193948828"></p>
+<p>安装好maven 后，在node节点中的maven配置文件  settings.xml 中将镜像仓库改为阿里云</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;  </span><br><span class="line">    &lt;id&gt;alimaven&lt;/id&gt;  </span><br><span class="line">    &lt;name&gt;aliyun maven&lt;/name&gt;  </span><br><span class="line">    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;  </span><br><span class="line">    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  </span><br><span class="line">&lt;/mirror&gt; </span><br></pre></td></tr></table></figure>
 
-<p>安装java8</p>
-<p><a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">https://www.oracle.com/java/technologies/downloads/#java8</a></p>
-<p>选择 linux x64 tar.gz版本</p>
-<p>解压 包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
+<p>在 .gitlab-ci.yml文件中添加镜像源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- mvn -s/opt/environment/apache-maven-3.8.8/conf/settings.xml clean package</span><br></pre></td></tr></table></figure>
 
-<p>添加到环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
+<p>在idea 项目根目录中中创建Dockerfile 和 .gitlab-ci.yml文件</p>
+<p>Dockerfile用于镜像打包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim</span><br><span class="line">ADD ./target/my-project.jar /usr/local/</span><br><span class="line">CMD [&quot;java&quot;,&quot;-jar&quot;,&quot;/usr/local/my-project.jar&quot;]</span><br><span class="line">EXPOSE 8080</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
+<p>.gitlab-ci.yml</p>
+<p>用于说明gitlab-ci执行的流程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - build</span><br><span class="line">  - build-image</span><br><span class="line">  - push-image</span><br><span class="line">build:</span><br><span class="line">  stage: build</span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;   //设置为，当建立新的TAG 时，开始构建</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  tags:</span><br><span class="line">    - shared</span><br><span class="line">  script:</span><br><span class="line">    - mvn -s/opt/environment/apache-maven-3.8.8/conf/settings.xml clean package</span><br><span class="line">  artifacts:</span><br><span class="line">    paths:</span><br><span class="line">      - target/*.jar</span><br><span class="line">build-image:</span><br><span class="line">  stage: build-image</span><br><span class="line">  tags:</span><br><span class="line">  	#指定哪个 runner执行</span><br><span class="line">    - shared    </span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  script:</span><br><span class="line">    - docker build -t registry.cn-hangzhou.aliyuncs.com/k8s-images01/my-project:$CI_COMMIT_TAG .</span><br><span class="line">push-image:</span><br><span class="line">  stage: push-image</span><br><span class="line">  tags:</span><br><span class="line">    - shared</span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  script:</span><br><span class="line">    - docker login --username=aliyun1875389260 --password=*** registry.cn-hangzhou.aliyuncs.com</span><br><span class="line">    - docker push registry.cn-hangzhou.aliyuncs.com/k8s-images01/my-project:$CI_COMMIT_TAG</span><br></pre></td></tr></table></figure>
 
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<p>pom文件需要修改</p>
+<p>需要加上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;finalName&gt;my-project&lt;/finalName&gt;</span><br></pre></td></tr></table></figure>
 
-<p>安装 maven</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
-
-
-
-<p>注册 gitlab -runner</p>
-<p>1、获取token</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240519092836328"></p>
-<p>注册</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240519093114352"></p>
-<p>详细过程</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_51510236/article/details/134874324">https://blog.csdn.net/m0_51510236/article/details/134874324</a></p>
-<p>vi dockerfile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>构建镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
-
-<p>远程推送镜像</p>
-<p>1、阿里云镜像仓库</p>
-<p>具体参考</p>
-<p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details</a></p>
-<p>2、私有化镜像仓库部署</p>
+<p>避免打包后的文件名和 Dockerfile中不一致。</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222746191.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222746191.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523222746191"></p>
+<p>每创建一次tag，CI 就执行一次</p>
+<p>流程走完</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222938234.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222938234.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523222938234"></p>
+<p>Gitlab-runner 流水线参数</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>job</code></td>
+<td>每个作业运行不同的命令。可以定义一个或多个作业(job)。 每个作业必须具有唯一的名称（不能使用关键字）。 每个作业是独立执行的。 每个作业至少要包含一个script。</td>
+</tr>
+<tr>
+<td><code>script</code></td>
+<td>运行的Shell命令或脚本</td>
+</tr>
+<tr>
+<td><code>image</code></td>
+<td>使用Docker映像</td>
+</tr>
+<tr>
+<td><code>services</code></td>
+<td>使用Docker服务映像</td>
+</tr>
+<tr>
+<td><code>before_script</code></td>
+<td>在作业运行前运行脚本</td>
+</tr>
+<tr>
+<td><code>after_script</code></td>
+<td>在作业运行后运行脚本</td>
+</tr>
+<tr>
+<td><code>stages</code></td>
+<td>定义管道中的阶段，运行顺序</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>为工作定义一个阶段（可选，未指定默认为test阶段）</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>用于从允许运行该项目的所有Runner列表中选择特定的Runner,<code>tags</code>可让指定了标签的runner来运行作业</td>
+</tr>
+<tr>
+<td><code>only</code></td>
+<td>定义哪些分支和标签的git项目将会被job执行。</td>
+</tr>
+<tr>
+<td><code>except</code></td>
+<td>定义哪些分支和标签的git项目将不会被job执行。</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td>条件列表，用于评估和确定作业的选定属性，以及是否创建该作业</td>
+</tr>
+<tr>
+<td><code>allow_failure</code></td>
+<td>允许作业失败（失败的工作不会影响提交状态）,默认为 false</td>
+</tr>
+<tr>
+<td><code>when</code></td>
+<td>什么时候开始工作</td>
+</tr>
+<tr>
+<td><code>environment</code></td>
+<td>作业部署到的环境的名称</td>
+</tr>
+<tr>
+<td><code>cache</code></td>
+<td>在后续运行之间应缓存的文件列表</td>
+</tr>
+<tr>
+<td><code>artifacts</code></td>
+<td>成功时附加到作业的文件和目录列表</td>
+</tr>
+<tr>
+<td><code>dependencies</code></td>
+<td>通过提供要从中获取工件的作业列表，限制将哪些工件传递给特定作业</td>
+</tr>
+<tr>
+<td><code>coverage</code></td>
+<td>给定作业的代码覆盖率设置</td>
+</tr>
+<tr>
+<td><code>retry</code></td>
+<td>发生故障时可以自动重试作业的时间和次数</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>定义自定义作业级别的超时（优先于项目范围的设置）</td>
+</tr>
+<tr>
+<td><code>parallel</code></td>
+<td>多少个作业实例应并行运行</td>
+</tr>
+<tr>
+<td><code>trigger</code></td>
+<td>定义下游管道触发器</td>
+</tr>
+<tr>
+<td><code>include</code></td>
+<td>允许此作业包括外部YAML文件</td>
+</tr>
+<tr>
+<td><code>extends</code></td>
+<td>该作业将要继承的配置条目</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td>上载作业结果以用于GitLab页面</td>
+</tr>
+<tr>
+<td><code>variables</code></td>
+<td>在作业级别上定义作业变量</td>
+</tr>
+<tr>
+<td><code>interruptible</code></td>
+<td>定义在通过新的运行使其冗余时是否可以取消作业</td>
+</tr>
+<tr>
+<td><code>resource_group</code></td>
+<td>限制作业并发</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
+          
+            <a href="/tags/docker/" class="">
+              docker
+            </a>
           
             <a href="/tags/gitlab/" class="">
               gitlab
@@ -497,10 +632,6 @@
           
             <a href="/tags/gitlab-runner/" class="">
               gitlab-runner
-            </a>
-          
-            <a href="/tags/kubernetes/" class="">
-              kubernetes
             </a>
           
         </div>
@@ -514,7 +645,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/kubernetes+gitlab+gitlab-runner自动化部署" target="_blank" title="kubernetes+gitlab+gitlab-runner自动化部署">http://example.com/kubernetes+gitlab+gitlab-runner自动化部署</a>
+    <a href="/Docker+gitlab+gitlab-runner实现CI/" target="_blank" title="Docker+gitlab+gitlab-runner实现CI">http://example.com/Docker+gitlab+gitlab-runner实现CI/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -536,18 +667,18 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3" class="post-nav-link">
+    <a href="/GitLab%E9%83%A8%E7%BD%B2/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">linux系统的安装文档</div>
+        <div class="title-text">GitLab部署</div>
       </div>
       
       <!-- <div class="content">
-        安装虚拟机，vmware
-Debian 安装下载debian iso镜像
-进入 debian官网 https://www
+        非私有化访问
+方式：注册GitLab
+https://blog.csdn.net/m0_50542823/article
       </div> -->
     </a>
   </div>
@@ -558,17 +689,15 @@ Debian 安装下载debian iso镜像
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/GitLab%E9%83%A8%E7%BD%B2" class="post-nav-link">
+    <a href="/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">GitLab部署</div>
+        <div class="title-text">MySQL数据库</div>
       </div>
       <!-- <div class="content">
-        非私有化访问
-方式：注册GitLab
-https://blog.csdn.net/m0_50542823/article
+        MySQLsql语句的分类DDL：数据定义语言。用来操作数据库，表，列等。DML：数据操作语言。用来对数据库中表的数据进
       </div> -->
     </a>
   </div>
@@ -817,7 +946,7 @@ https://blog.csdn.net/m0_50542823/article
             
 
             <div class="post-img-box">
-              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -828,7 +957,7 @@ https://blog.csdn.net/m0_50542823/article
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">MySQL安装配置文档</a>
+              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">MySQL安装配置文档</a>
             </div>
           </div>
         
@@ -838,7 +967,7 @@ https://blog.csdn.net/m0_50542823/article
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -849,7 +978,7 @@ https://blog.csdn.net/m0_50542823/article
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">linux系统的网络配置文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">linux系统的网络配置文档</a>
             </div>
           </div>
         
@@ -859,7 +988,7 @@ https://blog.csdn.net/m0_50542823/article
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -870,7 +999,7 @@ https://blog.csdn.net/m0_50542823/article
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3">linux系统的安装文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/">linux系统的安装文档</a>
             </div>
           </div>
         
@@ -880,7 +1009,7 @@ https://blog.csdn.net/m0_50542823/article
             
 
             <div class="post-img-box">
-              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -891,7 +1020,7 @@ https://blog.csdn.net/m0_50542823/article
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2">kubernetes+gitlab+gitlab-runner自动化部署</a>
+              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">kubernetes+gitlab+gitlab-runner自动化部署</a>
             </div>
           </div>
         
@@ -901,7 +1030,7 @@ https://blog.csdn.net/m0_50542823/article
             
 
             <div class="post-img-box">
-              <a href="/GitLab%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/GitLab%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -912,7 +1041,7 @@ https://blog.csdn.net/m0_50542823/article
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2">GitLab部署</a>
+              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2/">GitLab部署</a>
             </div>
           </div>
         

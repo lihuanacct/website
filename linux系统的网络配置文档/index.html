@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>linux系统 | 星猫博客</title>
+  <title>linux系统的网络配置文档 | 星猫博客</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -370,14 +370,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        linux系统
+        linux系统的网络配置文档
       </span>
     </div>
     
@@ -392,8 +392,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> category：
           
-            <a href="/categories/linux/" class="post-detail-header_category">
-              linux
+            <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-detail-header_category">
+              环境配置
             </a>
           
         </span>
@@ -417,397 +417,74 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>linux 的用户切换</p>
-<p>​	su - 用户名 ，</p>
-<p>​		su - user</p>
-<p>​		su - 或 su - root ，可切换到 root用户 </p>
-<p>linux 的帮助信息</p>
-<p>​	xxx – help 命令  （会展示 xxx 命令的基本用法）</p>
-<p>​	man xxx命令（展示 xxx 命令、函数 的操作手册）</p>
-<p>​	info xxx命令 （展示更详细的文档）</p>
-<p>linux 关机命令</p>
-<p>​	sync ，将数据同步到硬盘中</p>
-<p>​	shutdown ， 关机</p>
-<p>​		shutdown -h ，可以设置关机时间</p>
-<p>​			shutdwon - h now ， 立刻关机</p>
-<p>​			shutdwon - h 20:11 ， 20:11 关机</p>
-<p>​	reboot ， 重启</p>
-<p>linux 文件权限</p>
-<p>​	用户和用户组</p>
-<p>​	ls -al 可显示文件或文件夹的详细信息和权限</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x.   2      root    root     6        6月 9 2021       crash</span><br><span class="line">权限         链接数   拥有者   用户组   文件容量     修改日期时间   文件或文件夹名</span><br></pre></td></tr></table></figure>
-
-<p>r ， 可读</p>
-<p>w ，可写</p>
-<p>X ，可执行</p>
-<p>权限开头的 - ，表示这是一个文件，</p>
-<p>​		    d ，表示这是一个文件夹</p>
-<p>权限里面的 - 表示无权限</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d      rwx           r-x          	r-x</span><br><span class="line">文件   拥有者权限     用户组权限     其他用户权限</span><br></pre></td></tr></table></figure>
-
-<p>权限可用数字表示，rwx 可看做三位二进制数 ，1 1 1，写成十进制就是7 ，- 表示二进制数 0 </p>
-<p>rwxr-xr-x ， 写位数字就是 7 5 5</p>
-<p>注：加入用户组的成员，只需要 r 权限就可以读到文件，其他用户需要 r 和 x 权限才可读到文件。</p>
-<p>如 ： -rw-r–r–  root root a.txt ，这个文件 这有root用户，和root用户组的人可以看到，其他用户看不到</p>
-<p>修改为 -rw-r–r-x ， 其他用户才可读到</p>
-<p>文件权限修改</p>
-<p>chgrp ， 修改文件或目录所属用户组</p>
-<p>chown ， 修改文件或目录拥有者</p>
-<p>chmod ，修改文件或目录权限</p>
-<p>1、chgrp</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp [-R] groupname a/b ，写上 -R ，表示将a/b下所有子目录及其文件用户组权限改为 groupname </span><br></pre></td></tr></table></figure>
-
-<p>2、chown</p>
-<p>​	chown 用法与chgrp类似</p>
-<p>​	chown 还可同时修改文件拥有者和用户组的权限</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [-R] username:groupname a/b </span><br></pre></td></tr></table></figure>
-
-<p>3、chmod</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod [-R] 权限 a/b</span><br><span class="line">chmod [-R] drwxrwxrwx a/b 或 chmod [-R] 777 a/b</span><br></pre></td></tr></table></figure>
-
-
-
-<p>符号修改权限</p>
-<p>用户：u(user)、g(group)、o(other)、a(all)</p>
-<p>权限的修改：+、-、&#x3D;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+w a.txt ， 给所有用户加上可写的权限</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a-x a.txt ， 将所有用户的执行权限去掉</span><br></pre></td></tr></table></figure>
-
-
-
-<p>目录的操作</p>
-<p>cd  ，切换目录</p>
-<p>pwd  ， 显示当前目录</p>
-<p>mkdir ， 新建目录</p>
-<p>rmdir ， 删除目录</p>
-<p>1、pwd </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd [-P] ，可显示真实目录，而非链接目录</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、mkdir，只能建立不存在的目录，存在则报错</p>
-<p>mkdir ， 新建目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br></pre></td></tr></table></figure>
-
-<p>mkdir -m ，新建目录时添加权限</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -m 777 test</span><br></pre></td></tr></table></figure>
-
-<p>mkdir -p ，新建目录时，顺便建立上级目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p test1/test2/test</span><br></pre></td></tr></table></figure>
-
-<p>mkdir -mp ，新建目录时添加权限，顺便建立上级目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -mp 777 test1/test2/test	</span><br></pre></td></tr></table></figure>
-
-
-
-<p>3、rmdir ， 只能删除存在的空目录，不存在则报错，目录不为空报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rmdir a/b</span><br><span class="line">rmdir -P a/b/c ， 删除所有空目录</span><br></pre></td></tr></table></figure>
-
-<p>要删除有文件的目录，需要使用 rm -r </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -r a</span><br><span class="line">删除a目录及目录下的文件</span><br></pre></td></tr></table></figure>
-
-
-
-<p>文件和目录管理</p>
-<p>ls， 查看文件和目录</p>
-<p>cp ，复制 文件或目录, 重命名文件</p>
-<p>rm ， 删除文件或目录</p>
-<p>mv ， 移动文件或目录或重命名</p>
-<p>1、ls</p>
-<p>​	ls ,  查看所有文件和目录，不包括隐藏文件</p>
-<p>​	ls -a , 查看全部文件和目录，及其隐藏文件，隐藏文件用 .文件名表示</p>
-<p>​	ls -l , 可写为 ll ,列出文件和目录的详细信息</p>
-<p>​	ls -al , 列出全部文件和目录及其隐藏文件的详细信息</p>
-<p>2、cp ， 复制 文件或目录, 重命名文件</p>
-<p>​	cp</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /var/log/a.log  /var/log/b.log , 将a.log文件复制到/var/log目录下，并重命名为b.log</span><br></pre></td></tr></table></figure>
+        <p>进入虚拟网络编辑器</p>
+<p>选择vmnet8模式，设置子网ip  子网掩码</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
 
-<p>​	cp -p , 复制文件，并复制属性和原本的权限</p>
-<p>​	cp -i ，若目标文件存在，也在复制前会询问</p>
-<p>​	cp -s ， 软连接，复制成符号链接文件，快捷方式</p>
-<p>​	cp -l ， 硬连接，源文件和目标文件将共享相同的 inode（索引节点），它们被视为同一个文件的不同引用。</p>
-<p>硬链接和软连接也可使用 ln 命令创建</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp -s 源文件  目标文件 </span><br><span class="line">cp -s /var/log/a.log  /var/log/b.log</span><br><span class="line">ll </span><br><span class="line">lrwxrwxrwx. 1 root   root   5   3月  31 22:05 /var/log/b.log -&gt; /var/log/a.log，快捷方式-&gt;源文件</span><br></pre></td></tr></table></figure>
 
-<p>​	</p>
-<p>硬连接：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -l 源文件  目标文件</span><br><span class="line">ln -l /var/a.txt  /var/b.txt</span><br></pre></td></tr></table></figure>
 
-<p>软连接：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s 源文件  目标文件</span><br><span class="line">ln -s /var/a.txt  /var/b.txt</span><br></pre></td></tr></table></figure>
+<p>DHCP设置 ，</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291541604.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291541604.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329154114539" style="zoom:67%;" />
 
-<p>注：硬链接是指向文件系统中同一数据块的新文件名，它们实际上指向同一个inode（文件的索引节点）。这意味着硬链接与原始文件在内容上完全相同，删除其中一个硬链接并不会影响其他硬链接或原始文件。只有当所有硬链接和原始文件都被删除后，数据块才会被释放。硬链接的一个主要限制是它们不能跨文件系统，并且只能为文件创建，而不能为目录创建。此外，硬链接的文件权限一定和源文件一样。</p>
-<p>​	软连接（也称为符号链接）是在文件系统中创建一个特殊文件，其中包含指向另一个文件的路径，类似于Windows系统中的快捷方式。软连接与原始文件不在同一inode，因此它们是两个不同的文件。软连接只是一个指向原始文件路径的文本链接，删除原始文件后，软连接仍然存在，但指向的路径将失效。软连接的一个主要优点是它可以跨文件系统，并且可以为文件和目录（允许不存在）创建链接。此外，软连接的文件权限可以和源文件不一样。可以使用软连接缩短路径地址。</p>
-<p>​	硬链接和软连接各有其特点和适用场景。硬链接主要用于文件备份、多人共享文件。软连接主要用于缩短路径，文件或目录的重定向。</p>
-<p>3、rm ， 删除文件或目录</p>
-<p>​	rm</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm a.txt ，存在则删除，不存在则报错</span><br><span class="line">rm /a/b ， 目录为空则删除，不为空则报错</span><br></pre></td></tr></table></figure>
+<p>NAT设置</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631742.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631742.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
 
-<p>​	rm -i ， 删除文件或目录，删除时询问</p>
-<p>​	rm -f ， 强制删除文件，忽略不存在的文件，不警告</p>
-<p>​	rm -r ， 删除目录及其下所有文件和子目录，不存在则报错，删除时询问</p>
-<p>4、mv ， 移动文件或目录，或重命名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv a/b.txt  c/d.txt ， 将 a/b.txt文件移动到 c 目录下，并重命名为 d.txt</span><br><span class="line">mv a b , 将 a 目录重命名为 b目录</span><br></pre></td></tr></table></figure>
 
-<p>​	mv -f ， 不管目标文件是否存在，都直接覆盖。</p>
-<p>​	mv -i ， 若目标文件存在，则询问</p>
-<p>​	</p>
-<p>文件内容查看</p>
-<p>cat ，从第一行开始显示所有内容</p>
-<p>tac ， 从最后一行显示所有内容</p>
-<p>nl ， 展示所以内容，并显示行号</p>
-<p>more ， 根据需要显示内容，一页一页显示</p>
-<p>less ， 与more类似，但可向前翻页</p>
-<p>head ， 只显示前几行</p>
-<p>tail ， 只显示后几行</p>
-<p>1、cat ， 从第一行开始显示所有内容</p>
-<p>​	cat -b ， 显示行号</p>
-<p>2、head ，  只显示前几行，默认显示前10行</p>
-<p>​	head -n 行号  文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显示前100行的内容</span><br><span class="line">head -n 100 a.txt</span><br><span class="line">只打印前100行的内容</span><br><span class="line">head -n -100 a.txt</span><br></pre></td></tr></table></figure>
 
-<p>3、tail ， 只显示后几行，默认显示后10行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显示后100行的内容</span><br><span class="line">tail -n 100 a.txt</span><br><span class="line">只打印后100行的内容</span><br><span class="line">tail -n -100 a.txt</span><br></pre></td></tr></table></figure>
+<p>网络共享中心  &gt;  更改适配器设置  &gt; 选择vmnet8，点击属性，选择ipv4，点击属性</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051629178.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051629178.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
 
-<p>若要取第11行到20行 的内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">先取前20行，再取后10行</span><br><span class="line">head -n 20 a.txt | tail -n 10 </span><br></pre></td></tr></table></figure>
+<p>ip与NAT设置中网关IP一致</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051627606.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051627606.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-202403291545658" style="zoom:67%;" />
 
 
 
-<p>新建文件</p>
-<p>touch  file_name</p>
-<p>创建一个空文件，若目标文件存在，也不警告</p>
-<p>文件查找</p>
-<p>whereis ，查询速度快，但是只能查指定的几个目录，可用 whereis -l 查看有哪些目录可以查看</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whrer 文件名</span><br></pre></td></tr></table></figure>
+<p>查看网卡名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
 
-<p>locate ， 查询速度快，但只能查已存在数据库的文件，数据库默认一天更新一次，所以需要手动更新，updatedb命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate 文件名</span><br></pre></td></tr></table></figure>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632488.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632488.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" style="zoom:67%;" />
 
-<p>find </p>
-<p>​	find [目录]  -name 文件名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name http.txt</span><br><span class="line">find /var -name a.txt</span><br></pre></td></tr></table></figure>
+<p>显示为 ens33</p>
+<h3 id="centos7网络配置"><a href="#centos7网络配置" class="headerlink" title="centos7网络配置"></a>centos7网络配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">在root用户下： su </span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br><span class="line">TYPE=&quot;Ethernet&quot;</span><br><span class="line">PROXY_METHOD=&quot;none&quot;</span><br><span class="line">BROWSER_ONLY=&quot;no&quot;</span><br><span class="line">DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV4_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6INIT=&quot;yes&quot;</span><br><span class="line">IPV6_AUTOCONF=&quot;yes&quot;</span><br><span class="line">IPV6_DEFROUTE=&quot;yes&quot;</span><br><span class="line">IPV6_FAILURE_FATAL=&quot;no&quot;</span><br><span class="line">IPV6_ADDR_GEN_MODE=&quot;stable-privacy&quot;</span><br><span class="line">NAME=&quot;ens33&quot;</span><br><span class="line">UUID=&quot;febd5220-8d5d-30a8-a668-fcdd922512e0&quot;</span><br><span class="line">DEVICE=&quot;ens33&quot;</span><br><span class="line"></span><br><span class="line">//需要修改的地方</span><br><span class="line">ONBOOT=&quot;yes&quot;</span><br><span class="line">BOOTPROTO=&quot;static&quot;</span><br><span class="line"></span><br><span class="line">//需要添加的地方</span><br><span class="line">IPADDR=&quot;192.168.2.128&quot;  </span><br><span class="line">GATEWAY=&quot;192.168.2.1&quot;  </span><br><span class="line">NETMASK=255.255.255.0&quot; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>​	find 还可以用通配符查询</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name *tt*p.txt</span><br><span class="line">find /var -name scrip*.txt</span><br></pre></td></tr></table></figure>
+<p>配置DNS服务器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DNS=114.114.114.114</span><br></pre></td></tr></table></figure>
 
+<p>配置完成后，重启网络</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
 
-<p>文件内容查找</p>
-<p>grep </p>
-<p>​	grep xxx  文件 ， 在指定文件中查找 xxx ，显示 a 所在行的一整行内容</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;a&#x27; /b.txt	</span><br></pre></td></tr></table></figure>
 
-<p>​	grep ^xxx  文件  ， 在指定文件中查找以 xxx 开头的行，并标明行号。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;^a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
 
-<p>​	grep *xxx  文件 ， 在指定文件中查找以 xxx 结尾 的关键字</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &#x27;*a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
 
-<p>​	grep -i  xxx  文件，忽略大小写查找</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i &#x27;a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
 
-<p>​	grep -r xxx 目录 ， 递归查找包含 xxx 的文件名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r &#x27;a&#x27; /var </span><br></pre></td></tr></table></figure>
+<p>注意：如果 ens33 网卡为DOWN，意味着它目前处于禁用状态，可能没有被正确配置或者启动。需要确保ens33接口已启用并配置了IP地址。 </p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291756769.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291756769.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240329175622648"></p>
+<p>可以通过以下命令启用ens33接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set ens33 up</span><br><span class="line">sudo ip addr add &lt;ip_address&gt;/&lt;subnet_mask&gt; dev ens33</span><br><span class="line">	如：sudo ip addr add 192.168.2.128/24 dev ens33</span><br></pre></td></tr></table></figure>
 
 
 
-<p>删除指定的行</p>
-<p>1、删除指定包含 某个字符串的行。</p>
-<p>可以使用 grep -v 反向匹配其他不需要删除的行，将这些行放到新文件，再将新文件复制到原文件。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -v &#x27;关键字&#x27; a.txt &gt; aNew.txt &amp;&amp; mv aNew.txt a.txt</span><br></pre></td></tr></table></figure>
+<h3 id="Debian12系统网络配置"><a href="#Debian12系统网络配置" class="headerlink" title="Debian12系统网络配置"></a>Debian12系统网络配置</h3><p>编辑网络配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/network/interfaces</span><br></pre></td></tr></table></figure>
 
+<p>默认</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632405.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051632405.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp"></p>
+<p>在后面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto ens33</span><br><span class="line">iface ens33 inet static</span><br><span class="line">address 192.168.2.128</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">gateway 192.168.2.1</span><br></pre></td></tr></table></figure>
 
+<p>保存退出，重启网络</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart networking</span><br></pre></td></tr></table></figure>
 
-<p>2、删除具体的某一行，给出行号。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;&lt;行号&gt;d&#x27; &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+<p>设置dns</p>
+<p>debian 12安装后默认没有&#x2F;etc&#x2F;resolv.conf 文件，需要先创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br></pre></td></tr></table></figure>
 
-<p>如要删除 a.txt 文件中的第 5 行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;5d&#x27; a.txt</span><br></pre></td></tr></table></figure>
+<p>添加内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 8.8.8.4</span><br></pre></td></tr></table></figure>
 
-
-
-<p>文件的打包压缩与解压</p>
-<p>​	常见的压缩工具为gzip、bzip2、xz，但是这些工具只能压缩单个文件，利用 tar 命令可以将多个文件或目录打包成一个文件或目录，也可以对这些打包后的文件目录压缩，tar 还可以解压缩。</p>
-<p>​	bzip、xz 是比 gzip 压缩比更高的工具，但是压缩时间也变长。与gzip 用法类似。</p>
-<p>gzip</p>
-<p>​	gzip 文件名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip a.txt</span><br></pre></td></tr></table></figure>
-
-<p>​	gip 会将源文件压缩为 带有 .gz 后缀的文件。同时源文件会被删除。</p>
-<p>​	如果源文件为纯文本文件，则可使用 zcat &#x2F; zmore &#x2F; zless &#x2F; zgrep 读取，用法与 cat &#x2F; more &#x2F; less &#x2F; grep 类似。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">解压文件</span><br><span class="line">gzip -d 文件，会将压缩文件解压成源文件，同时删除压缩文件。</span><br><span class="line">gzip -d a.txt.gz</span><br><span class="line">不解压，直接显示解压后的源文件内容</span><br><span class="line">zcat a.txt.gz </span><br><span class="line">不解压，在压缩文件中查找关键字</span><br><span class="line">zgrep &#x27;block&#x27; a.txt.gz</span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用tar 打包压缩</p>
-<p>由于tar 命令 的选项太过，简单写几个</p>
-<p>压缩</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf 压缩后的文件名 源文件， -z 表示压缩为 .gz格式，表示将源文件打包成.gz格式，并查看被打包的文件名。</span><br><span class="line">tar -zcvf b.txt.tar.gz b.txt</span><br></pre></td></tr></table></figure>
-
-<p>如果只是打包，</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf 打包后的文件名 源文件</span><br><span class="line">tar -cvf  b.txt.tar  b.txt</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf 压缩文件 -C 解压后存放的目录 ,-x 表示解压缩 ，-C 表示对特定目录解压缩。</span><br><span class="line">tar -zxvf b.txt.tar.gz /var</span><br></pre></td></tr></table></figure>
-
-
-
-<p>vim 编辑器</p>
-<p>vim 与 vi 基本用法相同，分为三种模式，一般命令模式、编辑模式、命令行模式</p>
-<p>一般命令模式</p>
-<p>​	可移动光标，复制、粘贴文本内容</p>
-<p>​	在一般命令模式，按下[ctrl]+[f] 可 向下翻页，[ctrl]+[b] 向上翻页。</p>
-<p>编辑模式</p>
-<p>​	在一般命令模式中，按下 i  会进入编辑模式，可以修改删除文本内容。</p>
-<p>​	在编辑模式中，修改后先按下【ESC】键，退出编辑模式，然后按下 [ : q ] 不保存退出 vim编辑器</p>
-<p>​	按下 [ : wq ] 保存退出 vim编辑器</p>
-<p>​	按下 [ : wq! ] 可在无权限时强制保存退出 vim编辑器</p>
-<p>命令行模式</p>
-<p>​	在一般命令模式中按下[ &#x2F; ] 直接将光标移动到最下面一行，这个模式可进行显示行号、查找数据等操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/aa ， 查找文件内容中的 aa</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Shell</p>
-<p>换行</p>
-<p>​	使用 [ &#x2F; ] 转义 回车键。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# vim /var/lo\</span><br><span class="line">&gt; g/boot.log</span><br></pre></td></tr></table></figure>
-
-<p>变量</p>
-<p>echo</p>
-<p>设置变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=abc</span><br></pre></td></tr></table></figure>
-
-<p>读取变量，变量未设置时，读取内容为空</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $变量名 或者  echo $&#123;变量名&#125;</span><br><span class="line">echo $name</span><br></pre></td></tr></table></figure>
-
-
-
-<p>变量的设置规则</p>
-<p>1、等号两边不能有空格，变量内容有空格，可使用 单引号[‘ ‘] 或 双引号 [“ “] 连起来。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# a=&#x27;a b&#x27;</span><br><span class="line">[root@localhost /]# echo $a </span><br><span class="line">a b</span><br></pre></td></tr></table></figure>
-
-<p>2、变量名称只能是英文或数字，数字不能作为开头字符。</p>
-<p>3、单引号内如有特殊符号（[Enter]、$、\、空格、’ 等），可使用 [ \ ]转义。单引号内的 <code>$(command)</code> 或反引号 <code>command</code> 不会被执行。在单引号内的内容被视为字面字符串，即 Bash 不会尝试解释其中的变量或命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# a=&#x27;a\ b&#x27;</span><br><span class="line">[root@localhost /]# echo $a </span><br><span class="line">-&gt;a b</span><br><span class="line"></span><br><span class="line">name=he</span><br><span class="line">echo &#x27;its my $name&#x27;</span><br><span class="line">-&gt;its my $name</span><br></pre></td></tr></table></figure>
-
-<p>4、变量引用，双引号 [ “ “ ]，在双引号内，Bash 会解释变量，并用变量的值替换它。双引号内的 <code>$(command)</code> 或 <code>command</code> 会被执行，并替换为命令的输出。大多数特殊字符在双引号内仍具有特殊含义，但 $, &#96;&#96;, 和 \ 有特殊行为。其中，$ 用于变量替换，&#96; 用于命令替换，而 \ 用于转义下一个字符。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name=abc</span><br><span class="line">myname=&quot;its $name&quot;</span><br><span class="line">echo myname</span><br><span class="line">-&gt;its abc</span><br><span class="line"></span><br><span class="line">now=$(date)</span><br><span class="line">echo &quot;today is $now&quot;</span><br><span class="line">-&gt;today is 年月日时间</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>5、环境变量的设置</p>
-<p>export  变量名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">将 name 变量 在其他子程序中执行，需要设置环境变量，其他进程才会获取到值。</span><br><span class="line">[root@localhost /]# name=***</span><br><span class="line">[root@localhost /]# bash 开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# 获取不到</span><br><span class="line">[root@localhost /]# exit 退出子进程</span><br><span class="line">[root@localhost /]# export name 设置环境变量</span><br><span class="line">[root@localhost /]# bash 重新开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# ***</span><br></pre></td></tr></table></figure>
-
-
-
-<p>取消变量</p>
-<p>unset 变量名</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset name</span><br></pre></td></tr></table></figure>
-
-
-
-<p>变量键盘读取</p>
-<p>read</p>
-<p>read [ -p description ]  [ -t 时间] 变量名 ， -p 是提示信息， -t 是限制时间，单位秒</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">需求： please input name:   在30秒内</span><br><span class="line">[root@localhost /]# read -p &quot;please input name:&quot; -t 30 name</span><br><span class="line">[root@localhost /]# please input name:aa</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# aa</span><br></pre></td></tr></table></figure>
-
-<p>将字符串写入文件</p>
-<pre><code>覆盖文件中内容
-echo 字符串&gt;文件名 
-
-不覆盖文件中内容。
-echo 字符串&gt;&gt;文件名 
-</code></pre>
-<p>正则表达式</p>
-<p>查找特定字符串</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;the&#x27; regularex.txt  在regularex.txt文件中查找有 the 的行，并显示行号</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -in &#x27;the&#x27; regularex.txt  在regularex.txt文件中查找有 the 的行，忽略大小写，并显示行号</span><br></pre></td></tr></table></figure>
-
-<p>查找相似字符串</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件中有test 、 taste 两个关键字，需要包含这两个关键字的行都找出来。</span><br><span class="line">grep -n &#x27;t[ea]st&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-<p>反向查找字符串 [^]</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查找&#x27;oo&#x27;前不带&#x27;g&#x27;的字符串的行，显示行号</span><br><span class="line">grep -n &#x27;[^g]oo&#x27; regularex.txt</span><br><span class="line">查找&#x27;oo&#x27;前不带&#x27;a-z&#x27;小写字母的行，显示行号</span><br><span class="line">grep -n &#x27;[^a-z]oo&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-<p>行首和行尾 </p>
-<p>行首 ^</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">查找 以 the 开头的行</span><br><span class="line">grep -n &#x27;^the&#x27; regularex.txt</span><br><span class="line">查找 以a-z小写字母开头的行</span><br><span class="line">grep -n &#x27;^[a-z]&#x27; regularex.txt</span><br><span class="line">查找 以英文字母开头的行</span><br><span class="line">grep -n &#x27;^[a-zA-Z]&#x27; regularex.txt</span><br><span class="line">查找 不以英文字母开头的行</span><br><span class="line">grep -n &#x27;^[^[a-zA-Z]&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-<p>行尾 $</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查找以 o 结尾的行</span><br><span class="line">grep -n &#x27;o$&#x27; regularex.txt</span><br><span class="line">查找以 . 结尾的行</span><br><span class="line">grep -n &#x27;\.$&#x27; regularex.txt   ， .需要 \ 转义</span><br></pre></td></tr></table></figure>
-
-<p>查找空白行  ^$</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;^$&#x27; regularex.txt </span><br></pre></td></tr></table></figure>
-
-<p>-v 也可以反向匹配</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找非空白行和非 # 开头的行</span><br><span class="line">grep -v &#x27;^$&#x27; regularex.txt | grep -vn &#x27;^#&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>注：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -vn &#x27;^$&#x27; regularex.txt | grep -v &#x27;^#&#x27; 是错的，</span><br><span class="line">行号必须在最后一次的过滤再加，因为在开始加的话，后面的查询语句会将行号作为开头字符。</span><br></pre></td></tr></table></figure>
-
-<p>任意一个字符 .   与重复字符 *</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找 g??d ，以g开头，d结尾的四个字符的字符串所在行</span><br><span class="line">grep &#x27;g..d&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查找 包含 o 的行</span><br><span class="line">grep &#x27;o*&#x27; regularex.txt ，会查出来至少包含0个o的行</span><br><span class="line">查找 至少包含一个 o 的行</span><br><span class="line">grep &#x27;oo*&#x27; regularex.txt</span><br><span class="line">查找 两个 g 之间所有包含 o 的行</span><br><span class="line">grep &#x27;goo*g&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找包含g开头，g结尾的字符串的行</span><br><span class="line">grep &#x27;g.*g&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
-
-
-
-<p>wc 命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc 命令</span><br><span class="line">wc -l  统计行数</span><br><span class="line">   -m  统计字符数</span><br></pre></td></tr></table></figure>
-
-<p>统计行数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l &lt; a.txt   统计文本的行数  ，输出9</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -m &lt; a.txt   统计文本的字符数 ，输出 142</span><br></pre></td></tr></table></figure>
-
-<p>不加 &lt;  就会输出文件名， 如</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l a.txt   ,输出9 a.txt</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>sed命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#x27;command&#x27; file(s) </span><br><span class="line"></span><br><span class="line">sed [options] -f scriptfile file(s)  这个命令是读取指定脚本文件scriptfile中的命令，用于指定的某个文件</span><br></pre></td></tr></table></figure>
-
-<p>[options] 中的参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-e : 可以处理多个命令处理输入的文本文件；</span><br><span class="line">-f &lt;script文件&gt;或--file=&lt;script文件&gt;：以选项中指定的script脚本文件来处理输入的文本文件；</span><br><span class="line">-h或--help：显示帮助；</span><br><span class="line">-n或--quiet或——silent：仅显示script处理后的结果；</span><br><span class="line">-V或--version：显示版本信息。</span><br><span class="line">-i：编辑文件</span><br></pre></td></tr></table></figure>
-
-<p>command 参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d 删除，删除选择的行。</span><br><span class="line">D 删除模板块的第一行。</span><br><span class="line">s 替换指定字符。</span><br></pre></td></tr></table></figure>
-
-<p>&#x3D;&#x3D;对于 sed  的所有命令，不加 -i ，就是输出修改后的文本内容，但不会保存到原文件&#x3D;&#x3D;</p>
-<p>文本替换</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/../..&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/book/books&#x27; a.txt</span><br><span class="line">将a.txt 中的所有book 替换为books ，只是输出修改后的内容，但不会保存到原文件。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/book/books&#x27; a.txt</span><br><span class="line">将a.txt 中的所有book 替换为books ,并将修改保存到原文件。</span><br></pre></td></tr></table></figure>
-
-<p>删除行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^$/d&#x27; a.txt</span><br><span class="line">删除 a.txt中的空白行</span><br><span class="line"></span><br><span class="line">sed &#x27;2d&#x27; a.txt  </span><br><span class="line">删除 a.txt中的第二行</span><br><span class="line"></span><br><span class="line">sed &#x27;2,$d&#x27; a.txt</span><br><span class="line">删除文件的第2行到末尾所有行</span><br><span class="line"></span><br><span class="line">sed &#x27;$d&#x27; file</span><br><span class="line">删除文件最后一行</span><br><span class="line"></span><br><span class="line">sed &#x27;/^test/&#x27;d file</span><br><span class="line">删除文件中所有开头是test的行</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;2d&#x27; a.txt</span><br><span class="line">删除a.txt中的第二行，并保存到原文件。</span><br></pre></td></tr></table></figure>
-
-
-
-<p>执行多条命令，执行结果与顺序有关</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -e &#x27;1,5d&#x27; -e &#x27;s/test/check/&#x27; file</span><br><span class="line">删除file中的1-5行，然后再将test改为check</span><br></pre></td></tr></table></figure>
-
-
-
-<p>awk 命令</p>
+<p>保存退出，重启网络</p>
 
       </div>
       <div class="post-tags-categories">
@@ -829,7 +506,7 @@ echo 字符串&gt;&gt;文件名
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/linux系统" target="_blank" title="linux系统">http://example.com/linux系统</a>
+    <a href="/linux系统的网络配置文档/" target="_blank" title="linux系统的网络配置文档">http://example.com/linux系统的网络配置文档/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -851,16 +528,19 @@ echo 字符串&gt;&gt;文件名
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93" class="post-nav-link">
+    <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">MySQL数据库</div>
+        <div class="title-text">MySQL安装配置文档</div>
       </div>
       
       <!-- <div class="content">
-        MySQLsql语句的分类DDL：数据定义语言。用来操作数据库，表，列等。DML：数据操作语言。用来对数据库中表的数据进
+        
+安装环境:Win10 64位软件版本:MySQL 5.7.24 解压版
+
+一、下载点开下面的链接：https://do
       </div> -->
     </a>
   </div>
@@ -873,13 +553,15 @@ echo 字符串&gt;&gt;文件名
       background-position: center center;">
       <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/JVM" class="post-nav-link">
+    <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">JVM</div>
+        <div class="title-text">linux系统的安装文档</div>
       </div>
       <!-- <div class="content">
-        1 内存结构1、简述一下JVM的内存结构？(高频)JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区
+        安装虚拟机，vmware
+Debian 安装下载debian iso镜像
+进入 debian官网 https://www
       </div> -->
     </a>
   </div>
@@ -1095,7 +777,7 @@ echo 字符串&gt;&gt;文件名
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!--  -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#centos7%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">centos7网络配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Debian12%E7%B3%BB%E7%BB%9F%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="toc-text">Debian12系统网络配置</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1128,7 +810,7 @@ echo 字符串&gt;&gt;文件名
             
 
             <div class="post-img-box">
-              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -1139,7 +821,7 @@ echo 字符串&gt;&gt;文件名
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">MySQL安装配置文档</a>
+              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">MySQL安装配置文档</a>
             </div>
           </div>
         
@@ -1149,7 +831,7 @@ echo 字符串&gt;&gt;文件名
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -1160,7 +842,7 @@ echo 字符串&gt;&gt;文件名
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3">linux系统的网络配置文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">linux系统的网络配置文档</a>
             </div>
           </div>
         
@@ -1170,7 +852,7 @@ echo 字符串&gt;&gt;文件名
             
 
             <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3" class="post-img " style="background-size: cover; 
+              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -1181,7 +863,7 @@ echo 字符串&gt;&gt;文件名
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3">linux系统的安装文档</a>
+              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/">linux系统的安装文档</a>
             </div>
           </div>
         
@@ -1191,7 +873,7 @@ echo 字符串&gt;&gt;文件名
             
 
             <div class="post-img-box">
-              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -1202,7 +884,7 @@ echo 字符串&gt;&gt;文件名
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2">kubernetes+gitlab+gitlab-runner自动化部署</a>
+              <a class="post-title" href="/kubernetes+gitlab+gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">kubernetes+gitlab+gitlab-runner自动化部署</a>
             </div>
           </div>
         
@@ -1212,7 +894,7 @@ echo 字符串&gt;&gt;文件名
             
 
             <div class="post-img-box">
-              <a href="/GitLab%E9%83%A8%E7%BD%B2" class="post-img " style="background-size: cover; 
+              <a href="/GitLab%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
@@ -1223,7 +905,7 @@ echo 字符串&gt;&gt;文件名
                   <span class="post-date">05-27</span>
                 
               </div>
-              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2">GitLab部署</a>
+              <a class="post-title" href="/GitLab%E9%83%A8%E7%BD%B2/">GitLab部署</a>
             </div>
           </div>
         
