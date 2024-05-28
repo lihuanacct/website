@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Docker、gitlab-runner | 星猫博客</title>
+  <title>category: hexo | 星猫博客</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -596,872 +596,110 @@
 </header>
         <!-- 内容区域 -->
         
-<!-- prismjs 代码高亮 -->
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Docker、gitlab-runner
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-05-28 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> category：
-          
-            <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="post-detail-header_category">
-              环境配置
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> Words: 1.7k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> Reading time: 6min |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> reading：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="category-header"  style="background-image:url('https://pic3.zhimg.com/80/v2-98dcd81cb0d1fee52a807c13cedb8338_1440w.jpg?source=1940ef5c')">
+  <div class="category-header-title">
+    category
   </div>
-  
-  
-    <script defer src="/js/bubble/bubble.js"></script>
-  
+  <div class="category-header-desc">
+    
+      <span class="title" id="category-header-desc"></span>
+      <script>
+  function typedFn() {
+    const el = '#category-header-desc';
+    const type = 'categoryDetail';
+    let desc = '弹指一挥间，往事似云烟'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
+  }
+  typedFn();
+</script>
+      
+  </div>
+  <div class="mask-box"></div>
 </div>
 
 
+<div class="category">
+  <div class="category-name">
+    <div class="name" style="background-color: #FFF;">hexo category</div>
+  </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p>下面是在master虚拟机进行<br>安装jdk<br>安装maven</p>
-<p>在docker 中创建卷<br>在 Docker 中，卷是一种用于持久化数据的机制。它允许容器内的数据在容器被删除后仍然保留，并且可以被其他容器共享使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create gitlab-etc</span><br><span class="line">docker volume create gitlab-log</span><br><span class="line">docker volume create gitlab-opt</span><br></pre></td></tr></table></figure>
-
-<p>gitlab-etc：可能用于存储 GitLab 容器的配置文件。GitLab 是一个基于Web的Git代码仓库管理工具，配置文件通常包含了GitLab的设置、参数、密钥等信息。</p>
-<p>gitlab-log：可能用于存储 GitLab 容器的日志文件。在这个卷中，GitLab 容器将把日志文件写入到这个位置，你可以随时查看这些日志以了解 GitLab 容器的运行情况。</p>
-<p>gitlab-opt：可能用于存储 GitLab 容器的其他数据。这可能包括一些持久化的存储数据、插件、脚本等。</p>
-<p>启动gitlab容器，并通过挂载卷、端口映射等方式实现持久化存储和网络配置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker run --name gitlab \    </span><br><span class="line">--hostname 192.168.223.129 \    </span><br><span class="line">--restart=always \          </span><br><span class="line">-p 80:80 \                     </span><br><span class="line">-p 443:443 \				     			</span><br><span class="line">-v gitlab-etc:/etc/gitlab \</span><br><span class="line">-v gitlab-log:/var/log/gitlab \</span><br><span class="line">-v gitlab-opt:/var/opt/gitlab \</span><br><span class="line">-d gitlab/gitlab-ce:17.0.0-ce.0	</span><br><span class="line">												</span><br><span class="line">指定容器名称。</span><br><span class="line">设置容器主机名。</span><br><span class="line">设置容器遇到异常退出时总是重新启动。相当于开机时自启。</span><br><span class="line">将主机的 80 端口映射到容器的 80 端口，以及将主机的 443 端口映射到容器的 443 端口。这是为了让GitLab 的 Web 服务（HTTP 和 HTTPS）可以从外部访问。 前面为主机端口，后面为容器端口。</span><br><span class="line">将之前创建的三个卷 gitlab-etc、gitlab-log 和 gitlab-opt 分别挂载到容器的 /etc/gitlab、/var/log/gitlab 和 /var/opt/gitlab 目录，实现了持久化存储。</span><br><span class="line">以后台守护进程的方式运行容器。指定要运行的 Docker 镜像，这里是 GitLab CE 的版本号为 17.0.0-ce.0 的镜像。</span><br></pre></td></tr></table></figure>
-
-<p>查看gitlab日志文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f gitlab</span><br></pre></td></tr></table></figure>
-
-<p>查找GitLab 容器初始化时生成的管理员密码。用户名为root</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it gitlab grep &#x27;Password:&#x27; /etc/gitlab/initial_root_password</span><br></pre></td></tr></table></figure>
-
-<p>登录官网，修改密码</p>
-<p>下面是在node虚拟机</p>
-<p>安装jdk<br>安装maven<br>上面的版本个master相同</p>
-<p>添加安装源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner//script.rpm.sh | sudo bash</span><br></pre></td></tr></table></figure>
-
-<p>安装gitlab-runner</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y gitlab-runner-17.0.0</span><br></pre></td></tr></table></figure>
-
-<p>#查看所有用户</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cut -d: -f1 /etc/passwd</span><br></pre></td></tr></table></figure>
-
-
-<p>#删除gitlab-runner配置信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-runner uninstall</span><br></pre></td></tr></table></figure>
-
-<p>这一步是为了下面配置某些用户执行某些命令的权限，而不是所有人都可以执行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner install --working-directory /home/gitlab-runner --user root</span><br></pre></td></tr></table></figure>
-
-<p>设置gitlab下载的代码放在&#x2F;home&#x2F;gitlab-runner 目录下，同时让这条命令由root用户执行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload  重新加载守护进程的配置文件</span><br><span class="line">systemctl start gitlab-runner  开启gitlab-runner</span><br><span class="line">systemctl enable gitlab-runner  将gitlab-runner 设置为开机自启</span><br></pre></td></tr></table></figure>
-
-
-
-<p>创建一个runner</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193157972.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193157972.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193157972"></p>
-<p>添加标签,相当于给这个runner起了个名字。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193127185.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193127185.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193127185"></p>
-<p>将这段代码复制到node虚拟机执行。将gitlab-runner注册到master</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193501370.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193501370.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193501370"></p>
-<p>执行器选择 shell</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193644637.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193644637.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193644637"></p>
-<p>创建代码仓库</p>
-<p>上传代码</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193948828.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523193948828.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523193948828"></p>
-<p>安装好maven 后，在node节点中的maven配置文件  settings.xml 中将镜像仓库改为阿里云</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt;  </span><br><span class="line">    &lt;id&gt;alimaven&lt;/id&gt;  </span><br><span class="line">    &lt;name&gt;aliyun maven&lt;/name&gt;  </span><br><span class="line">    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;  </span><br><span class="line">    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  </span><br><span class="line">&lt;/mirror&gt; </span><br></pre></td></tr></table></figure>
-
-<p>在 .gitlab-ci.yml文件中添加镜像源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- mvn -s/opt/environment/apache-maven-3.8.8/conf/settings.xml clean package</span><br></pre></td></tr></table></figure>
-
-<p>在idea 项目根目录中中创建Dockerfile 和 .gitlab-ci.yml文件</p>
-<p>Dockerfile用于镜像打包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim</span><br><span class="line">ADD ./target/my-project.jar /usr/local/</span><br><span class="line">CMD [&quot;java&quot;,&quot;-jar&quot;,&quot;/usr/local/my-project.jar&quot;]</span><br><span class="line">EXPOSE 8080</span><br></pre></td></tr></table></figure>
-
-<p>.gitlab-ci.yml</p>
-<p>用于说明gitlab-ci执行的流程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">stages:</span><br><span class="line">  - build</span><br><span class="line">  - build-image</span><br><span class="line">  - push-image</span><br><span class="line">build:</span><br><span class="line">  stage: build</span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;   //设置为，当建立新的TAG 时，开始构建</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  tags:</span><br><span class="line">    - shared</span><br><span class="line">  script:</span><br><span class="line">    - mvn -s/opt/environment/apache-maven-3.8.8/conf/settings.xml clean package</span><br><span class="line">  artifacts:</span><br><span class="line">    paths:</span><br><span class="line">      - target/*.jar</span><br><span class="line">build-image:</span><br><span class="line">  stage: build-image</span><br><span class="line">  tags:</span><br><span class="line">  	#指定哪个 runner执行</span><br><span class="line">    - shared    </span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  script:</span><br><span class="line">    - docker build -t registry.cn-hangzhou.aliyuncs.com/k8s-images01/my-project:$CI_COMMIT_TAG .</span><br><span class="line">push-image:</span><br><span class="line">  stage: push-image</span><br><span class="line">  tags:</span><br><span class="line">    - shared</span><br><span class="line">  rules:</span><br><span class="line">    - if: &#x27;$CI_COMMIT_TAG&#x27;</span><br><span class="line">      allow_failure: false</span><br><span class="line">    - when: never</span><br><span class="line">  script:</span><br><span class="line">    - docker login --username=aliyun1875389260 --password=lihuan123 registry.cn-hangzhou.aliyuncs.com</span><br><span class="line">    - docker push registry.cn-hangzhou.aliyuncs.com/k8s-images01/my-project:$CI_COMMIT_TAG</span><br></pre></td></tr></table></figure>
-
-<p>pom文件需要修改</p>
-<p>需要加上</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;finalName&gt;my-project&lt;/finalName&gt;</span><br></pre></td></tr></table></figure>
-
-<p>避免打包后的文件名和 Dockerfile中不一致。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222746191.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222746191.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523222746191"></p>
-<p>每创建一次tag，CI 就执行一次</p>
-<p>流程走完</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222938234.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240523222938234.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20240523222938234"></p>
-<p>Gitlab-runner 流水线参数</p>
-<table>
-<thead>
-<tr>
-<th>关键字</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>job</code></td>
-<td>每个作业运行不同的命令。可以定义一个或多个作业(job)。 每个作业必须具有唯一的名称（不能使用关键字）。 每个作业是独立执行的。 每个作业至少要包含一个script。</td>
-</tr>
-<tr>
-<td><code>script</code></td>
-<td>运行的Shell命令或脚本</td>
-</tr>
-<tr>
-<td><code>image</code></td>
-<td>使用Docker映像</td>
-</tr>
-<tr>
-<td><code>services</code></td>
-<td>使用Docker服务映像</td>
-</tr>
-<tr>
-<td><code>before_script</code></td>
-<td>在作业运行前运行脚本</td>
-</tr>
-<tr>
-<td><code>after_script</code></td>
-<td>在作业运行后运行脚本</td>
-</tr>
-<tr>
-<td><code>stages</code></td>
-<td>定义管道中的阶段，运行顺序</td>
-</tr>
-<tr>
-<td><code>stage</code></td>
-<td>为工作定义一个阶段（可选，未指定默认为test阶段）</td>
-</tr>
-<tr>
-<td><code>tags</code></td>
-<td>用于从允许运行该项目的所有Runner列表中选择特定的Runner,<code>tags</code>可让指定了标签的runner来运行作业</td>
-</tr>
-<tr>
-<td><code>only</code></td>
-<td>定义哪些分支和标签的git项目将会被job执行。</td>
-</tr>
-<tr>
-<td><code>except</code></td>
-<td>定义哪些分支和标签的git项目将不会被job执行。</td>
-</tr>
-<tr>
-<td><code>rules</code></td>
-<td>条件列表，用于评估和确定作业的选定属性，以及是否创建该作业</td>
-</tr>
-<tr>
-<td><code>allow_failure</code></td>
-<td>允许作业失败（失败的工作不会影响提交状态）,默认为 false</td>
-</tr>
-<tr>
-<td><code>when</code></td>
-<td>什么时候开始工作</td>
-</tr>
-<tr>
-<td><code>environment</code></td>
-<td>作业部署到的环境的名称</td>
-</tr>
-<tr>
-<td><code>cache</code></td>
-<td>在后续运行之间应缓存的文件列表</td>
-</tr>
-<tr>
-<td><code>artifacts</code></td>
-<td>成功时附加到作业的文件和目录列表</td>
-</tr>
-<tr>
-<td><code>dependencies</code></td>
-<td>通过提供要从中获取工件的作业列表，限制将哪些工件传递给特定作业</td>
-</tr>
-<tr>
-<td><code>coverage</code></td>
-<td>给定作业的代码覆盖率设置</td>
-</tr>
-<tr>
-<td><code>retry</code></td>
-<td>发生故障时可以自动重试作业的时间和次数</td>
-</tr>
-<tr>
-<td><code>timeout</code></td>
-<td>定义自定义作业级别的超时（优先于项目范围的设置）</td>
-</tr>
-<tr>
-<td><code>parallel</code></td>
-<td>多少个作业实例应并行运行</td>
-</tr>
-<tr>
-<td><code>trigger</code></td>
-<td>定义下游管道触发器</td>
-</tr>
-<tr>
-<td><code>include</code></td>
-<td>允许此作业包括外部YAML文件</td>
-</tr>
-<tr>
-<td><code>extends</code></td>
-<td>该作业将要继承的配置条目</td>
-</tr>
-<tr>
-<td><code>pages</code></td>
-<td>上载作业结果以用于GitLab页面</td>
-</tr>
-<tr>
-<td><code>variables</code></td>
-<td>在作业级别上定义作业变量</td>
-</tr>
-<tr>
-<td><code>interruptible</code></td>
-<td>定义在通过新的运行使其冗余时是否可以取消作业</td>
-</tr>
-<tr>
-<td><code>resource_group</code></td>
-<td>限制作业并发</td>
-</tr>
-</tbody></table>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/docker/" class="">
-              docker
-            </a>
-          
-            <a href="/tags/gitlab/" class="">
-              gitlab
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>author:  </strong>夜来风</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>link:  </strong>
-    <a href="/Docker、gitlab-runner/" target="_blank" title="Docker、gitlab-runner">http://example.com/Docker、gitlab-runner/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>Copyright notice:   </strong>
-      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      reprint policy. If reproduced, please indicate source!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
+<section class="posts">
   
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text">网页端出现的问题</div>
-      </div>
-      
-      <!-- <div class="content">
-        
+    
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2024-05-28</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">网页端出现的问题</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/hexo/">hexo</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            
 markdown 文件名不能有 + % 等
 
 
-如果出现tags、categories等页面无内容，请检查_confi
-      </div> -->
-    </a>
-  </div>
+如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。
 
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-nav-link">
-      <div class="title">
-        Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text">k8s、gitlab、gitlab-runner自动化部署</div>
-      </div>
-      <!-- <div class="content">
-        1、kubernetes 、组件安装及集群搭建教程
-https://gitee.com/yooome/golang/bl
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
+或者 在配置中添加 layout
+          </div>
         </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
+        <div class="post-more">
+          <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
         </div>
       </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <div id="gitment-container"></div>
-
-    
-  </div>
-
-
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/'>
-          <img src='https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/Snipaste_2024-05-27_17-33-57.png'/>
+      <div class="post-img">
+        <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>绿竹幽窗，青萝拂衣</h2>
-        
-        
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:lihuanacct@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1299468738"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!--  -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
-
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-28</span>
-                
-              </div>
-              <a class="post-title" href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">网页端出现的问题</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/Docker%E3%80%81gitlab-runner/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-28</span>
-                
-              </div>
-              <a class="post-title" href="/Docker%E3%80%81gitlab-runner/">Docker、gitlab-runner</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-28</span>
-                
-              </div>
-              <a class="post-title" href="/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">k8s、gitlab、gitlab-runner自动化部署</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-27</span>
-                
-              </div>
-              <a class="post-title" href="/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">MySQL安装配置文档</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-27</span>
-                
-              </div>
-              <a class="post-title" href="/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">linux系统的网络配置文档</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>

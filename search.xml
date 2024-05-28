@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>网页端出现的问题</title>
+      <link href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>markdown 文件名不能有 + % 等</p></blockquote><blockquote><p>如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。</p><blockquote><p>或者 在配置中添加 layout: tags layout: categories</p></blockquote></blockquote><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: tags</span><br><span class="line">date: $&#123;date&#125;</span><br><span class="line">type: tags</span><br><span class="line">layout: &quot;tags&quot;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> hexo </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker、gitlab-runner</title>
       <link href="/Docker%E3%80%81gitlab-runner/"/>
       <url>/Docker%E3%80%81gitlab-runner/</url>
@@ -20,9 +39,9 @@
       
         <tags>
             
-            <tag> gitlab </tag>
-            
             <tag> docker </tag>
+            
+            <tag> gitlab </tag>
             
         </tags>
       
