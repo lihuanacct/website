@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>视频</title>
+      <link href="/%E8%A7%86%E9%A2%91/"/>
+      <url>/%E8%A7%86%E9%A2%91/</url>
+      
+        <content type="html"><![CDATA[<p><video src="//player.bilibili.com/player.html?isOutside=true&aid=1404829017&bvid=BV19r421j7mz&cid=1557068934&p=1"></video></p><iframe src="//player.bilibili.com/player.html?isOutside=true&aid=1404829017&bvid=BV19r421j7mz&cid=1557068934&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网页端出现的问题</title>
       <link href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
       <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
