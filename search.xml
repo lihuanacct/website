@@ -23,6 +23,56 @@
     
     
     <entry>
+      <title>视频</title>
+      <link href="/%E8%A7%86%E9%A2%91/"/>
+      <url>/%E8%A7%86%E9%A2%91/</url>
+      
+        <content type="html"><![CDATA[<h2 class="bamboo-h " id="video演示1k96i7hsdu8">video演示</h2><br/><p>100%宽度</p><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div>50%宽度<div class="videos" col='2'><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div></div><p>25%宽度</p><div class="videos" col='4'><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div><div class="video"><video controls preload><source src='https://assets.mixkit.co/videos/preview/mixkit-down-the-river-in-a-bamboo-canoe-6804-large.mp4' type='video/mp4'>Your browser does not support the video tag.</video></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 视频 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 视频 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>放个音乐</title>
+      <link href="/%E6%94%BE%E4%B8%AA%E9%9F%B3%E4%B9%90/"/>
+      <url>/%E6%94%BE%E4%B8%AA%E9%9F%B3%E4%B9%90/</url>
+      
+        <content type="html"><![CDATA[<h2 class="bamboo-h " id="音乐1j5vv1c8at0">音乐</h2><br/><ul><li>春易晚 <div class="audio"><audio controls preload><source src='http://mpge.5nd.com/2024/2024-4-11/3278612/1.mp3' type='audio/mp3'>Your browser does not support the audio tag.</audio></div></li></ul><hr><ul><li>想当初 <div class="audio"><audio controls preload><source src='http://mpge.5nd.com/2024/2024-4-11/3278613/1.mp3' type='audio/mp3'>Your browser does not support the audio tag.</audio></div></li></ul><h2 class="bamboo-h " id="写法1xtojcsqykb">写法</h2><br/><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% audio  http://mpge.5nd.com/2024/2024-4-11/3278613/1.mp3 %&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 音乐 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 音乐 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>网页端出现的问题</title>
       <link href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
       <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
