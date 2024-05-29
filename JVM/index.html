@@ -1,638 +1,270 @@
 <!DOCTYPE html>
-<html>
-  <!-- meta/link... -->
-  
-
-
-
+<html lang="zh-CN">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-  <title>JVM | 星猫博客</title>
 
-  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png">
-  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
-  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JVM的内存结构、垃圾回收等">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="JVM">
+<meta property="og:url" content="http://example.com/JVM/index.html">
+<meta property="og:site_name" content="星猫博客">
+<meta property="og:description" content="JVM的内存结构、垃圾回收等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840648.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840949.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840682.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840798.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840816.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840671.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840607.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840784.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840802.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840916.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840063.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840380.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840609.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840661.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840699.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840693.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840803.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840096.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840291.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840241.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840352.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840411.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840459.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840851.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840065.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840109.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840208.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840336.png">
+<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840530.png">
+<meta property="article:published_time" content="2024-05-27T13:25:38.694Z">
+<meta property="article:modified_time" content="2024-05-28T14:44:41.177Z">
+<meta property="article:author" content="夜来风">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840648.png">
+
+
+<link rel="canonical" href="http://example.com/JVM/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/JVM/","path":"JVM/","title":"JVM"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JVM | 星猫博客</title>
   
-  
-  
-  
-<link rel="stylesheet" href="/css/animate.min.css">
-
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-  
-    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
-  
-  
-    
-<link rel="stylesheet" href="/js/shareJs/share.min.css">
-
-  
-  <style>
-        @media (max-width: 992px) {
-            #waifu {
-                display: none;
-            }
-        }
-    </style>
-    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
-
-    
-    
-    <!-- 依赖于jquery和vue -->
-    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
-
-    <!-- import link -->
-    
-        
-            
-        
-            
-        
-    
-    <!-- import script -->
-    
-        
-            
-        
-            
-        
-    
-
-<meta name="generator" content="Hexo 7.2.0"></head>
-
-  
-  <!-- 预加载动画 -->
-  
-  
-  <div class="preloader_6" id="loader">
-  <div class="loader"></div>
-</div>
-  <script>
-    var endLoading = function () {
-      document.body.style.overflow = 'auto';
-      document.getElementById('loader').classList.add("loaded");
-    }
-    window.addEventListener('DOMContentLoaded', endLoading);
-  </script>
 
 
-  <body>
-    <!-- 判断是否为暗黑风格 -->
-    <!-- 判断是否为黑夜模式 -->
-<script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-
-  if (isDark) {
-    $(document.body).addClass('darkModel');
-  }
-</script>
-
-    <!-- 需要在上面加载的js -->
-    <script>
-  function loadScript(src, cb) {
-    return new Promise(resolve => {
-      setTimeout(function () {
-        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
-        var script = document.createElement("script");
-        script.setAttribute("type", "text/javascript");
-        if (cb) {
-          if (JSON.stringify(cb)) {
-            for (let p in cb) {
-              if (p == "onload") {
-                script[p] = () => {
-                  cb[p]()
-                  resolve()
-                }
-              } else {
-                script[p] = cb[p]
-                script.onload = resolve
-              }
-            }
-          } else {
-            script.onload = () => {
-              cb()
-              resolve()
-            };
-          }
-        } else {
-          script.onload = resolve
-        }
-        script.setAttribute("src", src);
-        HEAD.appendChild(script);
-      });
-    });
-  }
-
-  //https://github.com/filamentgroup/loadCSS
-  var loadCSS = function (src) {
-    return new Promise(resolve => {
-      setTimeout(function () {
-        var link = document.createElement('link');
-        link.rel = "stylesheet";
-        link.href = src;
-        link.onload = resolve;
-        document.getElementsByTagName("head")[0].appendChild(link);
-      });
-    });
-  };
-
-</script> 
-
-<!-- 轮播图所需要的js -->
-<script src="/js/swiper/swiper.min.js"></script>
-<script src="/js/swiper/vue-awesome-swiper.js"></script>
-<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
-
-<script type="text/javascript">
-  Vue.use(window.VueAwesomeSwiper)
-</script>
 
 
-  <script src="/js/vue-typed-js/index.js"></script>
 
 
-<!-- 首页的公告滚动插件的js需要重新加载 -->
-<script src="/js/vue-seamless-scroll/index.js"></script>
-
-<!-- 打字机效果js -->
-<script src="https://unpkg.com/typed.js@2.0.11"></script>
 
 
-    <div id="safearea">
-      <main class="main" id="pjax-container">
-        <!-- 头部导航 -->
-        
-<header class="header  " 
-  id="navHeader"
-  style="position: fixed;
-  left: 0; top: 0; z-index: 10;width: 100%;"
->
-  <div class="header-content">
-    <div class="bars">
-      <div id="appDrawer" class="sidebar-image">
-  <div class="drawer-box-icon">
-    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">星猫博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-docs"><a href="/docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">12</span></a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
   
-  <transition name="fade">
-    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
-    </div>
-  </transition>
-  <div class="drawer-box" :class="{'active': visible}">
-    <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
-      <h3 class="drawer-box-head_title">星猫博客</h3>
-      <h5 class="drawer-box-head_desc"></h5>
-    </div>
-    
-    <div class="drawer-box-content">
-      <ul class="drawer-box-content_menu">
-        
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                  
-                  <span class="name">首页</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/archives" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-archive" aria-hidden="true"></i>
-                  
-                  <span class="name">归档</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/tags" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-tags" aria-hidden="true"></i>
-                  
-                  <span class="name">标签</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/categories" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">分类</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/friends" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-user-group" aria-hidden="true"></i>
-                  
-                  <span class="name">友情链接</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(5)">
-                  <span>
-                    
-                      <i class="fas fa-link"></i>
-                    
-                    <span class="name">更多</span>
-                  </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(5)}" aria-hidden="true"></i>
-                </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(5)">
-                  
-                  <li>
-                    <a href="/gallery">
-                      
-                      <i class="fas fa-image" style="margin-top: -20px;"></i>
-                      
-                      <span>图库</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/huoban">
-                      
-                      <i class="fas fa-link" style="margin-top: -20px;"></i>
-                      
-                      <span>友情连接</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/me">
-                      
-                      <i class="fas fa-address-card" style="margin-top: -20px;"></i>
-                      
-                      <span>关于我</span>
-                    </a>
-                  </li>
-                  
-                </ul>
-              
-            </li>
-          
-        
-        
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
       </ul>
-    </div>
-  </div>
-</div>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDrawer',
-    data: {
-      visible: false,
-      top: 0,
-      openArr: [],
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      isOpen(index) {
-        if (this.openArr.includes(index)) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-      openOrCloseMenu(curIndex) {
-        const index = this.openArr.indexOf(curIndex);
-        if (index !== -1) {
-          this.openArr.splice(index, 1);
-        } else {
-          this.openArr.push(curIndex);
-        }
-      },
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      }
-    },
-    created() {}
-  })
-</script>
-
-    </div>
-    <div class="blog-title" id="author-avatar">
-      
-        <div class="avatar">
-          <img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">1 内存结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8BJVM%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">1.1.</span> <span class="nav-text">1、简述一下JVM的内存结构？(高频)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%A7%81%E6%9C%89%E5%8C%BA"><span class="nav-number">1.1.1.</span> <span class="nav-text">线程私有区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">① 程序计数器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">② 虚拟机栈</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8"><span class="nav-number">1.1.1.2.0.1.</span> <span class="nav-text">局部变量表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88"><span class="nav-number">1.1.1.2.0.2.</span> <span class="nav-text">操作数栈:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="nav-number">1.1.1.2.0.3.</span> <span class="nav-text">动态链接:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%9D%80"><span class="nav-number">1.1.1.2.0.4.</span> <span class="nav-text">方法的返回地址:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A2-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95-native-%E6%A0%88"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">③ 本地方法[native]栈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%8C%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">线程共享区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A0-%E5%A0%86%E5%86%85%E5%AD%98"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">① 堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%91%A1-%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">② 方法区</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">1.2.</span> <span class="nav-text">2、堆和栈的区别？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96Java%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%EF%BC%9F%E5%A0%86%E4%BD%BF%E7%94%A8%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%EF%BC%9F"><span class="nav-number">1.3.</span> <span class="nav-text">3、怎么获取Java程序使用的内存？堆使用的百分比？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E6%A0%88%E5%B8%A7%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4、栈帧都有哪些数据？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%97%B6%E5%80%99%E8%AE%BE%E7%BD%AEjvm%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="nav-number">1.5.</span> <span class="nav-text">5、如何启动系统的时候设置jvm的启动参数？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">2.</span> <span class="nav-text">2 垃圾回收</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E4%B8%BA%E5%9E%83%E5%9C%BE%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">2.1.</span> <span class="nav-text">6、如何判断一个对象是否为垃圾？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%8F%AF%E8%BE%BE%E6%80%A7%E7%AE%97%E6%B3%95%E4%B8%AD%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%AF%B9%E8%B1%A1%E5%8F%AF%E4%BD%9C%E4%B8%BAGC-Roots%E5%AF%B9%E8%B1%A1%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">2.2.</span> <span class="nav-text">7、可达性算法中，哪些对象可作为GC Roots对象？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8%E3%80%81Java%E4%B8%AD%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">2.3.</span> <span class="nav-text">8、Java中都有哪些引用类型？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">2.4.</span> <span class="nav-text">9、常见的垃圾回收算法都有哪些？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10%E3%80%81%E7%AE%80%E8%BF%B0Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8A%9E%E6%B3%95%E4%B8%BB%E5%8A%A8%E9%80%9A%E7%9F%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%9B%E8%A1%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F"><span class="nav-number">2.5.</span> <span class="nav-text">10、简述Java垃圾回收机制？有什么办法主动通知虚拟机进行垃圾回收？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D"><span class="nav-number">3.</span> <span class="nav-text">3 对象分配</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11%E3%80%81%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%88%86%E9%85%8D%E7%9A%84%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">3.1.</span> <span class="nav-text">11、对象在内存中是如何进行分配的？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12%E3%80%81%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E5%B9%B4%E8%BD%BB%E4%BB%A3%E8%BF%9B%E5%85%A5%E8%80%81%E5%B9%B4%E4%BB%A3%E7%9A%84%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">12、对象是怎么从年轻代进入老年代的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13%E3%80%81%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8B%EF%BC%88%E5%88%86%E4%BB%A3%EF%BC%89%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">3.3.</span> <span class="nav-text">13、简单描述一下（分代）垃圾回收的过程？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14%E3%80%81JVM%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3%E4%B8%AD%E4%BC%9A%E5%8F%91%E7%94%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%88%EF%BC%9F"><span class="nav-number">3.4.</span> <span class="nav-text">14、JVM的永久代中会发生垃圾回收么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">4 垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#15%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">4.1.</span> <span class="nav-text">15、常见的垃圾收集器都有哪些？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16%E3%80%81%E4%BD%A0%E9%83%BD%E7%94%A8%E8%BF%87G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E5%93%AA%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="nav-number">4.2.</span> <span class="nav-text">16、你都用过G1垃圾回收器的哪几个重要参数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17%E3%80%81%E4%B8%B2%E8%A1%8C%EF%BC%88serial%EF%BC%89%E6%94%B6%E9%9B%86%E5%99%A8%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F%EF%BC%88throughput%EF%BC%89%E6%94%B6%E9%9B%86%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="nav-number">4.3.</span> <span class="nav-text">17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18%E3%80%81%E7%94%9F%E4%BA%A7%E4%B8%8A%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9A%84%EF%BC%9F"><span class="nav-number">4.4.</span> <span class="nav-text">18、生产上如何配置垃圾收集器的？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">5 类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#19%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%EF%BC%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">5.1.</span> <span class="nav-text">19、什么是类加载器，类加载器有哪些？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20%E3%80%81Java%E7%9A%84%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">5.2.</span> <span class="nav-text">20、Java的双亲委托机制是什么？(高频)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">6.</span> <span class="nav-text">6 性能调优</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21%E3%80%81%E8%B0%83%E4%BC%98%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">6.1.</span> <span class="nav-text">21、调优命令有哪些？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22%E3%80%81%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9BJVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%8F%82%E6%95%B0%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">6.2.</span> <span class="nav-text">22、你知道哪些JVM性能调优参数？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23%E3%80%81%E4%BD%A0%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">6.3.</span> <span class="nav-text">23、你用过哪些性能调优工具？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#24%E3%80%81%E4%BD%A0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%89%8B%E6%AE%B5%E7%94%A8%E6%9D%A5%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="nav-number">6.4.</span> <span class="nav-text">24、你都有哪些手段用来排查内存溢出？(高频)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#25%E3%80%81%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">6.5.</span> <span class="nav-text">25、导致内存溢出的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26%E3%80%81%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88OOM%EF%BC%89%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">6.6.</span> <span class="nav-text">26、解决内存溢出（OOM）的方法</span></a></li></ol></li></ol></div>
         </div>
-      
-      <a href="/" class="logo">星猫博客</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/" class="menu-item-link" title="首页">
-                  
-                    <i class="fas fa-home" aria-hidden="true"></i>
-                  
-                  <span class="name">首页</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/archives" class="menu-item-link" title="归档">
-                  
-                    <i class="fas fa-archive" aria-hidden="true"></i>
-                  
-                  <span class="name">归档</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/tags" class="menu-item-link" title="标签">
-                  
-                    <i class="fas fa-tags" aria-hidden="true"></i>
-                  
-                  <span class="name">标签</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/categories" class="menu-item-link" title="分类">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">分类</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/friends" class="menu-item-link" title="友情链接">
-                  
-                    <i class="fas fa-user-group" aria-hidden="true"></i>
-                  
-                  <span class="name">友情链接</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="javascript:;" class="menu-item-link" title="更多">
-                  
-                    <i class="fas fa-link"></i>
-                  
-                  <span class="name">更多</span>
-                  <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
-                </a>
-                <ul class="sub-menu">
-                  
-                  <li>
-                    <a href="/gallery">
-                      
-                      <i class="fas fa-image" style="margin-top: -20px;"></i>
-                      
-                      <span>图库</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/huoban">
-                      
-                      <i class="fas fa-link" style="margin-top: -20px;"></i>
-                      
-                      <span>友情连接</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/me">
-                      
-                      <i class="fas fa-address-card" style="margin-top: -20px;"></i>
-                      
-                      <span>关于我</span>
-                    </a>
-                  </li>
-                  
-                </ul>
-              
-            </li>
-          
-        
-      </ul>
-      
-      
-        <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
-  <transition name="fade">
-    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
-      <div class="message-box animated bounceInDown">
-        <h2>
-          <span>
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">本地搜索</span>
-          </span>
-          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
-        </h2>
-        <form class="site-search-form">
-          <input type="text"
-            placeholder="请输入关键字"
-            id="local-search-input" 
-            @click="getSearchFile()"
-            class="st-search-input"
-            v-model="searchInput"
-          />
-        </form>
-        <div class="result-wrapper">
-          <div id="local-search-result" class="local-search-result-cls"></div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">夜来风</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
         </div>
       </div>
     </div>
-  </transition>
-</div>
-<script src="/js/local_search.js"></script>
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appSearch',
-    data: {
-      dialogVisible: false,
-      searchInput: '',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-      window.addEventListener('pjax:complete', () => {
-        this.cancelDialogVisible();
-      })
-    },
-    methods: {
-      showDialog() {
-        this.dialogVisible = true;
-        // 防止页面滚动，只能让弹框滚动
-        this.top = $(document).scrollTop()
-        body.style.cssText = 'overflow: hidden;';
-      },
-      getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
-      },
-      cancelDialogVisible() {
-        this.dialogVisible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-    },
-    created() {}
-  })
-</script>
-<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
-<!-- 下面是搜索基本写法 -->
-<!-- <script type="text/javascript" id="local.search.active">
-  var inputArea = document.querySelector("#local-search-input");
-  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
-  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
-</script> -->
 
-      
-
-    </nav>
-  </div>
-  
-  
-</header>
-        <!-- 内容区域 -->
-        
-<!-- prismjs 代码高亮 -->
+    
+  </aside>
 
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        JVM
-      </span>
     </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2024-05-27 |
-        </span>
-      
 
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/JAVA%E5%9F%BA%E7%A1%80/" class="post-detail-header_category">
-              JAVA基础
-            </a>
-          
-        </span>
-      
+    <div class="main-inner post posts-expand">
 
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 11.1k |
-          </span>
+
   
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 43分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
-  </div>
+
+
+<div class="post-block">
   
   
-    <script defer src="/js/bubble/bubble.js"></script>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/JVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="夜来风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星猫博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JVM | 星猫博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-27 21:25:38" itemprop="dateCreated datePublished" datetime="2024-05-27T21:25:38+08:00">2024-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-28 22:44:41" itemprop="dateModified" datetime="2024-05-28T22:44:41+08:00">2024-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/JAVA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">JAVA基础</span></a>
+        </span>
+    </span>
+
   
 </div>
 
+        </div>
+      </header>
 
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1><h2 id="1、简述一下JVM的内存结构？-高频"><a href="#1、简述一下JVM的内存结构？-高频" class="headerlink" title="1、简述一下JVM的内存结构？(高频)"></a>1、简述一下JVM的内存结构？(高频)</h2><p>JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840648.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840648.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1><h2 id="1、简述一下JVM的内存结构？-高频"><a href="#1、简述一下JVM的内存结构？-高频" class="headerlink" title="1、简述一下JVM的内存结构？(高频)"></a>1、简述一下JVM的内存结构？(高频)</h2><p>JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840648.png" alt="img"></p>
 <h3 id="线程私有区"><a href="#线程私有区" class="headerlink" title="线程私有区"></a>线程私有区</h3><h4 id="①-程序计数器"><a href="#①-程序计数器" class="headerlink" title="① 程序计数器"></a>① 程序计数器</h4><ul>
 <li><p>作用：是一块较小的内存空间[寄存器]，可以理解为是当前线程所执行程序的字节码文件的行号指示器，存储的是当前线程所执行的<strong>行号</strong></p>
 </li>
 <li><p>特点：①线程私有 ，②唯一一个不会出现内存溢出的内存空间</p>
 </li>
 </ul>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840949.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840949.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840949.png" alt="img"></p>
 <h4 id="②-虚拟机栈"><a href="#②-虚拟机栈" class="headerlink" title="② 虚拟机栈"></a>② 虚拟机栈</h4><p>栈的结构，先进后出</p>
 <p>虚拟机栈:每个线程运行时所需要的内存</p>
 <p>作用：管理JAVA方法执行的内存模型。每个方法执行时都会创建一个栈桢[每个方法运行时需要的内存]用来存储方法中局部变量表、操作数栈、动态链接、方法的返回地址。栈的大小决定了方法调用的可达深度（递归多少层次，或嵌套调用多少层其他方法，-Xss参数可以设置虚拟机栈大小）</p>
@@ -664,7 +296,7 @@
 <h4 id="①-堆内存"><a href="#①-堆内存" class="headerlink" title="① 堆内存"></a>① 堆内存</h4><ul>
 <li>作用：是Java内存区域中一块用来存放对象实例的区域，新创建的对象，数组都使用堆内存；【从Java7开始，常量池也会使用堆内存】</li>
 </ul>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840682.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840682.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840682.png" alt="img"></p>
 <p>Java 堆从GC的角度还可以细分为: 新生代( Eden[伊甸园区) 、From 和 To [Survivor幸存区] )和老年代。</p>
 <ul>
 <li><p>特点：<br>  1、被线程共享，因此需要考虑线程安全问题<br>  2、会产生内存溢出问题 	</p>
@@ -683,13 +315,13 @@
 <p>​	-Xmx	设置最大堆内存大小(不能小于1024K);   -Xmx 堆内存最大值，可以通过jmap工具进行查看</p>
 <p>​	例如：-Xms1024K -Xmx2048K</p>
 <p>注意：</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840798.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840798.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840798.png" alt="img"></p>
 <p>常见的堆内存诊断工具</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. jps工具</span><br><span class="line">	查看当前系统中有哪些java进程</span><br><span class="line">2. jmap工具</span><br><span class="line">	查看某一时刻堆内存的占用情况</span><br><span class="line">3. jconsole工具</span><br><span class="line">	图形界面，功能强大可连续检测</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="②-方法区"><a href="#②-方法区" class="headerlink" title="② 方法区"></a>② 方法区</h4><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840816.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840816.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom:67%;" />
+<h4 id="②-方法区"><a href="#②-方法区" class="headerlink" title="② 方法区"></a>② 方法区</h4><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840816.png" alt="img" style="zoom:67%;" />
 
 
 
@@ -699,7 +331,7 @@
 <li><p>特点：<br>  1、方法区是一块线程共享的内存区域<br>  2、方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出的错误<br>  3、jdk1.6和jdk1.7方法区也常常被称之为永久区(永久代),大小一般都是几百兆；<br>  4、jdk1.8已经将方法区取消，替代的是元数据区(元空间),如果不指定大小，默认情况下，虚拟机会耗尽可用系统内存<br>  5、jdk7以后就将方法区中的常量池移动至<strong>堆内存</strong></p>
 </li>
 </ul>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840671.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840671.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840671.png" alt="img"></p>
 <p>为什么将方法区中的常量池移动至<strong>堆内存</strong> ，变化的原因：</p>
 <p>​		1、提高内存的回收效率(方法区内存的回收效率远远低于堆内存，因为方法去中存储的都是类信息，静态变量…这些信息不能被轻易回收)</p>
 <p>​		2、字符串常量池在方法区，那么很容易产生内存溢出(因为方法区的垃圾回收效率比较低);</p>
@@ -719,7 +351,7 @@
 <p>2、Runtime.totalMemory()方法总内存的字节数</p>
 <h2 id="4、栈帧都有哪些数据？"><a href="#4、栈帧都有哪些数据？" class="headerlink" title="4、栈帧都有哪些数据？"></a>4、栈帧都有哪些数据？</h2><p>栈帧包含：局部变量表、操作数栈、动态链接、方法的返回地址等。</p>
 <h2 id="5、如何启动系统的时候设置jvm的启动参数？"><a href="#5、如何启动系统的时候设置jvm的启动参数？" class="headerlink" title="5、如何启动系统的时候设置jvm的启动参数？"></a>5、如何启动系统的时候设置jvm的启动参数？</h2><p>其实都很简单，比如说采用”java -jar”的方式启动一个jar包里面的系统，那么就可以才用类似下面的格式：</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840607.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840607.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840607.png" alt="img"></p>
 <ul>
 <li><p>-Xms:最小堆内存大小</p>
 </li>
@@ -738,7 +370,7 @@
 <p>① 引用计数法、② 可达性分析算法</p>
 <p><strong>① 引用计数法</strong>：堆中每个对象实例都有一个引用计数。当一个对象被创建时，且将该对象实例分配给一个变量，该变量计数设置为1。当任何其它变量被赋值为这个对象的引用时，计数加1（a &#x3D; b,则b引用的对象实例的计数器+1），但当一个对象实例的某个引用超过了生命周期或者被设置为一个新值时，对象实例的引用计数器减1。任何引用计数器为0的对象实例可以被当作垃圾收集。</p>
 <p>特点：简单、无法解决循环引用问题</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840784.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840784.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840784.png" alt="img"></p>
 <p>定义学生类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义成员变量</span></span><br><span class="line">    <span class="keyword">public</span> Object instance ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -806,17 +438,17 @@
 <h2 id="9、常见的垃圾回收算法都有哪些？-高频"><a href="#9、常见的垃圾回收算法都有哪些？-高频" class="headerlink" title="9、常见的垃圾回收算法都有哪些？(高频)"></a>9、常见的垃圾回收算法都有哪些？(高频)</h2><p>① 标记清除、② 标记整理、③复制算法、④ 分代回收</p>
 <p><strong>① 标记清除</strong></p>
 <p>执行过程：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840802.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840802.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840802.png" alt="img"></p>
 <p>优点：速度比较快</p>
 <p>缺点：会产生内存碎片，碎片过多，仍会使得连续空间少</p>
 <p><strong>② 标记整理</strong></p>
 <p>执行过程：首先标记出所有需要回收的对象，在标记完成后统一进行整理，整理是指存活对象向一端移动来减少内存碎片，相对效率较低</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840916.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840916.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840916.png" alt="img"></p>
 <p>优点：无内存碎片</p>
 <p>缺点：效率较低</p>
 <p><strong>③ 复制算法</strong></p>
 <p>执行过程：开辟两份大小相等空间，一份空间始终空着，垃圾回收时，将存活对象拷贝进入空闲空间；</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840063.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840063.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840063.png" alt="img"></p>
 <p>优点：无内存碎片</p>
 <p>缺点：占用空间多</p>
 <p>注意：如果有很多对象的存活率较高，这时我们采用复制算法，那么效率就比较低；</p>
@@ -827,15 +459,15 @@
 <h1 id="3-对象分配"><a href="#3-对象分配" class="headerlink" title="3 对象分配"></a>3 对象分配</h1><h2 id="11、对象在内存中是如何进行分配的？-高频"><a href="#11、对象在内存中是如何进行分配的？-高频" class="headerlink" title="11、对象在内存中是如何进行分配的？(高频)"></a>11、对象在内存中是如何进行分配的？(高频)</h2><p>① 对象优先在Eden分配、② 大对象直接晋升至老年代</p>
 <p><strong>① 对象优先在Eden分配</strong>：对象优先在『伊甸园』分配，当『伊甸园』没有足够的空间时，触发 ‘Minor GC’(小范围的GC)</p>
 <p>情况一：伊甸园的内存空间足够，不会发生’Minor GC’</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840380.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840380.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840380.png" alt="img"></p>
 <p>情况二：伊甸园的空间不够了</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840609.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840609.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840609.png" alt="img"></p>
 <p>垃圾回收线程启动，进行垃圾回收，此时会触发”stop the world”(停止所有用户线程)，</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840661.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840661.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840661.png" alt="img"></p>
 <p>Eden区中所有存活的对象都会被复制到“To”，而在“From”区中，仍存活的对象会根据他们的年龄值来决定去向。年龄最多到一定值(最大值是15，对象在Survivor区中每熬过一次Minor GC，年龄就会增加1岁)(年龄阈值，可以通过-XX:MaxTenuringThreshold来设置)的对象会被移动到年老代中，没有达到阈值的对象会被复制到“To”区域。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840699.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840699.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840699.png" alt="img"></p>
 <p>“From”和”To”会交换他们的角色,下一次垃圾回收的时候也是从Eden将存活的对象复制到TO区</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840693.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840693.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840693.png" alt="img"></p>
 <p>Minor GC会一直重复这样的过程，直到“To”区被填满，“To”区被填满之后，会将所有对象移动到年老代中。</p>
 <p>案例演示：</p>
 <p>jvm参数设置：</p>
@@ -874,9 +506,9 @@
 <p>触发了2次垃圾回收！并且将from区中存活的对象存储到老年代！</p>
 <p><strong>② 大对象直接晋升至老年代</strong></p>
 <p>当对象太大，伊甸园包括幸存区都存放不下时，这时候老年代的连续空间足够，此对象会直接晋升至老年代，不会发生 GC</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" alt="img"></p>
 <p>结果</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840803.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840803.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840803.png" alt="img"></p>
 <p>案例演示：</p>
 <p>案例1：直接分配一个8M的内存空间</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] bytes1 = <span class="keyword">new</span> <span class="title class_">byte</span>[_8MB] ;</span><br></pre></td></tr></table></figure>
@@ -897,7 +529,7 @@
 <p>1、如果对象够老，会通过提升（Promotion）进入老年代，这一般是根据对象的年龄进行判断的。</p>
 <p>2、动态对象年龄判定。有的垃圾回收算法，比如G1，并不要求age必须达到15才能晋升到老年代，它会使用一些动态的计算方法。</p>
 <p>3、超出某个大小的对象将直接在老年代分配。不过这个值默认为0，意思是全部首选Eden区进行分配。</p>
-<h2 id="13、简单描述一下（分代）垃圾回收的过程？-高频"><a href="#13、简单描述一下（分代）垃圾回收的过程？-高频" class="headerlink" title="13、简单描述一下（分代）垃圾回收的过程？(高频)"></a>13、简单描述一下（分代）垃圾回收的过程？(高频)</h2><p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840096.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840096.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<h2 id="13、简单描述一下（分代）垃圾回收的过程？-高频"><a href="#13、简单描述一下（分代）垃圾回收的过程？-高频" class="headerlink" title="13、简单描述一下（分代）垃圾回收的过程？(高频)"></a>13、简单描述一下（分代）垃圾回收的过程？(高频)</h2><p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840096.png" alt="img"></p>
 <p>分代回收器有两个分区：老生代和新生代，新生代默认的空间占比总空间的 1&#x2F;3，老生代的默认占比是2&#x2F;3。</p>
 <p>新生代使用的是复制算法，新生代里有3个分区：Eden、To Survivor、From Survivor，它们的默认占比是 8:1:1，它的执行流程如下：</p>
 <p>当年轻代中的Eden区分配满的时候，就会触发年轻代的GC（Minor GC）。具体过程如下：</p>
@@ -918,7 +550,7 @@
 <p>​	堆内存较大，多cpu,适合服务器</p>
 <p>​	单次STW时间越短越好</p>
 <p>常见的垃圾收集器如下所示：</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840291.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840291.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840291.png" alt="img"></p>
 <p>不同的垃圾收集器，作用的堆内存空间是不一样的；上面的  serial ， parnew ， Paraller Scavenge 是新生代的垃圾回收器；CMS ， Serial Old ，Paralle Old是老年代的垃圾收集器 ， G1垃圾收集器可以作用于新生代和老年代； 连线表示垃圾收集器可以搭配使用；</p>
 <p><strong>① Serial</strong></p>
 <p>特点：</p>
@@ -928,7 +560,7 @@
 <li><p>“Stop The World”，它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束。在用户不可见的情况下把用户正常工作的线程全部停掉。</p>
 </li>
 </ol>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840241.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840241.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840241.png" alt="img"></p>
 <p>应用场景：</p>
 <ol>
 <li><p>使用场景：多用于桌面应用，Client端的垃圾回收器</p>
@@ -939,7 +571,7 @@
 <p>Serial Old收集器是Serial的老年代版本和Serial一样是单线程，使用的算法是”标记-整理”</p>
 <p><strong>② ParNew</strong></p>
 <p>概述: ParNew 收集器其实就是 Serial 收集器的多线程版本</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840352.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840352.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840352.png" alt="img"></p>
 <p>特点：</p>
 <p>1、会触发stop the world</p>
 <p>2、多线程方式进行垃圾回收</p>
@@ -960,7 +592,7 @@
 <li><p>目前很大一部分的Java应用集中在互联网站或者B&#x2F;S系统的服务端上,这类应用尤其重视服务的响应速度，希望系统停顿时间最短，以给用户带来较好<br>   的体验。</p>
 </li>
 </ol>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840411.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840411.png" alt="img"></p>
 <p>步骤流程：</p>
 <ul>
 <li><p>初始标记（CMS initial mark)——– 标记一下 GC Roots 能直接关联到的对象，速度很快（stop the world）</p>
@@ -978,7 +610,7 @@
 <p>相比于CMS：</p>
 <p>​	1、G1垃圾回收器使用的是”标记-整理”，因此其回收得到的空间是连续的。 </p>
 <p>​	2、G1回收器的内存与CMS回收器要求的内存模型有极大的不同。G1将内存划分一个个固定大小的region，每个region可以是年轻代、老年代的一个。内存的回收是以region作为基本单位的； </p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840459.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840459.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840459.png" alt="img"></p>
 <h2 id="16、你都用过G1垃圾回收器的哪几个重要参数？"><a href="#16、你都用过G1垃圾回收器的哪几个重要参数？" class="headerlink" title="16、你都用过G1垃圾回收器的哪几个重要参数？"></a>16、你都用过G1垃圾回收器的哪几个重要参数？</h2><p><strong>① -XX:MaxGCPauseMillis</strong></p>
 <p>暂停时间，默认值200ms。这是一个软性目标，G1会尽量达成，如果达不成，会逐渐做自我调整。</p>
 <p><strong>② -XX:G1HeapRegionSize</strong></p>
@@ -986,13 +618,13 @@
 <p><strong>③ -XX:G1NewSizePercent 和 -XX:G1MaxNewSizePercent</strong></p>
 <p>新生代比例有两个数值指定，下限：-XX:G1NewSizePercent，默认值5%，上限：-XX:G1MaxNewSizePercent，默认值60%。</p>
 <h2 id="17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？"><a href="#17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？" class="headerlink" title="17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？"></a>17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？</h2><p>吞吐量收集器使用并行版本的新生代垃圾收集器，它用于中等规模和大规模数据的应用程序。 而串行收集器对大多数的小应用（在现代处理器上需要大概 100M 左右的内存）就足够了。</p>
-<h2 id="18、生产上如何配置垃圾收集器的？"><a href="#18、生产上如何配置垃圾收集器的？" class="headerlink" title="18、生产上如何配置垃圾收集器的？"></a>18、生产上如何配置垃圾收集器的？</h2><p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840851.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840851.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<h2 id="18、生产上如何配置垃圾收集器的？"><a href="#18、生产上如何配置垃圾收集器的？" class="headerlink" title="18、生产上如何配置垃圾收集器的？"></a>18、生产上如何配置垃圾收集器的？</h2><p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840851.png" alt="img"></p>
 <p>1、首先是内存大小问题，基本上每一个内存区域我都会设置一个上限，来避免溢出问题，比如元空间。通常，堆空间我会设置成操作系统的2&#x2F;3（这是想给其他进程和操作系统预留一些时间），超过8GB的堆优先选用G1。</p>
 <p>2、接下来，我会对JVM进行初步优化。比如根据老年代的对象提升速度，来调整年轻代和老年代之间的比例。</p>
 <p>3、再接下来，就是专项优化，主要判断的依据就是系统容量、访问延迟、吞吐量等。我们的服务是高并发的，所以对STW的时间非常敏感。我会通过记录</p>
 <p>详细的GC日志，来找到这个瓶颈点，借用<strong>gceasy（重点）</strong><a target="_blank" rel="noopener" href="https://gceasy.io/%E8%BF%99%E6%A0%B7%E7%9A%84%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%BE%88%E5%AE%B9%E6%98%93%E5%AE%9A%E4%BD%8D%E5%88%B0%E9%97%AE%E9%A2%98%E3%80%82%E4%B9%8B%E6%89%80%E4%BB%A5%E9%80%89%E6%8B%A9%E9%87%87%E7%94%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%98%AF%E5%9B%A0">https://gceasy.io/这样的日志分析工具，很容易定位到问题。之所以选择采用工具，是因</a></p>
 <p>为gc日志看起来实在是太麻烦了，gceasy号称是AI学习分析问题，可视化做的较好。</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" alt="img"></p>
 <h1 id="5-类加载器"><a href="#5-类加载器" class="headerlink" title="5 类加载器"></a>5 类加载器</h1><h2 id="19、什么是类加载器，类加载器有哪些？-高频"><a href="#19、什么是类加载器，类加载器有哪些？-高频" class="headerlink" title="19、什么是类加载器，类加载器有哪些？(高频)"></a>19、什么是类加载器，类加载器有哪些？(高频)</h2><p>类加载器的作用：负载将的class文件加载到java虚拟机中，并为之创建一个Class对象	</p>
 <p>​	1、 启动类加载器（Bootstrap class loader）：它是虚拟机的内置类加载器，通过表示为null </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载 JAVA_HOME/jre/lib目录</span><br></pre></td></tr></table></figure>
@@ -1006,7 +638,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加载classpath目录</span><br></pre></td></tr></table></figure>
 
 <h2 id="20、Java的双亲委托机制是什么？-高频"><a href="#20、Java的双亲委托机制是什么？-高频" class="headerlink" title="20、Java的双亲委托机制是什么？(高频)"></a>20、Java的双亲委托机制是什么？(高频)</h2><p><strong>概述</strong></p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840065.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840065.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img" style="zoom: 150%;" />
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840065.png" alt="img" style="zoom: 150%;" />
 
 <p>类加载器之间的层次关系，就称之为类加载器的双亲委派模型。双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应该有自己的父类加载器。这里的类加载器的父子关系不是真正物理意义上的继承，而是逻辑上的继承。</p>
 <p><strong>工作过程</strong></p>
@@ -1014,8 +646,8 @@
 <h1 id="6-性能调优"><a href="#6-性能调优" class="headerlink" title="6 性能调优"></a>6 性能调优</h1><h2 id="21、调优命令有哪些？"><a href="#21、调优命令有哪些？" class="headerlink" title="21、调优命令有哪些？"></a>21、调优命令有哪些？</h2><p>1、<strong>jps</strong>，JVM Process Status Tool显示指定系统内所有的HotSpot虚拟机进程。</p>
 <p>2、<strong>jstat</strong>，JVM statistics Monitoring是用于监视虚拟机运行时状态信息的命令，它可以显示出虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据。</p>
 <p>查询帮助文档：jstat -options</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840109.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840109.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840208.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840208.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840109.png" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840208.png" alt="img"></p>
 <p>3、<strong>jmap</strong>，JVM Memory Map命令用于查看<strong>堆内存</strong>的分配情况以及生成heap dump文件</p>
 <p>查询帮助文档：jmap -h</p>
 <p>示例1：jmap -heap 33193 查询堆内存的分配情况</p>
@@ -1024,14 +656,14 @@
 <p>查询帮助文档：</p>
 <p>jhat -h</p>
 <p>示例：jhat -J-Xmx512M thread-cup.log</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840336.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840336.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840336.png" alt="img"></p>
 <p>5、<strong>jstack</strong>，用于生成java虚拟机当前时刻的线程快照。</p>
 <p>查看帮助文档：jstack -h</p>
 <p>示例：jstack -l 33193</p>
 <p>6、<strong>jinfo</strong>，JVM Configuration info 这个命令作用是实时查看和调整虚拟机运行参数。</p>
 <p>查看帮助文档：jinfo -h</p>
 <p>示例：jinfo -flags 33193</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840530.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840530.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840530.png" alt="img"></p>
 <h2 id="22、你知道哪些JVM性能调优参数？-高频"><a href="#22、你知道哪些JVM性能调优参数？-高频" class="headerlink" title="22、你知道哪些JVM性能调优参数？(高频)"></a>22、你知道哪些JVM性能调优参数？(高频)</h2><p>1、设定堆内存大小：</p>
 <p>​	-Xms	设置最小堆内存大小(不能小于1024K); 	-Xms 堆内存初始大小，可以通过jmap工具进行查看</p>
 <p>​	-Xmx	设置最大堆内存大小(不能小于1024K);   -Xmx 堆内存最大值，可以通过jmap工具进行查看</p>
@@ -1070,1492 +702,110 @@
 <p>5、优化递归算法：检查和优化递归算法，确保递归调用的深度合理且不会导致栈溢出。可以考虑使用迭代或尾递归等替代递归的方式来避免栈溢出问题。</p>
 <p>6、监控和调优：使用性能监控工具对应用程序进行实时监控，查看内存使用情况和垃圾回收行为。根据监控结果进行相应的优化和调整，如调整垃圾回收器参数、调整内存分配策略等。</p>
 
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/JVM/" class="">
-              JVM
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>夜来风</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/JVM/" target="_blank" title="JVM">http://example.com/JVM/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
+    </div>
+
     
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
+    
+    
 
+    <footer class="post-footer">
+          
 
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/linux%E7%B3%BB%E7%BB%9F/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">linux系统</div>
-      </div>
-      
-      <!-- <div class="content">
-        linux 的用户切换
-​	su - 用户名 ，
-​		su - user
-​		su - 或 su - root ，可
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/hello-world/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Hello World</div>
-      </div>
-      <!-- <div class="content">
-        Welcome to 星猫博客! This is your very first post. Check documen
-      </div> -->
-    </a>
-  </div>
-
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>夜来风
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/JVM/" title="JVM">http://example.com/JVM/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-    
-    
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+          </div>
 
-    <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-angle-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/linux%E7%B3%BB%E7%BB%9F/" rel="next" title="linux系统">
+                  linux系统 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
 </div>
 
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="twitter,facebook,google,qq,wechat,weibo,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
-  }
-</style>
 
 
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
 
-  <div id="myComment">
-    
-      <div id="gitment-container"></div>
 
-    
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">夜来风</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
-
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
-
-
-  </div>
-
-  <!-- 目录 -->
-  <aside id='l_side'>
-  
-    
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/me'>
-          <img src='https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/Snipaste_2024-05-27_17-33-57.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>绿竹幽窗，青萝拂衣</h2>
-        
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:lihuanacct@163.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1299468738"
-              class="social fab fa-qq flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-  
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-text">1 内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%AE%80%E8%BF%B0%E4%B8%80%E4%B8%8BJVM%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">1、简述一下JVM的内存结构？(高频)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%A7%81%E6%9C%89%E5%8C%BA"><span class="toc-text">线程私有区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0-%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-text">① 程序计数器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1-%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88"><span class="toc-text">② 虚拟机栈</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F%E8%A1%A8"><span class="toc-text">局部变量表</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%A0%88"><span class="toc-text">操作数栈:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-text">动态链接:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E8%BF%94%E5%9B%9E%E5%9C%B0%E5%9D%80"><span class="toc-text">方法的返回地址:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A2-%E6%9C%AC%E5%9C%B0%E6%96%B9%E6%B3%95-native-%E6%A0%88"><span class="toc-text">③ 本地方法[native]栈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E5%85%B1%E4%BA%AB%E5%8C%BA"><span class="toc-text">线程共享区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A0-%E5%A0%86%E5%86%85%E5%AD%98"><span class="toc-text">① 堆内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%91%A1-%E6%96%B9%E6%B3%95%E5%8C%BA"><span class="toc-text">② 方法区</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">2、堆和栈的区别？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96Java%E7%A8%8B%E5%BA%8F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%86%85%E5%AD%98%EF%BC%9F%E5%A0%86%E4%BD%BF%E7%94%A8%E7%9A%84%E7%99%BE%E5%88%86%E6%AF%94%EF%BC%9F"><span class="toc-text">3、怎么获取Java程序使用的内存？堆使用的百分比？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%A0%88%E5%B8%A7%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="toc-text">4、栈帧都有哪些数据？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%97%B6%E5%80%99%E8%AE%BE%E7%BD%AEjvm%E7%9A%84%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="toc-text">5、如何启动系统的时候设置jvm的启动参数？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">2 垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%90%A6%E4%B8%BA%E5%9E%83%E5%9C%BE%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">6、如何判断一个对象是否为垃圾？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E5%8F%AF%E8%BE%BE%E6%80%A7%E7%AE%97%E6%B3%95%E4%B8%AD%EF%BC%8C%E5%93%AA%E4%BA%9B%E5%AF%B9%E8%B1%A1%E5%8F%AF%E4%BD%9C%E4%B8%BAGC-Roots%E5%AF%B9%E8%B1%A1%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">7、可达性算法中，哪些对象可作为GC Roots对象？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81Java%E4%B8%AD%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">8、Java中都有哪些引用类型？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">9、常见的垃圾回收算法都有哪些？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E7%AE%80%E8%BF%B0Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%8A%9E%E6%B3%95%E4%B8%BB%E5%8A%A8%E9%80%9A%E7%9F%A5%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%BF%9B%E8%A1%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%EF%BC%9F"><span class="toc-text">10、简述Java垃圾回收机制？有什么办法主动通知虚拟机进行垃圾回收？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E5%AF%B9%E8%B1%A1%E5%88%86%E9%85%8D"><span class="toc-text">3 对象分配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81%E5%AF%B9%E8%B1%A1%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%88%86%E9%85%8D%E7%9A%84%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">11、对象在内存中是如何进行分配的？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12%E3%80%81%E5%AF%B9%E8%B1%A1%E6%98%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E5%B9%B4%E8%BD%BB%E4%BB%A3%E8%BF%9B%E5%85%A5%E8%80%81%E5%B9%B4%E4%BB%A3%E7%9A%84%EF%BC%9F"><span class="toc-text">12、对象是怎么从年轻代进入老年代的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13%E3%80%81%E7%AE%80%E5%8D%95%E6%8F%8F%E8%BF%B0%E4%B8%80%E4%B8%8B%EF%BC%88%E5%88%86%E4%BB%A3%EF%BC%89%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">13、简单描述一下（分代）垃圾回收的过程？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14%E3%80%81JVM%E7%9A%84%E6%B0%B8%E4%B9%85%E4%BB%A3%E4%B8%AD%E4%BC%9A%E5%8F%91%E7%94%9F%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E4%B9%88%EF%BC%9F"><span class="toc-text">14、JVM的永久代中会发生垃圾回收么？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4 垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#15%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">15、常见的垃圾收集器都有哪些？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16%E3%80%81%E4%BD%A0%E9%83%BD%E7%94%A8%E8%BF%87G1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E5%93%AA%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="toc-text">16、你都用过G1垃圾回收器的哪几个重要参数？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17%E3%80%81%E4%B8%B2%E8%A1%8C%EF%BC%88serial%EF%BC%89%E6%94%B6%E9%9B%86%E5%99%A8%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F%EF%BC%88throughput%EF%BC%89%E6%94%B6%E9%9B%86%E5%99%A8%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-text">17、串行（serial）收集器和吞吐量（throughput）收集器的应用场景？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18%E3%80%81%E7%94%9F%E4%BA%A7%E4%B8%8A%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9A%84%EF%BC%9F"><span class="toc-text">18、生产上如何配置垃圾收集器的？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-text">5 类加载器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#19%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%EF%BC%8C%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">19、什么是类加载器，类加载器有哪些？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20%E3%80%81Java%E7%9A%84%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%89%98%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">20、Java的双亲委托机制是什么？(高频)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="toc-text">6 性能调优</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#21%E3%80%81%E8%B0%83%E4%BC%98%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-text">21、调优命令有哪些？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22%E3%80%81%E4%BD%A0%E7%9F%A5%E9%81%93%E5%93%AA%E4%BA%9BJVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%8F%82%E6%95%B0%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">22、你知道哪些JVM性能调优参数？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23%E3%80%81%E4%BD%A0%E7%94%A8%E8%BF%87%E5%93%AA%E4%BA%9B%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E5%B7%A5%E5%85%B7%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">23、你用过哪些性能调优工具？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24%E3%80%81%E4%BD%A0%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%89%8B%E6%AE%B5%E7%94%A8%E6%9D%A5%E6%8E%92%E6%9F%A5%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%9F-%E9%AB%98%E9%A2%91"><span class="toc-text">24、你都有哪些手段用来排查内存溢出？(高频)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25%E3%80%81%E5%AF%BC%E8%87%B4%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-text">25、导致内存溢出的原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26%E3%80%81%E8%A7%A3%E5%86%B3%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%EF%BC%88OOM%EF%BC%89%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">26、解决内存溢出（OOM）的方法</span></a></li></ol></li></ol> -->
-        <div class="toc"></div>
-      </div>
     </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
   </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
-</div>
-
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/%E8%A7%A3%E6%94%BE%E5%8F%B0%E6%B9%BE/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/Snipaste_2024-05-28_23-29-07.png" class="lazyload placeholder" data-srcset="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/Snipaste_2024-05-28_23-29-07.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">01-01</span>
-                
-              </div>
-              <a class="post-title" href="/%E8%A7%A3%E6%94%BE%E5%8F%B0%E6%B9%BE/">解放台湾</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/%E8%A7%86%E9%A2%91/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-29</span>
-                
-              </div>
-              <a class="post-title" href="/%E8%A7%86%E9%A2%91/">视频</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/%E6%94%BE%E4%B8%AA%E9%9F%B3%E4%B9%90/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-29</span>
-                
-              </div>
-              <a class="post-title" href="/%E6%94%BE%E4%B8%AA%E9%9F%B3%E4%B9%90/">放个音乐</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-28</span>
-                
-              </div>
-              <a class="post-title" href="/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">网页端出现的问题</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/Docker%E3%80%81gitlab-runner/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-28</span>
-                
-              </div>
-              <a class="post-title" href="/Docker%E3%80%81gitlab-runner/">Docker、gitlab-runner</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
-  
-</script>
-
-
-      </main>
-    </div>
-
-    <!-- 页脚 -->
-    
-  
-  
-    <!-- 底部鱼儿跳动效果，依赖于jquery-->
-<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
-<script defer>
-  var RENDERER = {
-    POINT_INTERVAL: 5,
-    FISH_COUNT: 3,
-    MAX_INTERVAL_COUNT: 50,
-    INIT_HEIGHT_RATE: .5,
-    THRESHOLD: 50,
-    FISH_COLOR: '',
-    init: function () {
-      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
-    },
-    setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-      if (isDark) {
-        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
-      } else {
-        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
-      }
-    },
-    setParameters: function () {
-      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
-    },
-    createSurfacePoints: function () {
-      var t = Math.round(this.width / this.POINT_INTERVAL);
-      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
-      for (var i = 1; i < t; i++) {
-        var e = new SURFACE_POINT(this, i * this.pointInterval),
-          h = this.points[i - 1];
-        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
-      }
-    },
-    reconstructMethods: function () {
-      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
-    },
-    setup: function () {
-      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
-        width: this.width,
-        height: this.height
-      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
-    },
-    watchWindowSize: function () {
-      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
-    },
-    clearTimer: function () {
-      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
-    },
-    jdugeToStopResize: function () {
-      var t = this.$window.width(),
-        i = this.$window.height(),
-        e = t == this.tmpWidth && i == this.tmpHeight;
-      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
-    },
-    bindEvent: function () {
-      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
-    },
-    getAxis: function (t) {
-      var i = this.$container.offset();
-      return {
-        x: t.clientX - i.left + this.$window.scrollLeft(),
-        y: t.clientY - i.top + this.$window.scrollTop()
-      }
-    },
-    startEpicenter: function (t) {
-      this.axis = this.getAxis(t)
-    },
-    moveEpicenter: function (t) {
-      var i = this.getAxis(t);
-      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
-    },
-    generateEpicenter: function (t, i, e) {
-      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
-        var h = Math.round(t / this.pointInterval);
-        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
-      }
-    },
-    reverseVertical: function () {
-      this.reverse = !this.reverse;
-      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
-    },
-    controlStatus: function () {
-      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
-      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
-      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
-    },
-    render: function () {
-      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
-      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
-      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
-      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
-      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
-    }
-  },
-  SURFACE_POINT = function (t, i) {
-    this.renderer = t, this.x = i, this.init()
-  };
-  SURFACE_POINT.prototype = {
-    SPRING_CONSTANT: .03,
-    SPRING_FRICTION: .9,
-    WAVE_SPREAD: .3,
-    ACCELARATION_RATE: .01,
-    init: function () {
-      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
-        previous: 0,
-        next: 0
-      }
-    },
-    setPreviousPoint: function (t) {
-      this.previous = t
-    },
-    setNextPoint: function (t) {
-      this.next = t
-    },
-    interfere: function (t, i) {
-      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
-    },
-    updateSelf: function () {
-      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
-    },
-    updateNeighbors: function () {
-      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
-    },
-    render: function (t) {
-      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
-    }
-  };
-  var FISH = function (t) {
-    this.renderer = t, this.init()
-  };
-  FISH.prototype = {
-    GRAVITY: .4,
-    init: function () {
-      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
-    },
-    getRandomValue: function (t, i) {
-      return t + (i - t) * Math.random()
-    },
-    reverseVertical: function () {
-      this.isOut = !this.isOut, this.ay *= -1
-    },
-    controlStatus: function (t) {
-      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
-    },
-    render: function (t) {
-      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
-    }
-  }, $(function () {
-    RENDERER.init()
-    $('.dark').click(function () {
-      setTimeout(() => {
-        RENDERER.setFishColor();
-        RENDERER.context.fill();
-      });
-    })
-  });
-</script>
-  
-  <div class="footer bg-color">
-    <div class="footer-main">
-      
-        
-          <div class="link">
-            
-          </div>
-        
-      
-        
-          <div class="footer-copyright">
-            <p>Copyright © 2023 - 2025 <a target="_blank" rel="noopener" href="https://www.baidu.com">百度</a> | Powered by <a target="_blank" rel="noopener" href="https://www.baidu.com">夜来风</a></p>
-
-          </div>
-        
-      
-        
-          <div class="footer-custom">
-            
-          </div>
-        
-      
-    </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
   </div>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-
-    <!-- 渲染暗黑按钮 -->
-    
-      <div class="dark" onclick="toggleDarkMode()">
-  <div class="dark-content">
-    <i class="fas" id="darkIcon" aria-hidden="true"></i>
-  </div>
-</div>
-
-<script defer>
-  $(function() {
-    // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-    updateDarkModeIcon(isDark);
-  });
-
-  function toggleDarkMode() {
-    const isDark = $(document.body).hasClass('darkModel');
-    $(document.body).toggleClass('darkModel');
-    localStorage.setItem('dark', !isDark);
-    updateDarkModeIcon(!isDark);
-  }
-
-  function updateDarkModeIcon(isDark) {
-    const iconElement = document.getElementById('darkIcon');
-    if (isDark) {
-      iconElement.classList.remove('fa-moon');
-      iconElement.classList.add('fa-lightbulb');
-    } else {
-      iconElement.classList.remove('fa-lightbulb');
-      iconElement.classList.add('fa-moon');
-    }
-  }
-</script>
-
-    
-    <!-- 渲染回到顶部按钮 -->
-    
-    <!-- 渲染左下角音乐播放器 -->
-    
-      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
-<style>
-.aplayer .aplayer-lrc p {
-  
-  display: none;
-  
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 16px !important;
-}
-
-.aplayer .aplayer-lrc p.aplayer-lrc-current {
-  
-  display: none;
-  
-  font-size: 15px;
-  color: #42b983;
-}
-
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
-  left: -66px !important;
-}
-
-.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
-  left: 0px !important;
-}
-
-
-</style>
-<meting-js  
-  class=""
-  server="netease"
-  type="playlist"
-  id="9194877203"
-  fixed='true'
-  autoplay='false'
-  theme='#42b983'
-  loop='all'
-  order='random'
-  preload='none'
-  volume='0.7'
-  list-folded='true'
->
-</meting-js>
-
-<!-- <style>
-  #aplayer {
-    position: fixed;
-    left: 0;
-    bottom: 300px;
-  }
-</style> -->
-<script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-<script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
-    
-
-    <!-- 图片放大 -->
-    
-      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    
-
-    <!-- 百度解析 -->
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script async>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    <!-- 背景彩带 -->
-    
-      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
-    
-
-    <script src="/js/utils/index.js"></script>
-    <script src="/js/app.js"></script>
-    
-    <!-- 文章目录所需js -->
-<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
-<script src="/js/tocbot/tocbot.min.js"></script> -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
-
-<script>
-  var headerEl = 'h2, h3, h4',  //headers 
-    content = '.post-detail',//文章容器
-    idArr = {};  //标题数组以确定是否增加索引id
-  //add #id
-  var option = {
-    // Where to render the table of contents.
-    tocSelector: '.toc',
-    // Where to grab the headings to build the table of contents.
-    contentSelector: content,
-    // Which headings to grab inside of the contentSelector element.
-    headingSelector: headerEl,
-    scrollSmooth: true,
-    scrollSmoothOffset: -70,
-    // headingsOffset: -($(window).height() * 0.4 - 45),
-    headingsOffset: -($(window).height() * 0.4 - 70),
-    // positionFixedSelector: '.toc-main',
-    // positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    activeLinkClass: 'is-active-link',
-    orderedList: true,
-    collapseDepth: 20,
-    // onClick: function (e) {},
-  }
-  if ($('.toc').length > 0) {
-
-    $(content).children(headerEl).each(function () {
-      //去除空格以及多余标点
-      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
-
-      headerId = headerId.toLowerCase();
-      if (idArr[headerId]) {
-        //id已经存在
-        $(this).attr('id', headerId + '-' + idArr[headerId]);
-        idArr[headerId]++;
-      }
-      else {
-        //id未存在
-        idArr[headerId] = 1;
-        $(this).attr('id', headerId);
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-      tocbot.init(option);
-      mobileTocClick();
-    });
-
-  }
-
-  window.tocScrollFn = function () {
-    return bamboo.throttle(function () {
-      findHeadPosition();
-    }, 100)()
-  }
-  window.addEventListener('scroll', tocScrollFn);
-
-  const findHeadPosition = function (top) {
-    if ($('.toc-list').length <= 0) {
-      return false;
-    }
-    setTimeout(() => {  // or DOMContentLoaded 
-      autoScrollToc();
-    }, 0);
-  }
-
-  const autoScrollToc = function () {
-    const $activeItem = document.querySelector('.is-active-link');
-    const $cardToc = document.querySelector('.toc-content');
-    const activePosition = $activeItem.getBoundingClientRect().top
-    const sidebarScrollTop = $cardToc.scrollTop
-    if (activePosition > (document.documentElement.clientHeight - 100)) {
-      $cardToc.scrollTop = sidebarScrollTop + 150
-    }
-    if (activePosition < 150) {
-      $cardToc.scrollTop = sidebarScrollTop - 150
-    }
-  }
-
-  document.addEventListener('pjax:send', function () {
-    if ($('.toc').length) {
-      tocbot.destroy();
-    }
-  });
-
-  document.addEventListener('pjax:complete', function () {
-    if ($('.toc').length) {
-      tocbot.init(option);
-      mobileTocClick();
-    }
-  });
-  
-  // 手机端toc按钮点击出现目录
-  const mobileTocClick = function () {
-    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
-    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
-    let right = '45px';
-    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
-      right = '100px'
-    }
-    const mobileToc = {
-      open: () => {
-        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
-      },
-
-      close: () => {
-        $cardTocLayout.style.animation = 'toc-close .2s'
-        setTimeout(() => {
-          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
-        }, 100)
-      }
-    }
-    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
-      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
-      else mobileToc.close()
-    })
-
-    $cardToc.addEventListener('click', (e) => {
-      if (window.innerWidth < 992) { // 小于992px的时候
-        mobileToc.close()
-      }
-    })
-  }
-</script>
-
-<style>
-  /* .is-position-fixed {
-    position: sticky !important;
-    top: 74px;
-  }
-
-  .toc-main ul {
-    counter-reset: show-list;
-  }
-
-  .toc-main ul li::before {
-    content: counter(item)".";
-    display: block;
-    position: absolute;
-    left: 12px;
-    top: 0;
-  } */
-</style>
- 
-
-<!-- 设置导航背景 -->
-<script>
-  let setHeaderClass = () => {
-    const nav = $('#navHeader');
-    const navTop = nav.outerHeight();
-    const winTop = $(window).scrollTop();
-    if(winTop > navTop) {
-      nav.addClass('header-bg-color');
-    }
-    else {
-      nav.removeClass('header-bg-color');
-    }
-  };
-
-  let scrollCollect = () => {
-    return bamboo.throttle(function (e) {
-      setHeaderClass();
-    }, 200)()
-  }
-
-  let initHeaderBg = () => {
-    setHeaderClass();
-  }
-
-  setHeaderClass();
-  window.addEventListener('scroll', scrollCollect);
-
-  document.addEventListener('pjax:send', function () {
-    window.removeEventListener('scroll', scrollCollect)
-  })
-  document.addEventListener('pjax:complete', function () {
-    window.addEventListener('scroll', scrollCollect);
-    setHeaderClass();
-  })
-</script> 
-
-<!-- 渲染issues标签里的内容 -->
-<script>
-  function loadIssuesJS() {
-    if ($(".post-detail").find(".issues-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/issues/index.js');
-  };
-  $(function () {
-    loadIssuesJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof IssuesAPI == "undefined") {
-      loadIssuesJS();
-    }
-  })
-</script>
-
-<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
-<script>
-  function loadPhotoOnlineJS() {
-    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/getPhotoOnline/index.js');
-  };
-  $(function () {
-    loadPhotoOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getPhotoJson == "undefined") {
-      loadPhotoOnlineJS();
-    }
-  })
-</script>
-
-<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
-<script>
-  function loadTalkOnlineJS() {
-    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
-      return;
-    } 
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
-    loadScript('/js/getTalkOnline/index.js');
-  };
-  $(function () {
-    loadTalkOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getTalkJson == "undefined") {
-      loadTalkOnlineJS();
-    }
-  })
-</script>
-
-<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
-<script>
-  function loadSiteOnlineJS() {
-    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
-      return;
-    } 
-    loadScript('/js/getSiteOnline/index.js');
-  };
-  $(function () {
-    loadSiteOnlineJS();
-  });
-  document.addEventListener('pjax:complete', function () {
-    if (typeof getSiteJson == "undefined") {
-      loadSiteOnlineJS();
-    }
-  })
-</script>
-
-<!-- 输入框打字特效 -->
-<!-- 输入框打字特效 -->
-
-  <script src="/js/activate-power-mode.js"></script>
-  <script>
-    POWERMODE.colorful = true;  // 打开随机颜色特效
-    POWERMODE.shake = false;    // 关闭输入框抖动
-    document.body.addEventListener('input', POWERMODE);//监听打字事件
-  </script>
-
-
-<!-- markdown代码一键复制功能 -->
-
-  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
-  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
-  <script src="/js/clipboard/clipboard.min.js"></script>
-  <div id="appCopy">
-  </div>
-  <script data-pjax>
-    var vm = new Vue({
-      el: '#appCopy',
-      data: {
-      },
-      computed: {
-      },
-      mounted() {
-        const that = this;
-        var copy = '复制';
-        /* code */
-        var initCopyCode = function () {
-          var copyHtml = '';
-          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
-          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
-          copyHtml += '</button>';
-          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
-          $(".post-detail pre").not('.gutter pre').before(copyHtml);
-          new ClipboardJS('.btn-copy', {
-            target: function (trigger) {
-              return trigger.nextElementSibling;
-            }
-          });
-        }
-        initCopyCode();
-        $('.btn-copy').unbind('click').bind('click', function () {
-          doSomething();
-        })
-        $(document).unbind('keypress').bind('keypress', function (e) {
-          if (e.ctrlKey && e.keyCode == 67) {
-            doSomething();
-          }
-        })
-
-        function doSomething() {
-          that.$notify({
-            title: "成功",
-            content: "代码已复制，请遵守相关授权协议。",
-            type: 'success'
-          })
-        }
-      },
-      methods: {
-      },
-      created() { }
-    })
-  </script>
-  
-
-<!-- 图片懒加载 -->
-<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
-<script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
-</script>
-
-
-<!-- 卡片滚动动画 -->
-   
-
-<!-- 评论所需js -->
 
   
-        <script type="text/javascript">
-  var utteranceComment = {};
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-  function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-    if (isDark) {
-      utteranceComment.Theme = 'github-dark';
-    } else {
-      utteranceComment.Theme = 'github-light';
-    }
-
-    return document.getElementById("gitment-container");
-  }
-  comment_el = '#gitment-container';
-  load_utterance = function () {
-    if ($(comment_el).length) {
-      // 匿名函数，防止污染全局变量
-      const HEAD = check_utterance();
-
-      var utterances = document.createElement('script');
-      utterances.type = 'text/javascript';
-      utterances.async = true;
-      utterances.setAttribute('issue-term', 'pathname')
-      utterances.setAttribute('theme', utteranceComment.Theme)
-      utterances.setAttribute('repo', 'lihuanacct/comment')
-      utterances.crossorigin = 'anonymous';
-      utterances.src = 'https://utteranc.es/client.js';
-      // content 是要插入评论的地方
-      document.getElementById('gitment-container').appendChild(utterances);
-
-    }
-  }
-
-  function dark_utterance() {
-    const HEAD = check_utterance();
-    if (!HEAD) return;
-    const message = {
-      type: 'set-theme',
-      theme: utteranceComment.Theme
-    };
-    const utteranceIframe = document.querySelector('iframe');
-    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
-  }
-
-  $(document).ready(load_utterance);
-  document.addEventListener('pjax:complete', function () {
-    load_utterance();
-  });
-
-  $('.dark').click(function () {
-    setTimeout(() => {
-      dark_utterance();
-    });
-  })
-
-</script>
-
-<style>
-  .utterances {
-    max-width: inherit !important;
-  }
-</style>
-      
-
-
-<!-- 鼠标点击特效 -->
-<!-- 爱心点击 -->
-
-  
-    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
-    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-    <script async src="/js/cursor/explosion.min.js"></script>
   
 
 
 
 
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
 
-
-<!-- 轮播图标签 -->
-<script>
-  var bambooSwiperTag = {};
-  function load_swiper() {
-    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
-    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
-    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
-      pjax_swiper();
-    });
-  }
-
-  load_swiper();
-
-  function pjax_swiper() {
-    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
-      slidesPerView: 'auto',
-      spaceBetween: 8,
-      centeredSlides: true,
-      loop: true,
-      autoplay: true ? {
-        delay: 3000,
-        stopOnLastSlide: false,
-        disableOnInteraction: false,
-      } : false,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on:{
-        init: function(){
-          swiperAnimateCache(this); //隐藏动画元素 
-          swiperAnimate(this); //初始化完成开始动画
-        }, 
-        slideChangeTransitionEnd: function(){ 
-          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
-          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
-        } 
-      }
-    });
-  }
-
-  document.addEventListener('pjax:complete', function () {
-    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
-    if (typeof bambooSwiperTag.swiper === "undefined") {
-      load_swiper();
-    } else {
-      pjax_swiper();
-    }
-  });
-</script>
-    <!-- pjax -->
-    
-
-<!-- pjax -->
-
-
-  <script src="/js/pjax@0.2.8/index.js"></script>
-  
-    <div class="pjax-animate">
-  
-    <div class="loading-circle"><div id="loader-circle"></div></div>
-    <script>
-      window.ShowLoading = function() {
-        $(".loading-circle").css("display", "block");
-      };
-      window.HideLoading = function() {
-        $(".loading-circle").css("display", "none");
-      }
-    </script>
-  
-	<script>
-    document.addEventListener('pjax:complete', function () {
-      window.HideLoading();
-    })
-    document.addEventListener('pjax:send', function () {
-      window.ShowLoading();
-    })
-    document.addEventListener('pjax:error', function () {
-      window.HideLoading();
-    })
-	</script>
-</div>
 
   
 
-  <script>
-    var pjax = new Pjax({
-      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
-      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
-      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-      timeout: 5000
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-
-    })
-    
-    document.addEventListener('pjax:complete', function () {
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-      window.location.href = e.triggerElement.href;
-    })
-    
-    // 刷新不从顶部开始
-    document.addEventListener("DOMContentLoaded", function () {
-      history.scrollRestoration = 'auto';
-    })
-  </script>
 
 
 
-  </body>
+
+</body>
 </html>
