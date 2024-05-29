@@ -530,7 +530,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
     width: 50px;
     height: 50px;
     line-height: 50px;
-    bottom: 140px;
+    bottom: 100px;
     right: 17px;
     text-align: center;
     z-index: 9999999;
@@ -4557,7 +4557,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   background-color: #222;
   position: fixed;
   right: 0;
-  bottom: 130px;
+  bottom: 100px;
   right: 17px;
   width: 50px;
   height: 50px;
@@ -4579,7 +4579,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
     width: 30px;
     height: 30px;
     line-height: 30px;
-    bottom: 120px;
+    bottom: 145px;
     right: 0;
   }
 }
