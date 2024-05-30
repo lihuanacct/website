@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>GitLab部署</title>
-    <url>/GitLab%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p>非私有化访问</p>
-<p>方式：注册GitLab</p>
-<p><a href="https://blog.csdn.net/m0_50542823/article/details/135495927">https://blog.csdn.net/m0_50542823/article/details/135495927</a></p>
-<p>私有化部署</p>
-<p>1、使用 docker-compose 配置 gitlab</p>
-<p>安装docker-compose 之前需安装 docker </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>删除 docker</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、安装 docker-compose</p>
-<p>使用 pip安装 docker-compose</p>
-<p>pip install –upgrade pip -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> –trusted-host mirrors.aliyun.com<br>pip install -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> docker-compose –trusted-host mirrors.aliyun.com</p>
-<p>3、安装gitlab</p>
-<p><a href="https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4</a></p>
-<p>修改 docker-compose.yml 文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
-
-<p>修改 gitlab.rb文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>启动 docker-compose</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
-
-<p>启动成功后，在网页中打开gitlab</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
-
-<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
-<p>部署过程</p>
-<p><a href="https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE</a></p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>gitlab</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Docker、gitlab-runner</title>
     <url>/Docker%E3%80%81gitlab-runner/</url>
     <content><![CDATA[<p>下面是在master虚拟机进行<br>安装jdk<br>安装maven</p>
@@ -253,114 +207,8 @@
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>gitlab</tag>
         <tag>docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL安装配置文档</title>
-    <url>/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>安装环境:Win10 64位</strong><br><strong>软件版本:MySQL 5.7.24 解压版</strong></p>
-</blockquote>
-<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>点开下面的链接：<br><a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<h2 id="二、linux-安装"><a href="#二、linux-安装" class="headerlink" title="二、linux 安装"></a>二、linux 安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、通过secureCRT.工具连接Linux系统</span><br><span class="line"></span><br><span class="line">2、上传mysq的安装包</span><br><span class="line">	alt+p，然后 put d:/develop/mysql-5.7.18-1.e17.x86_64.rpm-bundle.tar</span><br><span class="line">	</span><br><span class="line">3、解压mysql的安装包</span><br><span class="line">	mkdir mysql </span><br><span class="line">	tar -xvf mysql-5.7.18-1.el8.x86_64.rpm-bundle.tar -C mysql/</span><br><span class="line">	</span><br><span class="line">4、安装客户端</span><br><span class="line">    cd mysql/</span><br><span class="line">	rpm -ivh mysql-community-client-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">5、安装服务端</span><br><span class="line">	rpm -ivh mysql-community-server-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">6、修改mysql默认字符集</span><br><span class="line">	vi /etc/my.cnf</span><br><span class="line">	添加如下内容：</span><br><span class="line">	[mysqld]</span><br><span class="line">	character-set-server=utf8</span><br><span class="line">	collation-server=utf8_general_ci</span><br><span class="line">	--在文件最下方添加</span><br><span class="line">	[client]</span><br><span class="line">	default-character-set=utf8</span><br><span class="line"></span><br><span class="line">7、启动mysql服务</span><br><span class="line">	service mysqld start</span><br><span class="line">	</span><br><span class="line">8、登录mysql</span><br><span class="line">	mysql -u root -p 敲回车，输入密码</span><br><span class="line">	初始密码查看：cat /var/log/mysqld.log</span><br><span class="line">		在root@localhost:   后面的就是初始密码</span><br><span class="line">		</span><br><span class="line">9、修改mysql登录密码</span><br><span class="line">	set global validate_password_policy=0;</span><br><span class="line">	set global validate_password_length=1;</span><br><span class="line">	set password=password(&#x27;密码&#x27;);    //这里密码设置为***    set password=password(&#x27;***&#x27;);</span><br><span class="line">	</span><br><span class="line">10、授予远程连接权限</span><br><span class="line">	//授权</span><br><span class="line">	grant all privileges on *.* to &#x27;root&#x27; @&#x27;%&#x27; identified by &#x27;***&#x27;;</span><br><span class="line">	//刷新</span><br><span class="line">	flush privileges;</span><br><span class="line">	</span><br><span class="line">11、退出mysql界面，关闭Linux系统防火墙</span><br><span class="line">	systemctl stop firewalld</span><br><span class="line">	</span><br><span class="line">12、重启mysql服务</span><br><span class="line">	service mysqld restart</span><br><span class="line">	</span><br><span class="line">13、使用SQLYog工具连接mysql</span><br></pre></td></tr></table></figure>
-
-<p>”&#x2F;“是根目录，”~“是home目录。</p>
-<p>&#x2F;是指根目录：就是所有目录最顶层的目录</p>
-<p>~是当前用户的家目录：如果是root用户就是&#x2F;root&#x2F;目录， 如果是其他用户就是&#x2F;home&#x2F;下用户名命名的用户 </p>
-<h2 id="三、windows安装"><a href="#三、windows安装" class="headerlink" title="三、windows安装"></a>三、windows安装</h2><h3 id="1、解压mysql压缩包"><a href="#1、解压mysql压缩包" class="headerlink" title="1、解压mysql压缩包"></a>1、解压mysql压缩包</h3><h3 id="2、添加环境变量"><a href="#2、添加环境变量" class="headerlink" title="2、添加环境变量"></a>2、添加环境变量</h3><blockquote>
-<p>环境变量里面有很多选项，这里我们只用到<code>Path</code>这个参数。为什么在初始化的开始要添加环境变量呢？<br>在黑框(即CMD)中输入一个可执行程序的名字，Windows会先在环境变量中的<code>Path</code>所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。</p>
-</blockquote>
-<p>右键<code>此电脑</code>→<code>属性</code>，点击<code>高级系统设置</code></p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216257.png" alt="img"></p>
-<p>点击<code>环境变量</code></p>
-<p>在<code>系统变量</code>中新建MYSQL_HOME</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216731.png" alt="image-20201109140222488"></p>
-<p>在<code>系统变量</code>中找到并<strong>双击</strong><code>Path</code></p>
-<p>点击<code>新建</code></p>
-<p>最后点击确定。</p>
-<p><strong>如何验证是否添加成功？</strong></p>
-<p>右键开始菜单(就是屏幕左下角)，选择<code>命令提示符(管理员)</code>，打开黑框，敲入<code>mysql</code>，回车。<br>如果提示<code>Can&#39;t connect to MySQL server on &#39;localhost&#39;</code>则证明添加成功；<br>如果提示<code>mysql不是内部或外部命令，也不是可运行的程序或批处理文件</code>则表示添加添加失败，请重新检查步骤并重试。</p>
-<h3 id="3、新建配置文件"><a href="#3、新建配置文件" class="headerlink" title="3、新建配置文件"></a>3、新建配置文件</h3><p>新建一个文本文件，内容如下：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=<span class="string">INNODB</span></span><br><span class="line"><span class="attr">sql_mode</span>=<span class="string">STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span></span><br></pre></td></tr></table></figure>
-
-<p>把上面的文本文件另存为，在保存类型里选<code>所有文件 (*.*)</code>，文件名叫<code>my.ini</code>，存放的路径为MySQL的<code>根目录</code>(例如我的是<code>D:\software\mysql-5.7.24-winx64</code>,根据自己的MySQL目录位置修改)。</p>
-<h3 id="4、初始化MySQL"><a href="#4、初始化MySQL" class="headerlink" title="4、初始化MySQL"></a>4、初始化MySQL</h3><p>在刚才的黑框中敲入<code>mysqld --initialize-insecure</code>，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明data目录初始化没有问题，此时再查看MySQL目录下已经有data目录生成。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld --initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216706.png" alt="image-20201109140955772"></p>
-<p>tips：如果出现如下错误</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216910.png" alt="image-20201109135848054"></p>
-<p>是由于权限不足导致的，去<code>C:\Windows\System32</code> 下以管理员方式运行 cmd.exe</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216508.png" alt="image-20201109140001186"></p>
-<h3 id="5、注册MySQL服务"><a href="#5、注册MySQL服务" class="headerlink" title="5、注册MySQL服务"></a>5、注册MySQL服务</h3><p>在黑框里敲入<code>mysqld -install</code>，回车。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216710.png" alt="image-20201109141325810"></p>
-<p>现在你的计算机上已经安装好了MySQL服务了。</p>
-<h3 id="6、-启动MySQL服务"><a href="#6、-启动MySQL服务" class="headerlink" title="6、 启动MySQL服务"></a>6、 启动MySQL服务</h3><p>在黑框里敲入<code>net start mysql</code>，回车。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">net start mysql  <span class="comment">// 启动mysql服务</span></span><br><span class="line">    </span><br><span class="line">net stop mysql  <span class="comment">// 停止mysql服务</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216751.png" alt="img"></p>
-<h3 id="7、修改默认账户密码"><a href="#7、修改默认账户密码" class="headerlink" title="7、修改默认账户密码"></a>7、修改默认账户密码</h3><p>在黑框里敲入<code>mysqladmin -u root password 1234</code>，这里的<code>1234</code>就是指默认管理员(即root账户)的密码，可以自行修改成你喜欢的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqladmin -u root password 1234</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216797.png" alt="img"></p>
-<p><strong>至此，MySQL 5.7 解压版安装完毕！</strong></p>
-<hr>
-<h2 id="四、登录MySQL"><a href="#四、登录MySQL" class="headerlink" title="四、登录MySQL"></a>四、登录MySQL</h2><p>右键开始菜单，选择<code>命令提示符</code>，打开黑框。<br>在黑框中输入，<code>mysql -uroot -p1234</code>，回车，出现下图且左下角为<code>mysql&gt;</code>，则登录成功。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p1234</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216916.png" alt="img"></p>
-<p><strong>到这里你就可以开始你的MySQL之旅了！</strong></p>
-<p>退出mysql：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
-
-<p>登陆参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)</span><br><span class="line">mysql -uroot -p1234 -h127.0.0.1 -p3306</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<h2 id="五、卸载MySQL"><a href="#五、卸载MySQL" class="headerlink" title="五、卸载MySQL"></a>五、卸载MySQL</h2><p>如果你想卸载MySQL，也很简单。</p>
-<p>右键开始菜单，选择<code>命令提示符(管理员)</code>，打开黑框。</p>
-<ol>
-<li>敲入<code>net stop mysql</code>，回车。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216953.png" alt="img"></p>
-<ol start="2">
-<li>再敲入<code>mysqld -remove mysql</code>，回车。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -remove mysql</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216027.png" alt="img"></p>
-<ol start="3">
-<li>最后删除MySQL目录及相关的环境变量。</li>
-</ol>
-<p><strong>至此，MySQL卸载完成！</strong></p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>mysql</tag>
+        <tag>gitlab</tag>
       </tags>
   </entry>
   <entry>
@@ -820,24 +668,155 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://special711.cn/">星猫博客</a>! This is your very first post. Check <a href="https://special711.cn/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://special711.cn/">troubleshooting</a> or you can ask me on <a href="https://github.com/">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
+    <title>MySQL安装配置文档</title>
+    <url>/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>安装环境:Win10 64位</strong><br><strong>软件版本:MySQL 5.7.24 解压版</strong></p>
+</blockquote>
+<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>点开下面的链接：<br><a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+<h2 id="二、linux-安装"><a href="#二、linux-安装" class="headerlink" title="二、linux 安装"></a>二、linux 安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、通过secureCRT.工具连接Linux系统</span><br><span class="line"></span><br><span class="line">2、上传mysq的安装包</span><br><span class="line">	alt+p，然后 put d:/develop/mysql-5.7.18-1.e17.x86_64.rpm-bundle.tar</span><br><span class="line">	</span><br><span class="line">3、解压mysql的安装包</span><br><span class="line">	mkdir mysql </span><br><span class="line">	tar -xvf mysql-5.7.18-1.el8.x86_64.rpm-bundle.tar -C mysql/</span><br><span class="line">	</span><br><span class="line">4、安装客户端</span><br><span class="line">    cd mysql/</span><br><span class="line">	rpm -ivh mysql-community-client-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">5、安装服务端</span><br><span class="line">	rpm -ivh mysql-community-server-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">6、修改mysql默认字符集</span><br><span class="line">	vi /etc/my.cnf</span><br><span class="line">	添加如下内容：</span><br><span class="line">	[mysqld]</span><br><span class="line">	character-set-server=utf8</span><br><span class="line">	collation-server=utf8_general_ci</span><br><span class="line">	--在文件最下方添加</span><br><span class="line">	[client]</span><br><span class="line">	default-character-set=utf8</span><br><span class="line"></span><br><span class="line">7、启动mysql服务</span><br><span class="line">	service mysqld start</span><br><span class="line">	</span><br><span class="line">8、登录mysql</span><br><span class="line">	mysql -u root -p 敲回车，输入密码</span><br><span class="line">	初始密码查看：cat /var/log/mysqld.log</span><br><span class="line">		在root@localhost:   后面的就是初始密码</span><br><span class="line">		</span><br><span class="line">9、修改mysql登录密码</span><br><span class="line">	set global validate_password_policy=0;</span><br><span class="line">	set global validate_password_length=1;</span><br><span class="line">	set password=password(&#x27;密码&#x27;);    //这里密码设置为***    set password=password(&#x27;***&#x27;);</span><br><span class="line">	</span><br><span class="line">10、授予远程连接权限</span><br><span class="line">	//授权</span><br><span class="line">	grant all privileges on *.* to &#x27;root&#x27; @&#x27;%&#x27; identified by &#x27;***&#x27;;</span><br><span class="line">	//刷新</span><br><span class="line">	flush privileges;</span><br><span class="line">	</span><br><span class="line">11、退出mysql界面，关闭Linux系统防火墙</span><br><span class="line">	systemctl stop firewalld</span><br><span class="line">	</span><br><span class="line">12、重启mysql服务</span><br><span class="line">	service mysqld restart</span><br><span class="line">	</span><br><span class="line">13、使用SQLYog工具连接mysql</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://special711.cn/">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+<p>”&#x2F;“是根目录，”~“是home目录。</p>
+<p>&#x2F;是指根目录：就是所有目录最顶层的目录</p>
+<p>~是当前用户的家目录：如果是root用户就是&#x2F;root&#x2F;目录， 如果是其他用户就是&#x2F;home&#x2F;下用户名命名的用户 </p>
+<h2 id="三、windows安装"><a href="#三、windows安装" class="headerlink" title="三、windows安装"></a>三、windows安装</h2><h3 id="1、解压mysql压缩包"><a href="#1、解压mysql压缩包" class="headerlink" title="1、解压mysql压缩包"></a>1、解压mysql压缩包</h3><h3 id="2、添加环境变量"><a href="#2、添加环境变量" class="headerlink" title="2、添加环境变量"></a>2、添加环境变量</h3><blockquote>
+<p>环境变量里面有很多选项，这里我们只用到<code>Path</code>这个参数。为什么在初始化的开始要添加环境变量呢？<br>在黑框(即CMD)中输入一个可执行程序的名字，Windows会先在环境变量中的<code>Path</code>所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。</p>
+</blockquote>
+<p>右键<code>此电脑</code>→<code>属性</code>，点击<code>高级系统设置</code></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216257.png" alt="img"></p>
+<p>点击<code>环境变量</code></p>
+<p>在<code>系统变量</code>中新建MYSQL_HOME</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216731.png" alt="image-20201109140222488"></p>
+<p>在<code>系统变量</code>中找到并<strong>双击</strong><code>Path</code></p>
+<p>点击<code>新建</code></p>
+<p>最后点击确定。</p>
+<p><strong>如何验证是否添加成功？</strong></p>
+<p>右键开始菜单(就是屏幕左下角)，选择<code>命令提示符(管理员)</code>，打开黑框，敲入<code>mysql</code>，回车。<br>如果提示<code>Can&#39;t connect to MySQL server on &#39;localhost&#39;</code>则证明添加成功；<br>如果提示<code>mysql不是内部或外部命令，也不是可运行的程序或批处理文件</code>则表示添加添加失败，请重新检查步骤并重试。</p>
+<h3 id="3、新建配置文件"><a href="#3、新建配置文件" class="headerlink" title="3、新建配置文件"></a>3、新建配置文件</h3><p>新建一个文本文件，内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=<span class="string">INNODB</span></span><br><span class="line"><span class="attr">sql_mode</span>=<span class="string">STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://special711.cn/">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+<p>把上面的文本文件另存为，在保存类型里选<code>所有文件 (*.*)</code>，文件名叫<code>my.ini</code>，存放的路径为MySQL的<code>根目录</code>(例如我的是<code>D:\software\mysql-5.7.24-winx64</code>,根据自己的MySQL目录位置修改)。</p>
+<h3 id="4、初始化MySQL"><a href="#4、初始化MySQL" class="headerlink" title="4、初始化MySQL"></a>4、初始化MySQL</h3><p>在刚才的黑框中敲入<code>mysqld --initialize-insecure</code>，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明data目录初始化没有问题，此时再查看MySQL目录下已经有data目录生成。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld --initialize-insecure</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://special711.cn/">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216706.png" alt="image-20201109140955772"></p>
+<p>tips：如果出现如下错误</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216910.png" alt="image-20201109135848054"></p>
+<p>是由于权限不足导致的，去<code>C:\Windows\System32</code> 下以管理员方式运行 cmd.exe</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216508.png" alt="image-20201109140001186"></p>
+<h3 id="5、注册MySQL服务"><a href="#5、注册MySQL服务" class="headerlink" title="5、注册MySQL服务"></a>5、注册MySQL服务</h3><p>在黑框里敲入<code>mysqld -install</code>，回车。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://special711.cn/">Deployment</a></p>
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216710.png" alt="image-20201109141325810"></p>
+<p>现在你的计算机上已经安装好了MySQL服务了。</p>
+<h3 id="6、-启动MySQL服务"><a href="#6、-启动MySQL服务" class="headerlink" title="6、 启动MySQL服务"></a>6、 启动MySQL服务</h3><p>在黑框里敲入<code>net start mysql</code>，回车。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">net start mysql  <span class="comment">// 启动mysql服务</span></span><br><span class="line">    </span><br><span class="line">net stop mysql  <span class="comment">// 停止mysql服务</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216751.png" alt="img"></p>
+<h3 id="7、修改默认账户密码"><a href="#7、修改默认账户密码" class="headerlink" title="7、修改默认账户密码"></a>7、修改默认账户密码</h3><p>在黑框里敲入<code>mysqladmin -u root password 1234</code>，这里的<code>1234</code>就是指默认管理员(即root账户)的密码，可以自行修改成你喜欢的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqladmin -u root password 1234</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216797.png" alt="img"></p>
+<p><strong>至此，MySQL 5.7 解压版安装完毕！</strong></p>
+<hr>
+<h2 id="四、登录MySQL"><a href="#四、登录MySQL" class="headerlink" title="四、登录MySQL"></a>四、登录MySQL</h2><p>右键开始菜单，选择<code>命令提示符</code>，打开黑框。<br>在黑框中输入，<code>mysql -uroot -p1234</code>，回车，出现下图且左下角为<code>mysql&gt;</code>，则登录成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p1234</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216916.png" alt="img"></p>
+<p><strong>到这里你就可以开始你的MySQL之旅了！</strong></p>
+<p>退出mysql：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>登陆参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)</span><br><span class="line">mysql -uroot -p1234 -h127.0.0.1 -p3306</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="五、卸载MySQL"><a href="#五、卸载MySQL" class="headerlink" title="五、卸载MySQL"></a>五、卸载MySQL</h2><p>如果你想卸载MySQL，也很简单。</p>
+<p>右键开始菜单，选择<code>命令提示符(管理员)</code>，打开黑框。</p>
+<ol>
+<li>敲入<code>net stop mysql</code>，回车。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216953.png" alt="img"></p>
+<ol start="2">
+<li>再敲入<code>mysqld -remove mysql</code>，回车。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -remove mysql</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216027.png" alt="img"></p>
+<ol start="3">
+<li>最后删除MySQL目录及相关的环境变量。</li>
+</ol>
+<p><strong>至此，MySQL卸载完成！</strong></p>
 ]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
       <tags>
-        <tag>世界</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitLab部署</title>
+    <url>/GitLab%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>非私有化访问</p>
+<p>方式：注册GitLab</p>
+<p><a href="https://blog.csdn.net/m0_50542823/article/details/135495927">https://blog.csdn.net/m0_50542823/article/details/135495927</a></p>
+<p>私有化部署</p>
+<p>1、使用 docker-compose 配置 gitlab</p>
+<p>安装docker-compose 之前需安装 docker </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除 docker</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、安装 docker-compose</p>
+<p>使用 pip安装 docker-compose</p>
+<p>pip install –upgrade pip -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> –trusted-host mirrors.aliyun.com<br>pip install -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> docker-compose –trusted-host mirrors.aliyun.com</p>
+<p>3、安装gitlab</p>
+<p><a href="https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4</a></p>
+<p>修改 docker-compose.yml 文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
+
+<p>修改 gitlab.rb文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启动 docker-compose</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
+
+<p>启动成功后，在网页中打开gitlab</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
+
+<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
+<p>部署过程</p>
+<p><a href="https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE</a></p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>gitlab</tag>
       </tags>
   </entry>
   <entry>
@@ -1794,6 +1773,27 @@
       </categories>
       <tags>
         <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://special711.cn/">星猫博客</a>! This is your very first post. Check <a href="https://special711.cn/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://special711.cn/">troubleshooting</a> or you can ask me on <a href="https://github.com/">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://special711.cn/">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://special711.cn/">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://special711.cn/">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://special711.cn/">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>世界</tag>
       </tags>
   </entry>
   <entry>

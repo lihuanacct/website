@@ -2,42 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/about/index.html</loc>
-    
-    <lastmod>2024-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/404/index.html</loc>
-    
-    <lastmod>2024-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/schedule/index.html</loc>
-    
-    <lastmod>2024-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</loc>
-    
-    <lastmod>2024-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     
     <lastmod>2024-05-30</lastmod>
@@ -83,7 +47,25 @@
   </url>
   
   <url>
+    <loc>http://example.com/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/JVM/</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/hello-world/</loc>
     
     <lastmod>2024-05-30</lastmod>
     
@@ -119,6 +101,24 @@
   </url>
   
   <url>
+    <loc>http://example.com/about/index.html</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/404/index.html</loc>
+    
+    <lastmod>2024-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/index.html</loc>
     
     <lastmod>2024-05-28</lastmod>
@@ -136,15 +136,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>http://example.com/hello-world/</loc>
-    
-    <lastmod>2024-05-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>http://example.com/</loc>
@@ -155,13 +146,6 @@
 
   
   <url>
-    <loc>http://example.com/tags/gitlab/</loc>
-    <lastmod>2024-05-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/docker/</loc>
     <lastmod>2024-05-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -169,7 +153,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/mysql/</loc>
+    <loc>http://example.com/tags/gitlab/</loc>
     <lastmod>2024-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -183,7 +167,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/%E4%B8%96%E7%95%8C/</loc>
+    <loc>http://example.com/tags/mysql/</loc>
     <lastmod>2024-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -191,6 +175,13 @@
   
   <url>
     <loc>http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2024-05-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/%E4%B8%96%E7%95%8C/</loc>
     <lastmod>2024-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
