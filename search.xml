@@ -303,7 +303,9 @@
     <title>k8s、gitlab、gitlab-runner自动化部署</title>
     <url>/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<p>1、kubernetes 、组件安装及集群搭建教程</p>
-<p><a href="https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
+
+
 <p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
 <p>访问路径 <a href="https://192.168.223.129:30009/">https://192.168.223.129:30009</a></p>
 <p>3、gitlab安装</p>
@@ -1473,14 +1475,6 @@ echo 字符串&gt;&gt;文件名
       </categories>
       <tags>
         <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解放台湾</title>
-    <url>/%E8%A7%A3%E6%94%BE%E5%8F%B0%E6%B9%BE/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>解放台湾</tag>
       </tags>
   </entry>
   <entry>
