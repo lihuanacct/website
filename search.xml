@@ -212,52 +212,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitLab部署</title>
-    <url>/GitLab%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p>非私有化访问</p>
-<p>方式：注册GitLab</p>
-<p><a href="https://blog.csdn.net/m0_50542823/article/details/135495927">https://blog.csdn.net/m0_50542823/article/details/135495927</a></p>
-<p>私有化部署</p>
-<p>1、使用 docker-compose 配置 gitlab</p>
-<p>安装docker-compose 之前需安装 docker </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>删除 docker</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、安装 docker-compose</p>
-<p>使用 pip安装 docker-compose</p>
-<p>pip install –upgrade pip -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> –trusted-host mirrors.aliyun.com<br>pip install -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> docker-compose –trusted-host mirrors.aliyun.com</p>
-<p>3、安装gitlab</p>
-<p><a href="https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4</a></p>
-<p>修改 docker-compose.yml 文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
-
-<p>修改 gitlab.rb文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>启动 docker-compose</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
-
-<p>启动成功后，在网页中打开gitlab</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
-
-<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
-<p>部署过程</p>
-<p><a href="https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE</a></p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>gitlab</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JVM</title>
     <url>/JVM/</url>
     <content><![CDATA[<h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1><h2 id="1、简述一下JVM的内存结构？-高频"><a href="#1、简述一下JVM的内存结构？-高频" class="headerlink" title="1、简述一下JVM的内存结构？(高频)"></a>1、简述一下JVM的内存结构？(高频)</h2><p>JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。</p>
@@ -714,130 +668,49 @@
       </tags>
   </entry>
   <entry>
-    <title>MySQL安装配置文档</title>
-    <url>/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<blockquote>
-<p><strong>安装环境:Win10 64位</strong><br><strong>软件版本:MySQL 5.7.24 解压版</strong></p>
-</blockquote>
-<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>点开下面的链接：<br><a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<h2 id="二、linux-安装"><a href="#二、linux-安装" class="headerlink" title="二、linux 安装"></a>二、linux 安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、通过secureCRT.工具连接Linux系统</span><br><span class="line"></span><br><span class="line">2、上传mysq的安装包</span><br><span class="line">	alt+p，然后 put d:/develop/mysql-5.7.18-1.e17.x86_64.rpm-bundle.tar</span><br><span class="line">	</span><br><span class="line">3、解压mysql的安装包</span><br><span class="line">	mkdir mysql </span><br><span class="line">	tar -xvf mysql-5.7.18-1.el8.x86_64.rpm-bundle.tar -C mysql/</span><br><span class="line">	</span><br><span class="line">4、安装客户端</span><br><span class="line">    cd mysql/</span><br><span class="line">	rpm -ivh mysql-community-client-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">5、安装服务端</span><br><span class="line">	rpm -ivh mysql-community-server-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">6、修改mysql默认字符集</span><br><span class="line">	vi /etc/my.cnf</span><br><span class="line">	添加如下内容：</span><br><span class="line">	[mysqld]</span><br><span class="line">	character-set-server=utf8</span><br><span class="line">	collation-server=utf8_general_ci</span><br><span class="line">	--在文件最下方添加</span><br><span class="line">	[client]</span><br><span class="line">	default-character-set=utf8</span><br><span class="line"></span><br><span class="line">7、启动mysql服务</span><br><span class="line">	service mysqld start</span><br><span class="line">	</span><br><span class="line">8、登录mysql</span><br><span class="line">	mysql -u root -p 敲回车，输入密码</span><br><span class="line">	初始密码查看：cat /var/log/mysqld.log</span><br><span class="line">		在root@localhost:   后面的就是初始密码</span><br><span class="line">		</span><br><span class="line">9、修改mysql登录密码</span><br><span class="line">	set global validate_password_policy=0;</span><br><span class="line">	set global validate_password_length=1;</span><br><span class="line">	set password=password(&#x27;密码&#x27;);    //这里密码设置为***    set password=password(&#x27;***&#x27;);</span><br><span class="line">	</span><br><span class="line">10、授予远程连接权限</span><br><span class="line">	//授权</span><br><span class="line">	grant all privileges on *.* to &#x27;root&#x27; @&#x27;%&#x27; identified by &#x27;***&#x27;;</span><br><span class="line">	//刷新</span><br><span class="line">	flush privileges;</span><br><span class="line">	</span><br><span class="line">11、退出mysql界面，关闭Linux系统防火墙</span><br><span class="line">	systemctl stop firewalld</span><br><span class="line">	</span><br><span class="line">12、重启mysql服务</span><br><span class="line">	service mysqld restart</span><br><span class="line">	</span><br><span class="line">13、使用SQLYog工具连接mysql</span><br></pre></td></tr></table></figure>
+    <title>GitLab部署</title>
+    <url>/GitLab%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>非私有化访问</p>
+<p>方式：注册GitLab</p>
+<p><a href="https://blog.csdn.net/m0_50542823/article/details/135495927">https://blog.csdn.net/m0_50542823/article/details/135495927</a></p>
+<p>私有化部署</p>
+<p>1、使用 docker-compose 配置 gitlab</p>
+<p>安装docker-compose 之前需安装 docker </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>”&#x2F;“是根目录，”~“是home目录。</p>
-<p>&#x2F;是指根目录：就是所有目录最顶层的目录</p>
-<p>~是当前用户的家目录：如果是root用户就是&#x2F;root&#x2F;目录， 如果是其他用户就是&#x2F;home&#x2F;下用户名命名的用户 </p>
-<h2 id="三、windows安装"><a href="#三、windows安装" class="headerlink" title="三、windows安装"></a>三、windows安装</h2><h3 id="1、解压mysql压缩包"><a href="#1、解压mysql压缩包" class="headerlink" title="1、解压mysql压缩包"></a>1、解压mysql压缩包</h3><h3 id="2、添加环境变量"><a href="#2、添加环境变量" class="headerlink" title="2、添加环境变量"></a>2、添加环境变量</h3><blockquote>
-<p>环境变量里面有很多选项，这里我们只用到<code>Path</code>这个参数。为什么在初始化的开始要添加环境变量呢？<br>在黑框(即CMD)中输入一个可执行程序的名字，Windows会先在环境变量中的<code>Path</code>所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。</p>
-</blockquote>
-<p>右键<code>此电脑</code>→<code>属性</code>，点击<code>高级系统设置</code></p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216257.png" alt="img"></p>
-<p>点击<code>环境变量</code></p>
-<p>在<code>系统变量</code>中新建MYSQL_HOME</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216731.png" alt="image-20201109140222488"></p>
-<p>在<code>系统变量</code>中找到并<strong>双击</strong><code>Path</code></p>
-<p>点击<code>新建</code></p>
-<p>最后点击确定。</p>
-<p><strong>如何验证是否添加成功？</strong></p>
-<p>右键开始菜单(就是屏幕左下角)，选择<code>命令提示符(管理员)</code>，打开黑框，敲入<code>mysql</code>，回车。<br>如果提示<code>Can&#39;t connect to MySQL server on &#39;localhost&#39;</code>则证明添加成功；<br>如果提示<code>mysql不是内部或外部命令，也不是可运行的程序或批处理文件</code>则表示添加添加失败，请重新检查步骤并重试。</p>
-<h3 id="3、新建配置文件"><a href="#3、新建配置文件" class="headerlink" title="3、新建配置文件"></a>3、新建配置文件</h3><p>新建一个文本文件，内容如下：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=<span class="string">INNODB</span></span><br><span class="line"><span class="attr">sql_mode</span>=<span class="string">STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span></span><br></pre></td></tr></table></figure>
-
-<p>把上面的文本文件另存为，在保存类型里选<code>所有文件 (*.*)</code>，文件名叫<code>my.ini</code>，存放的路径为MySQL的<code>根目录</code>(例如我的是<code>D:\software\mysql-5.7.24-winx64</code>,根据自己的MySQL目录位置修改)。</p>
-<h3 id="4、初始化MySQL"><a href="#4、初始化MySQL" class="headerlink" title="4、初始化MySQL"></a>4、初始化MySQL</h3><p>在刚才的黑框中敲入<code>mysqld --initialize-insecure</code>，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明data目录初始化没有问题，此时再查看MySQL目录下已经有data目录生成。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld --initialize-insecure</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216706.png" alt="image-20201109140955772"></p>
-<p>tips：如果出现如下错误</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216910.png" alt="image-20201109135848054"></p>
-<p>是由于权限不足导致的，去<code>C:\Windows\System32</code> 下以管理员方式运行 cmd.exe</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216508.png" alt="image-20201109140001186"></p>
-<h3 id="5、注册MySQL服务"><a href="#5、注册MySQL服务" class="headerlink" title="5、注册MySQL服务"></a>5、注册MySQL服务</h3><p>在黑框里敲入<code>mysqld -install</code>，回车。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure>
+<p>删除 docker</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216710.png" alt="image-20201109141325810"></p>
-<p>现在你的计算机上已经安装好了MySQL服务了。</p>
-<h3 id="6、-启动MySQL服务"><a href="#6、-启动MySQL服务" class="headerlink" title="6、 启动MySQL服务"></a>6、 启动MySQL服务</h3><p>在黑框里敲入<code>net start mysql</code>，回车。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">net start mysql  <span class="comment">// 启动mysql服务</span></span><br><span class="line">    </span><br><span class="line">net stop mysql  <span class="comment">// 停止mysql服务</span></span><br></pre></td></tr></table></figure>
+<p>2、安装 docker-compose</p>
+<p>使用 pip安装 docker-compose</p>
+<p>pip install –upgrade pip -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> –trusted-host mirrors.aliyun.com<br>pip install -i <a href="http://mirrors.aliyun.com/pypi/simple">http://mirrors.aliyun.com/pypi/simple</a> docker-compose –trusted-host mirrors.aliyun.com</p>
+<p>3、安装gitlab</p>
+<p><a href="https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4</a></p>
+<p>修改 docker-compose.yml 文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
+
+<p>修改 gitlab.rb文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216751.png" alt="img"></p>
-<h3 id="7、修改默认账户密码"><a href="#7、修改默认账户密码" class="headerlink" title="7、修改默认账户密码"></a>7、修改默认账户密码</h3><p>在黑框里敲入<code>mysqladmin -u root password 1234</code>，这里的<code>1234</code>就是指默认管理员(即root账户)的密码，可以自行修改成你喜欢的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqladmin -u root password 1234</span><br></pre></td></tr></table></figure>
+<p>启动 docker-compose</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
 
+<p>启动成功后，在网页中打开gitlab</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
 
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216797.png" alt="img"></p>
-<p><strong>至此，MySQL 5.7 解压版安装完毕！</strong></p>
-<hr>
-<h2 id="四、登录MySQL"><a href="#四、登录MySQL" class="headerlink" title="四、登录MySQL"></a>四、登录MySQL</h2><p>右键开始菜单，选择<code>命令提示符</code>，打开黑框。<br>在黑框中输入，<code>mysql -uroot -p1234</code>，回车，出现下图且左下角为<code>mysql&gt;</code>，则登录成功。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p1234</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216916.png" alt="img"></p>
-<p><strong>到这里你就可以开始你的MySQL之旅了！</strong></p>
-<p>退出mysql：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
-
-<p>登陆参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)</span><br><span class="line">mysql -uroot -p1234 -h127.0.0.1 -p3306</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<h2 id="五、卸载MySQL"><a href="#五、卸载MySQL" class="headerlink" title="五、卸载MySQL"></a>五、卸载MySQL</h2><p>如果你想卸载MySQL，也很简单。</p>
-<p>右键开始菜单，选择<code>命令提示符(管理员)</code>，打开黑框。</p>
-<ol>
-<li>敲入<code>net stop mysql</code>，回车。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216953.png" alt="img"></p>
-<ol start="2">
-<li>再敲入<code>mysqld -remove mysql</code>，回车。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -remove mysql</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216027.png" alt="img"></p>
-<ol start="3">
-<li>最后删除MySQL目录及相关的环境变量。</li>
-</ol>
-<p><strong>至此，MySQL卸载完成！</strong></p>
+<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
+<p>部署过程</p>
+<p><a href="https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE</a></p>
 ]]></content>
       <categories>
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://special711.cn/">星猫博客</a>! This is your very first post. Check <a href="https://special711.cn/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://special711.cn/">troubleshooting</a> or you can ask me on <a href="https://github.com/">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://special711.cn/">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://special711.cn/">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://special711.cn/">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://special711.cn/">Deployment</a></p>
-]]></content>
-      <tags>
-        <tag>世界</tag>
+        <tag>gitlab</tag>
       </tags>
   </entry>
   <entry>
@@ -1797,138 +1670,130 @@
       </tags>
   </entry>
   <entry>
-    <title>k8s、gitlab、gitlab-runner自动化部署</title>
-    <url>/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p>1、kubernetes 、组件安装及集群搭建教程</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
+    <title>MySQL安装配置文档</title>
+    <url>/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<blockquote>
+<p><strong>安装环境:Win10 64位</strong><br><strong>软件版本:MySQL 5.7.24 解压版</strong></p>
+</blockquote>
+<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>点开下面的链接：<br><a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+<h2 id="二、linux-安装"><a href="#二、linux-安装" class="headerlink" title="二、linux 安装"></a>二、linux 安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1、通过secureCRT.工具连接Linux系统</span><br><span class="line"></span><br><span class="line">2、上传mysq的安装包</span><br><span class="line">	alt+p，然后 put d:/develop/mysql-5.7.18-1.e17.x86_64.rpm-bundle.tar</span><br><span class="line">	</span><br><span class="line">3、解压mysql的安装包</span><br><span class="line">	mkdir mysql </span><br><span class="line">	tar -xvf mysql-5.7.18-1.el8.x86_64.rpm-bundle.tar -C mysql/</span><br><span class="line">	</span><br><span class="line">4、安装客户端</span><br><span class="line">    cd mysql/</span><br><span class="line">	rpm -ivh mysql-community-client-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">5、安装服务端</span><br><span class="line">	rpm -ivh mysql-community-server-5.7.18-1.e17.x86_64.rpm --force --nodeps</span><br><span class="line">	</span><br><span class="line">6、修改mysql默认字符集</span><br><span class="line">	vi /etc/my.cnf</span><br><span class="line">	添加如下内容：</span><br><span class="line">	[mysqld]</span><br><span class="line">	character-set-server=utf8</span><br><span class="line">	collation-server=utf8_general_ci</span><br><span class="line">	--在文件最下方添加</span><br><span class="line">	[client]</span><br><span class="line">	default-character-set=utf8</span><br><span class="line"></span><br><span class="line">7、启动mysql服务</span><br><span class="line">	service mysqld start</span><br><span class="line">	</span><br><span class="line">8、登录mysql</span><br><span class="line">	mysql -u root -p 敲回车，输入密码</span><br><span class="line">	初始密码查看：cat /var/log/mysqld.log</span><br><span class="line">		在root@localhost:   后面的就是初始密码</span><br><span class="line">		</span><br><span class="line">9、修改mysql登录密码</span><br><span class="line">	set global validate_password_policy=0;</span><br><span class="line">	set global validate_password_length=1;</span><br><span class="line">	set password=password(&#x27;密码&#x27;);    //这里密码设置为***    set password=password(&#x27;***&#x27;);</span><br><span class="line">	</span><br><span class="line">10、授予远程连接权限</span><br><span class="line">	//授权</span><br><span class="line">	grant all privileges on *.* to &#x27;root&#x27; @&#x27;%&#x27; identified by &#x27;***&#x27;;</span><br><span class="line">	//刷新</span><br><span class="line">	flush privileges;</span><br><span class="line">	</span><br><span class="line">11、退出mysql界面，关闭Linux系统防火墙</span><br><span class="line">	systemctl stop firewalld</span><br><span class="line">	</span><br><span class="line">12、重启mysql服务</span><br><span class="line">	service mysqld restart</span><br><span class="line">	</span><br><span class="line">13、使用SQLYog工具连接mysql</span><br></pre></td></tr></table></figure>
 
+<p>”&#x2F;“是根目录，”~“是home目录。</p>
+<p>&#x2F;是指根目录：就是所有目录最顶层的目录</p>
+<p>~是当前用户的家目录：如果是root用户就是&#x2F;root&#x2F;目录， 如果是其他用户就是&#x2F;home&#x2F;下用户名命名的用户 </p>
+<h2 id="三、windows安装"><a href="#三、windows安装" class="headerlink" title="三、windows安装"></a>三、windows安装</h2><h3 id="1、解压mysql压缩包"><a href="#1、解压mysql压缩包" class="headerlink" title="1、解压mysql压缩包"></a>1、解压mysql压缩包</h3><h3 id="2、添加环境变量"><a href="#2、添加环境变量" class="headerlink" title="2、添加环境变量"></a>2、添加环境变量</h3><blockquote>
+<p>环境变量里面有很多选项，这里我们只用到<code>Path</code>这个参数。为什么在初始化的开始要添加环境变量呢？<br>在黑框(即CMD)中输入一个可执行程序的名字，Windows会先在环境变量中的<code>Path</code>所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。</p>
+</blockquote>
+<p>右键<code>此电脑</code>→<code>属性</code>，点击<code>高级系统设置</code></p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216257.png" alt="img"></p>
+<p>点击<code>环境变量</code></p>
+<p>在<code>系统变量</code>中新建MYSQL_HOME</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216731.png" alt="image-20201109140222488"></p>
+<p>在<code>系统变量</code>中找到并<strong>双击</strong><code>Path</code></p>
+<p>点击<code>新建</code></p>
+<p>最后点击确定。</p>
+<p><strong>如何验证是否添加成功？</strong></p>
+<p>右键开始菜单(就是屏幕左下角)，选择<code>命令提示符(管理员)</code>，打开黑框，敲入<code>mysql</code>，回车。<br>如果提示<code>Can&#39;t connect to MySQL server on &#39;localhost&#39;</code>则证明添加成功；<br>如果提示<code>mysql不是内部或外部命令，也不是可运行的程序或批处理文件</code>则表示添加添加失败，请重新检查步骤并重试。</p>
+<h3 id="3、新建配置文件"><a href="#3、新建配置文件" class="headerlink" title="3、新建配置文件"></a>3、新建配置文件</h3><p>新建一个文本文件，内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">[mysql]</span></span><br><span class="line"><span class="attr">default-character-set</span>=<span class="string">utf8</span></span><br><span class="line"></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">character-set-server</span>=<span class="string">utf8</span></span><br><span class="line"><span class="attr">default-storage-engine</span>=<span class="string">INNODB</span></span><br><span class="line"><span class="attr">sql_mode</span>=<span class="string">STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span></span><br></pre></td></tr></table></figure>
 
-<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
-<p>访问路径 <a href="https://192.168.223.129:30009/">https://192.168.223.129:30009</a></p>
-<p>3、gitlab安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[GitLab部署.md]: E:\***.md</span><br></pre></td></tr></table></figure>
+<p>把上面的文本文件另存为，在保存类型里选<code>所有文件 (*.*)</code>，文件名叫<code>my.ini</code>，存放的路径为MySQL的<code>根目录</code>(例如我的是<code>D:\software\mysql-5.7.24-winx64</code>,根据自己的MySQL目录位置修改)。</p>
+<h3 id="4、初始化MySQL"><a href="#4、初始化MySQL" class="headerlink" title="4、初始化MySQL"></a>4、初始化MySQL</h3><p>在刚才的黑框中敲入<code>mysqld --initialize-insecure</code>，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明data目录初始化没有问题，此时再查看MySQL目录下已经有data目录生成。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld --initialize-insecure</span><br></pre></td></tr></table></figure>
 
-<p>访问路径 <a href="http://192.168.223.129:30080/">http://192.168.223.129:30080</a></p>
-<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
-<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、gitlab-runner 安装</p>
-<p>vi docker-compose.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
-
-<p>安装java8</p>
-<p><a href="https://www.oracle.com/java/technologies/downloads/#java8">https://www.oracle.com/java/technologies/downloads/#java8</a></p>
-<p>选择 linux x64 tar.gz版本</p>
-<p>解压 包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加到环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<p>安装 maven</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216706.png" alt="image-20201109140955772"></p>
+<p>tips：如果出现如下错误</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216910.png" alt="image-20201109135848054"></p>
+<p>是由于权限不足导致的，去<code>C:\Windows\System32</code> 下以管理员方式运行 cmd.exe</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216508.png" alt="image-20201109140001186"></p>
+<h3 id="5、注册MySQL服务"><a href="#5、注册MySQL服务" class="headerlink" title="5、注册MySQL服务"></a>5、注册MySQL服务</h3><p>在黑框里敲入<code>mysqld -install</code>，回车。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -install</span><br></pre></td></tr></table></figure>
 
 
 
-<p>注册 gitlab -runner</p>
-<p>1、获取token</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" alt="image-20240519092836328"></p>
-<p>注册</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216710.png" alt="image-20201109141325810"></p>
+<p>现在你的计算机上已经安装好了MySQL服务了。</p>
+<h3 id="6、-启动MySQL服务"><a href="#6、-启动MySQL服务" class="headerlink" title="6、 启动MySQL服务"></a>6、 启动MySQL服务</h3><p>在黑框里敲入<code>net start mysql</code>，回车。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">net start mysql  <span class="comment">// 启动mysql服务</span></span><br><span class="line">    </span><br><span class="line">net stop mysql  <span class="comment">// 停止mysql服务</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" alt="image-20240519093114352"></p>
-<p>详细过程</p>
-<p><a href="https://blog.csdn.net/m0_51510236/article/details/134874324">https://blog.csdn.net/m0_51510236/article/details/134874324</a></p>
-<p>vi dockerfile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
 
-<p>构建镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
 
-<p>远程推送镜像</p>
-<p>1、阿里云镜像仓库</p>
-<p>具体参考</p>
-<p><a href="https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details</a></p>
-<p>2、私有化镜像仓库部署</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216751.png" alt="img"></p>
+<h3 id="7、修改默认账户密码"><a href="#7、修改默认账户密码" class="headerlink" title="7、修改默认账户密码"></a>7、修改默认账户密码</h3><p>在黑框里敲入<code>mysqladmin -u root password 1234</code>，这里的<code>1234</code>就是指默认管理员(即root账户)的密码，可以自行修改成你喜欢的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqladmin -u root password 1234</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216797.png" alt="img"></p>
+<p><strong>至此，MySQL 5.7 解压版安装完毕！</strong></p>
+<hr>
+<h2 id="四、登录MySQL"><a href="#四、登录MySQL" class="headerlink" title="四、登录MySQL"></a>四、登录MySQL</h2><p>右键开始菜单，选择<code>命令提示符</code>，打开黑框。<br>在黑框中输入，<code>mysql -uroot -p1234</code>，回车，出现下图且左下角为<code>mysql&gt;</code>，则登录成功。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p1234</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216916.png" alt="img"></p>
+<p><strong>到这里你就可以开始你的MySQL之旅了！</strong></p>
+<p>退出mysql：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">quit</span><br></pre></td></tr></table></figure>
+
+<p>登陆参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)</span><br><span class="line">mysql -uroot -p1234 -h127.0.0.1 -p3306</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h2 id="五、卸载MySQL"><a href="#五、卸载MySQL" class="headerlink" title="五、卸载MySQL"></a>五、卸载MySQL</h2><p>如果你想卸载MySQL，也很简单。</p>
+<p>右键开始菜单，选择<code>命令提示符(管理员)</code>，打开黑框。</p>
+<ol>
+<li>敲入<code>net stop mysql</code>，回车。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">net stop mysql</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216953.png" alt="img"></p>
+<ol start="2">
+<li>再敲入<code>mysqld -remove mysql</code>，回车。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mysqld -remove mysql</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403172216027.png" alt="img"></p>
+<ol start="3">
+<li>最后删除MySQL目录及相关的环境变量。</li>
+</ol>
+<p><strong>至此，MySQL卸载完成！</strong></p>
 ]]></content>
       <categories>
         <category>环境配置</category>
       </categories>
       <tags>
-        <tag>k8s</tag>
+        <tag>mysql</tag>
       </tags>
   </entry>
   <entry>
-    <title>linux系统的安装文档</title>
-    <url>/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>安装虚拟机，vmware</p>
-<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
-<p>进入 debian官网 <a href="https://www.debian.org/">https://www.debian.org/</a></p>
-<p>点击其他下载链接</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png">
+    <title>Hello World</title>
+    <url>/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://special711.cn/">星猫博客</a>! This is your very first post. Check <a href="https://special711.cn/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://special711.cn/">troubleshooting</a> or you can ask me on <a href="https://github.com/">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://special711.cn/">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://special711.cn/">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
 
-<p>点击获取完整镜</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" alt="image-20240329160514227" style="zoom:67%;">
+<p>More info: <a href="https://special711.cn/">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
 
-<p>通过 HTTP 下载 CD&#x2F;DVD 映像文件</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" alt="image-20240329160619964" style="zoom:67%;">
-
-<p>选择DVD，amd64</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" alt="image-20240329160702026"></p>
-<p>点击下载镜像</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" alt="image-20240329160733488" style="zoom:67%;">
-
-<p>进入vmware安装镜像</p>
-<p>第一步选择安装图像化界面 ，graphic install</p>
-<p>网络配置选择暂不配置</p>
-<p>磁盘分区，选择最大连续空间</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" alt="image-20240329162800220" style="zoom:67%;">
-
-<p>boot (启动)200M， swap (交换区) (虚拟机配置的内存大小，如配置了2G，这里写2G)&#x2F;  ，&#x2F; (根目录，数据存放，依据虚拟机配置的空间)</p>
-<p>也可以设置将所有文件放入同一个分区</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" alt="image-20240329161729770" style="zoom:67%;">
-
-<p>是否使用网络镜像点，选择否，系统自带默认镜像源为阿里云镜像源</p>
-<p>软件选择，桌面选KDE或GNOME</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" alt="image-20240329161852601" style="zoom:67%;">
-
-<p>是否添加GRUB启动，选择是</p>
-<p>重启</p>
-<h3 id="U盘做启动盘安装CentOS7"><a href="#U盘做启动盘安装CentOS7" class="headerlink" title="U盘做启动盘安装CentOS7"></a>U盘做启动盘安装CentOS7</h3><p>镜像下载完毕后，插入U盘，用软碟通打开</p>
-<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_4/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
-<p>确认U盘后，选择写入，制作完毕后开始安装。</p>
-<h2 id><a href="#" class="headerlink" title></a></h2><p>插入U盘，进入BIOS设置，将启动顺序设置为USB启动。</p>
-<p>选择Install Centos 7 安装</p>
-<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_6/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
+<p>More info: <a href="https://special711.cn/">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
       <tags>
-        <tag>linux</tag>
+        <tag>世界</tag>
       </tags>
   </entry>
   <entry>
@@ -2334,6 +2199,141 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
+    <title>k8s、gitlab、gitlab-runner自动化部署</title>
+    <url>/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>1、kubernetes 、组件安装及集群搭建教程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
+
+
+<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
+<p>访问路径 <a href="https://192.168.223.129:30009/">https://192.168.223.129:30009</a></p>
+<p>3、gitlab安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[GitLab部署.md]: E:\***.md</span><br></pre></td></tr></table></figure>
+
+<p>访问路径 <a href="http://192.168.223.129:30080/">http://192.168.223.129:30080</a></p>
+<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
+<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4、gitlab-runner 安装</p>
+<p>vi docker-compose.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
+
+<p>安装java8</p>
+<p><a href="https://www.oracle.com/java/technologies/downloads/#java8">https://www.oracle.com/java/technologies/downloads/#java8</a></p>
+<p>选择 linux x64 tar.gz版本</p>
+<p>解压 包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
+
+<p>添加到环境变量</p>
+<p>vi &#x2F;etc&#x2F;profile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p>安装 maven</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
+
+<p>添加环境变量</p>
+<p>vi &#x2F;etc&#x2F;profile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注册 gitlab -runner</p>
+<p>1、获取token</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" alt="image-20240519092836328"></p>
+<p>注册</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" alt="image-20240519093114352"></p>
+<p>详细过程</p>
+<p><a href="https://blog.csdn.net/m0_51510236/article/details/134874324">https://blog.csdn.net/m0_51510236/article/details/134874324</a></p>
+<p>vi dockerfile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>构建镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
+
+<p>远程推送镜像</p>
+<p>1、阿里云镜像仓库</p>
+<p>具体参考</p>
+<p><a href="https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details</a></p>
+<p>2、私有化镜像仓库部署</p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux系统的安装文档</title>
+    <url>/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>安装虚拟机，vmware</p>
+<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
+<p>进入 debian官网 <a href="https://www.debian.org/">https://www.debian.org/</a></p>
+<p>点击其他下载链接</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png">
+
+
+
+<p>点击获取完整镜</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" alt="image-20240329160514227" style="zoom:67%;">
+
+<p>通过 HTTP 下载 CD&#x2F;DVD 映像文件</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" alt="image-20240329160619964" style="zoom:67%;">
+
+<p>选择DVD，amd64</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" alt="image-20240329160702026"></p>
+<p>点击下载镜像</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" alt="image-20240329160733488" style="zoom:67%;">
+
+<p>进入vmware安装镜像</p>
+<p>第一步选择安装图像化界面 ，graphic install</p>
+<p>网络配置选择暂不配置</p>
+<p>磁盘分区，选择最大连续空间</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" alt="image-20240329162800220" style="zoom:67%;">
+
+<p>boot (启动)200M， swap (交换区) (虚拟机配置的内存大小，如配置了2G，这里写2G)&#x2F;  ，&#x2F; (根目录，数据存放，依据虚拟机配置的空间)</p>
+<p>也可以设置将所有文件放入同一个分区</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" alt="image-20240329161729770" style="zoom:67%;">
+
+<p>是否使用网络镜像点，选择否，系统自带默认镜像源为阿里云镜像源</p>
+<p>软件选择，桌面选KDE或GNOME</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" alt="image-20240329161852601" style="zoom:67%;">
+
+<p>是否添加GRUB启动，选择是</p>
+<p>重启</p>
+<h3 id="U盘做启动盘安装CentOS7"><a href="#U盘做启动盘安装CentOS7" class="headerlink" title="U盘做启动盘安装CentOS7"></a>U盘做启动盘安装CentOS7</h3><p>镜像下载完毕后，插入U盘，用软碟通打开</p>
+<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_4/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
+<p>确认U盘后，选择写入，制作完毕后开始安装。</p>
+<h2 id><a href="#" class="headerlink" title></a></h2><p>插入U盘，进入BIOS设置，将启动顺序设置为USB启动。</p>
+<p>选择Install Centos 7 安装</p>
+<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_6/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux系统的网络配置文档</title>
     <url>/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<p>进入虚拟网络编辑器</p>
@@ -2413,40 +2413,6 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>网页端出现的问题</title>
-    <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<blockquote>
-<p>markdown 文件名不能有 + % 等</p>
-</blockquote>
-<blockquote>
-<p>如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。</p>
-<blockquote>
-<p>或者 在配置中添加 layout: tags layout: categories</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">date: $&#123;date&#125;</span><br><span class="line">type: tags</span><br><span class="line">layout: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-<p>我的书籍，图片大小最好 400X300</p>
-<p>如果需要页面只显示文章标题和一部分内容，需要配置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">excerpt: &quot;网页端出现的问题，和一部分内容&quot;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>文章发布脚本改进</title>
-    <url>/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>儿童节</title>
     <url>/%E5%84%BF%E7%AB%A5%E8%8A%82/</url>
     <content><![CDATA[<style>  
@@ -2470,5 +2436,39 @@ echo 字符串&gt;&gt;文件名
       <tags>
         <tag>儿童节</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>文章发布脚本改进</title>
+    <url>/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网页端出现的问题</title>
+    <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<blockquote>
+<p>markdown 文件名不能有 + % 等</p>
+</blockquote>
+<blockquote>
+<p>如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。</p>
+<blockquote>
+<p>或者 在配置中添加 layout: tags layout: categories</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">date: $&#123;date&#125;</span><br><span class="line">type: tags</span><br><span class="line">layout: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+<p>我的书籍，图片大小最好 400X300</p>
+<p>如果需要页面只显示文章标题和一部分内容，需要配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">excerpt: &quot;网页端出现的问题，和一部分内容&quot;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
   </entry>
 </search>
