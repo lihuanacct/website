@@ -2472,4 +2472,21 @@ echo 字符串&gt;&gt;文件名
         <tag>测试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>自动化脚本发布文章</title>
+    <url>/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<p>deploy.sh  shell脚本文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: [测试]&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: [测试]&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br></pre></td></tr></table></figure>
+
+<p>deploy.bat 批处理文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;D:\Develop\Software Installation\Git\git-bash.exe&quot; D:\Develop\workspace\javaworkspace\website\source\temp\deploy.sh</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
 </search>
