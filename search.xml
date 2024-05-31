@@ -2446,4 +2446,29 @@ echo 字符串&gt;&gt;文件名
         <tag>测试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>儿童节</title>
+    <url>/%E5%84%BF%E7%AB%A5%E8%8A%82/</url>
+    <content><![CDATA[<style>  
+@keyframes bounce {  
+  0%, 100% { transform: translateY(0); }  
+  50% { transform: translateY(-20px); }  
+}  
+.bouncing-text {  
+  display: inline-block;  
+  animation: bounce 2s infinite;  
+}  
+</style>  
+
+<p>今天是<span class="bouncing-text">儿童节</span>！</p>
+
+<p><img src="http://img2.baidu.com/it/u=2468907217,3090369167&fm=253&app=138&f=JPEG?w=1110&h=730" alt="儿童节图片" title="儿童节"></p>
+]]></content>
+      <categories>
+        <category>节日</category>
+      </categories>
+      <tags>
+        <tag>儿童节</tag>
+      </tags>
+  </entry>
 </search>
