@@ -2433,4 +2433,16 @@ echo 字符串&gt;&gt;文件名
         <category>hexo</category>
       </categories>
   </entry>
+  <entry>
+    <title>测试</title>
+    <url>/%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p>测试测试</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
 </search>
