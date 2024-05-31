@@ -2457,4 +2457,19 @@ echo 字符串&gt;&gt;文件名
         <tag>测试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>${filename_no_ext}</title>
+    <url>/%E6%B5%8B%E8%AF%954/</url>
+    <content><![CDATA[<p>测试4</p>
+<p>测试4</p>
+<p>测试4</p>
+<p>测试4</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
 </search>
