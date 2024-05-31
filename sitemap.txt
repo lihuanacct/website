@@ -1,10 +1,5 @@
-http://example.com/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%94%B9%E8%BF%9B%E8%84%9A%E6%9C%AC/
-http://example.com/%E6%B5%8B%E8%AF%955/
-http://example.com/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/
-http://example.com/%E6%B5%8B%E8%AF%954/
-http://example.com/%E6%B5%8B%E8%AF%952/
+http://example.com/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/
 http://example.com/JVM/
-http://example.com/%E6%B5%8B%E8%AF%95/
 http://example.com/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/
 http://example.com/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/
 http://example.com/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/

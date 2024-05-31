@@ -2334,18 +2334,6 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>测试</title>
-    <url>/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p>测试测试</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux系统的网络配置文档</title>
     <url>/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<p>进入虚拟网络编辑器</p>
@@ -2425,45 +2413,6 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>测试2</title>
-    <url>/%E6%B5%8B%E8%AF%952/</url>
-    <content><![CDATA[<p>测试2<br>测试2<br>菜市场测试测试测试测试</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试4</title>
-    <url>/%E6%B5%8B%E8%AF%954/</url>
-    <content><![CDATA[<p>测试4</p>
-<p>测试4</p>
-<p>测试4</p>
-<p>测试4</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>测试5</title>
-    <url>/%E6%B5%8B%E8%AF%955/</url>
-    <content><![CDATA[<p>测试5，自动填入分类、时间、标签</p>
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>网页端出现的问题</title>
     <url>/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<blockquote>
@@ -2485,26 +2434,9 @@ echo 字符串&gt;&gt;文件名
       </categories>
   </entry>
   <entry>
-    <title>脚本改进</title>
-    <url>/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%94%B9%E8%BF%9B%E8%84%9A%E6%9C%AC/</url>
+    <title>文章发布脚本改进</title>
+    <url>/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自动化脚本发布文章</title>
-    <url>/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<p>deploy.sh  shell脚本文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: [测试]&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: [测试]&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br></pre></td></tr></table></figure>
-
-<p>deploy.bat 批处理文件</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;D:\Develop\Software Installation\Git\git-bash.exe&quot; D:\Develop\workspace\javaworkspace\website\source\temp\deploy.sh</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
