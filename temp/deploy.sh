@@ -27,7 +27,7 @@ sed -i '1i\date: ${date}' $filename
 sed -i "1i\\title: ${filename_no_ext}" "$filename"
 sed -i '1i\---' $filename
 
-#
+#替换分类和标签的值
 sed -i "4s/测试/${first_line1}/" $filename
 sed -i "5s/测试/${first_line2}/" $filename
 
