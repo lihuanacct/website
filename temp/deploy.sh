@@ -11,7 +11,7 @@ sed -i '1i\---' $filename
 sed -i '1i\categories: [测试]' $filename
 sed -i '1i\tags: [测试]' $filename
 sed -i '1i\date: ${date}' $filename
-sed -i '1i\title: $filename_no_ext' $filename
+sed -i '1i\title: ${filename_no_ext}' $filename
 sed -i '1i\---' $filename
 
 echo -e "\033[47;30m>>>>>>>>>>>>>>>>>>>>开始复制并删除原文件<<<<<<<<<<<<<<<<<<<<\033[0m"
