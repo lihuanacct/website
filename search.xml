@@ -2489,4 +2489,16 @@ echo 字符串&gt;&gt;文件名
         <tag>测试</tag>
       </tags>
   </entry>
+  <entry>
+    <title>测试5</title>
+    <url>/%E6%B5%8B%E8%AF%955/</url>
+    <content><![CDATA[<p>测试5，自动填入分类、时间、标签</p>
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
+  </entry>
 </search>
