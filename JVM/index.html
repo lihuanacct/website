@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="1 内存结构1、简述一下JVM的内存结构？(高频)JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。">
 <meta property="og:type" content="blog">
@@ -124,7 +124,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">11</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">14</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -188,17 +188,17 @@
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;"><i class="fab fa-github fa-fw"></i></span>
       </span>
       <span class="links-of-author-item">
-        <a href="https://weibo.com/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i></a>
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20v" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;"><i class="fab fa-weibo fa-fw"></i></span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:lihuanacct@163.com" title="email → mailto:lihuanacct@163.com" rel="noopener me" target="_blank"><i class="fas fa-envelope fa-fw"></i></a>
+        <span class="exturl" data-url="bWFpbHRvOmV4YW1wbGVAMTYzLmNvbQ==" title="email → mailto:example@163.com"><i class="fas fa-envelope fa-fw"></i></span>
       </span>
   </div>
   <div class="cc-license animated" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></a>
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
 <div class="cc-license animated" itemprop="sponsor">
   <a href="https://www.netlify.com" class="cc-opacity" title="Deploy with Netlify → https://www.netlify.com" target="_blank"><img width="120" src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Netlify"></a>
@@ -287,14 +287,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>25k</span>
+      <span>11k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1:30</span>
+      <span>40 分钟</span>
     </span>
 </div>
 
@@ -670,7 +670,7 @@
 <p>1、首先是内存大小问题，基本上每一个内存区域我都会设置一个上限，来避免溢出问题，比如元空间。通常，堆空间我会设置成操作系统的2&#x2F;3（这是想给其他进程和操作系统预留一些时间），超过8GB的堆优先选用G1。</p>
 <p>2、接下来，我会对JVM进行初步优化。比如根据老年代的对象提升速度，来调整年轻代和老年代之间的比例。</p>
 <p>3、再接下来，就是专项优化，主要判断的依据就是系统容量、访问延迟、吞吐量等。我们的服务是高并发的，所以对STW的时间非常敏感。我会通过记录</p>
-<p>详细的GC日志，来找到这个瓶颈点，借用<strong>gceasy（重点）</strong><a target="_blank" rel="noopener" href="https://gceasy.io/%E8%BF%99%E6%A0%B7%E7%9A%84%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%BE%88%E5%AE%B9%E6%98%93%E5%AE%9A%E4%BD%8D%E5%88%B0%E9%97%AE%E9%A2%98%E3%80%82%E4%B9%8B%E6%89%80%E4%BB%A5%E9%80%89%E6%8B%A9%E9%87%87%E7%94%A8%E5%B7%A5%E5%85%B7%EF%BC%8C%E6%98%AF%E5%9B%A0">https://gceasy.io/这样的日志分析工具，很容易定位到问题。之所以选择采用工具，是因</a></p>
+<p>详细的GC日志，来找到这个瓶颈点，借用<strong>gceasy（重点）</strong><span class="exturl" data-url="aHR0cHM6Ly9nY2Vhc3kuaW8vJUU4JUJGJTk5JUU2JUEwJUI3JUU3JTlBJTg0JUU2JTk3JUE1JUU1JUJGJTk3JUU1JTg4JTg2JUU2JTlFJTkwJUU1JUI3JUE1JUU1JTg1JUI3JUVGJUJDJThDJUU1JUJFJTg4JUU1JUFFJUI5JUU2JTk4JTkzJUU1JUFFJTlBJUU0JUJEJThEJUU1JTg4JUIwJUU5JTk3JUFFJUU5JUEyJTk4JUUzJTgwJTgyJUU0JUI5JThCJUU2JTg5JTgwJUU0JUJCJUE1JUU5JTgwJTg5JUU2JThCJUE5JUU5JTg3JTg3JUU3JTk0JUE4JUU1JUI3JUE1JUU1JTg1JUI3JUVGJUJDJThDJUU2JTk4JUFGJUU1JTlCJUEw">https://gceasy.io/这样的日志分析工具，很容易定位到问题。之所以选择采用工具，是因<i class="fa fa-external-link-alt"></i></span></p>
 <p>为gc日志看起来实在是太麻烦了，gceasy号称是AI学习分析问题，可视化做的较好。</p>
 <p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202306191840815.png" alt="img"></p>
 <h1 id="5-类加载器"><a href="#5-类加载器" class="headerlink" title="5 类加载器"></a>5 类加载器</h1><h2 id="19、什么是类加载器，类加载器有哪些？-高频"><a href="#19、什么是类加载器，类加载器有哪些？-高频" class="headerlink" title="19、什么是类加载器，类加载器有哪些？(高频)"></a>19、什么是类加载器，类加载器有哪些？(高频)</h2><p>类加载器的作用：负载将的class文件加载到java虚拟机中，并为之创建一个Class对象	</p>
@@ -769,7 +769,7 @@
       <a href="http://example.com/JVM/" title="JVM">http://example.com/JVM/</a>
   </li>
   <li class="post-copyright-license">
-      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -858,13 +858,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">75k</span>
+    <span title="站点总字数">33k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:31</span>
+    <span title="站点阅读时长">1:59</span>
   </span>
 </div>
 <div class="busuanzi-count">
