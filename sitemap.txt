@@ -34,3 +34,4 @@ http://example.com/categories/linux/
 http://example.com/categories/%E8%8A%82%E6%97%A5/
 http://example.com/categories/%E6%B5%8B%E8%AF%95/
 http://example.com/categories/hexo/
+http://example.com/categories/%E6%9D%82%E8%B0%88/
