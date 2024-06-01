@@ -2540,4 +2540,44 @@ echo 字符串&gt;&gt;文件名
         <tag>疫情</tag>
       </tags>
   </entry>
+  <entry>
+    <title></title>
+    <url>/s/</url>
+    <content><![CDATA[<div class="no-access-container">  
+    <div class="no-access-message">  
+        <h2>禁止访问此页面</h2>  
+        <p>此页面包含敏感信息，您没有权限查看。</p>   
+    </div>  
+</div>  
+  
+<style>  
+body {  
+    margin: 0;  
+    padding: 20px; /* 可根据需要调整内边距 */  
+    font-family: Arial, sans-serif; /* 可选：设置字体 */  
+}  
+  
+.no-access-container {  
+    display: flex;  
+    justify-content: center; /* 水平居中 */  
+    align-items: center; /* 垂直居中（如果容器高度是确定的）*/  
+    margin-top: 10%; /* 可选：从页面顶部留出一些空间 */  
+    height: 100%; /* 如果需要占据整个页面高度，可以取消注释这行 */  
+}  
+  
+.no-access-message {  
+    background-color: #f2dede;  
+    border: 1px solid #ebccd1;  
+    color: #a94442;  
+    padding: 20px;  
+    text-align: center;  
+}  
+  
+.no-access-icon {  
+    width: 100px;  
+    height: 100px;  
+    margin: 20px 0;  
+}  
+</style>]]></content>
+  </entry>
 </search>
