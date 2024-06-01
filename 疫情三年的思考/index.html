@@ -22,31 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.special711.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="1、kubernetes 、组件安装及集群搭建教程 1https:&#x2F;&#x2F;gitee.com&#x2F;yooome&#x2F;golang&#x2F;blob&#x2F;main&#x2F;21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B&#x2F;Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard   Dashboard 页面需要在firefox浏">
+    <meta name="description" content="中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。  吹哨人2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="k8s、gitlab、gitlab-runner自动化部署">
-<meta property="og:url" content="https://www.special711.cn/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:title" content="疫情三年的思考">
+<meta property="og:url" content="https://www.special711.cn/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="星猫博客">
-<meta property="og:description" content="1、kubernetes 、组件安装及集群搭建教程 1https:&#x2F;&#x2F;gitee.com&#x2F;yooome&#x2F;golang&#x2F;blob&#x2F;main&#x2F;21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B&#x2F;Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard   Dashboard 页面需要在firefox浏">
+<meta property="og:description" content="中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。  吹哨人2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png">
-<meta property="og:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png">
-<meta property="article:published_time" content="2024-05-30T06:39:51.258Z">
-<meta property="article:modified_time" content="2024-05-30T15:49:29.184Z">
+<meta property="article:published_time" content="2024-06-01T07:59:20.894Z">
+<meta property="article:modified_time" content="2024-06-01T07:59:20.894Z">
 <meta property="article:author" content="夜来风">
-<meta property="article:tag" content="k8s">
+<meta property="article:tag" content="疫情">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png">
 
 
-<link rel="canonical" href="https://www.special711.cn/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="https://www.special711.cn/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.special711.cn/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/","path":"k8s、gitlab、gitlab-runner自动化部署/","title":"k8s、gitlab、gitlab-runner自动化部署"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.special711.cn/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/","path":"疫情三年的思考/","title":"疫情三年的思考"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>k8s、gitlab、gitlab-runner自动化部署 | 星猫博客</title>
+<title>疫情三年的思考 | 星猫博客</title>
   
 
 
@@ -133,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -146,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%B9%E5%93%A8%E4%BA%BA"><span class="nav-text">吹哨人</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A6%E6%B1%89%E5%B0%81%E5%9F%8E"><span class="nav-text">武汉封城</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A5%BF%E5%AE%89%E5%AD%95%E5%A6%87"><span class="nav-text">西安孕妇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E8%A7%A3%E5%B0%81"><span class="nav-text">上海解封</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E5%86%8D%E5%BA%A6%E5%B0%81%E5%9F%8E"><span class="nav-text">上海再度封城</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%8C%E9%B2%81%E6%9C%A8%E9%BD%90%E7%81%AB%E7%81%BE"><span class="nav-text">乌鲁木齐火灾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BD%E7%BA%B8%E8%BF%90%E5%8A%A8"><span class="nav-text">白纸运动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E5%B7%9E%E8%A7%A3%E5%B0%81%E4%B8%8E%E5%85%A8%E5%9B%BD%E7%BB%93%E6%9D%9F%E5%8A%A8%E6%80%81%E6%B8%85%E9%9B%B6"><span class="nav-text">广州解封与全国结束动态清零</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E7%90%83%E6%8A%97%E7%96%AB%E8%A1%A8%E7%8E%B0"><span class="nav-text">全球抗疫表现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-text">思考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.special711.cn/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://www.special711.cn/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://bpic.588ku.com/element_origin_min_pic/16/08/05/1557a43e586e7bc.jpg">
@@ -208,12 +206,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="k8s、gitlab、gitlab-runner自动化部署 | 星猫博客">
+      <meta itemprop="name" content="疫情三年的思考 | 星猫博客">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          k8s、gitlab、gitlab-runner自动化部署
+          疫情三年的思考
         </h1>
 
         <div class="post-meta-container">
@@ -223,9 +221,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-05-30 14:39:51 / 修改时间：23:49:29" itemprop="dateCreated datePublished" datetime="2024-05-30T14:39:51+08:00">2024-05-30</time>
+      <time title="创建时间：2024-06-01 15:59:20" itemprop="dateCreated datePublished" datetime="2024-06-01T15:59:20+08:00">2024-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -233,7 +230,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">环境配置</span></a>
+          <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">杂谈</span></a>
         </span>
     </span>
 
@@ -251,14 +248,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>491</span>
+      <span>2.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -268,78 +265,28 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>1、kubernetes 、组件安装及集群搭建教程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
-
-
-<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
-<p>访问路径 <span class="exturl" data-url="aHR0cHM6Ly8xOTIuMTY4LjIyMy4xMjk6MzAwMDkv">https://192.168.223.129:30009<i class="fa fa-external-link-alt"></i></span></p>
-<p>3、gitlab安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[GitLab部署.md]: E:\***.md</span><br></pre></td></tr></table></figure>
-
-<p>访问路径 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMjIzLjEyOTozMDA4MC8=">http://192.168.223.129:30080<i class="fa fa-external-link-alt"></i></span></p>
-<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
-<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、gitlab-runner 安装</p>
-<p>vi docker-compose.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
-
-<p>安装java8</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9kb3dubG9hZHMvI2phdmE4">https://www.oracle.com/java/technologies/downloads/#java8<i class="fa fa-external-link-alt"></i></span></p>
-<p>选择 linux x64 tar.gz版本</p>
-<p>解压 包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加到环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<p>安装 maven</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
-
-
-
-<p>注册 gitlab -runner</p>
-<p>1、获取token</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" alt="image-20240519092836328"></p>
-<p>注册</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" alt="image-20240519093114352"></p>
-<p>详细过程</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUxNTEwMjM2L2FydGljbGUvZGV0YWlscy8xMzQ4NzQzMjQ=">https://blog.csdn.net/m0_51510236/article/details/134874324<i class="fa fa-external-link-alt"></i></span></p>
-<p>vi dockerfile</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>构建镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
-
-<p>远程推送镜像</p>
-<p>1、阿里云镜像仓库</p>
-<p>具体参考</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jci5jb25zb2xlLmFsaXl1bi5jb20vcmVwb3NpdG9yeS9jbi1oYW5nemhvdS9rOHMtaW1hZ2VzMDEvazhzLXRlc3QvZGV0YWlscw==">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details<i class="fa fa-external-link-alt"></i></span></p>
-<p>2、私有化镜像仓库部署</p>
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p><strong>中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。</strong></p>
+</blockquote>
+<h3 id="吹哨人"><a href="#吹哨人" class="headerlink" title="吹哨人"></a>吹哨人</h3><p>2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的沟通机制，确保一线医务人员的声音能够被听到和重视。</p>
+<p>他的去世引发了全国范围内的悼念和愤怒，公众对信息透明度和言论自由的呼声愈发强烈。李文亮成为了疫情早期信息不透明的象征，激发了人们对政府信息披露和公共卫生政策的反思。李文亮作为一名普通的医生，他的勇气和牺牲激励着无数人，他的名字将永远铭刻在历史的记忆中。</p>
+<h3 id="武汉封城"><a href="#武汉封城" class="headerlink" title="武汉封城"></a>武汉封城</h3><p>2020年1月23日凌晨2点，武汉市宣布封城，暂停一切公共交通，封闭所有出城通道。此举史无前例，标志着中国抗击疫情的开始。封城期间，市民生活受到了极大影响，物资供应紧张，医疗资源短缺。由于交通封锁，许多外地工作者滞留武汉，家庭分离和心理压力增大。随着疫情逐步得到控制，武汉于4月8日解封，封城历时76天。虽然封城有效遏制了病毒扩散，但也暴露了应急物资储备不足和基层治理的短板。武汉封城是迫不得已，随后而来的是全国大面积封城。疫情爆发时我在深圳，小区了住着很多湖北人，过年后听说有很多湖北人偷偷进了小区，大家看到湖北的的车牌都避之不及。</p>
+<h3 id="西安孕妇"><a href="#西安孕妇" class="headerlink" title="西安孕妇"></a>西安孕妇</h3><p>2021年12月29日，新一轮疫情爆发，西安市宣布实施严格的封城措施。2022年1月1日，一名怀孕8个月的孕妇在西安高新区因未能及时获得医院救治而流产。这名孕妇在抵达高新医院时，已出现明显的出血症状，情况紧急。由于疫情防控措施的严格执行，医院要求所有病人必须出示核酸检测阴性证明才能入院。然而，该孕妇的核酸检测结果已超过了医院要求的48小时有效期，因此被拒之门外。医院政府召开记者会，人民向往常一样听到了习惯性的道歉和展望。西安的严格防疫政策让大家看到了，这群政府工作者的懒政庸政和麻木不仁。各路保安在这个时候都纷纷展示自己的权利，一道铁栅栏隔绝了病毒，我在这头，你在那头，你我之间却只能靠电话交流。</p>
+<p>2021年底，我在西安，见证了这片土地的神奇，封控期间我在出租屋里只能每周一次去小区超市买点食物，听说我所在的雁塔区政府向居民免费配送实物，我填了申请表，向往常一样这种好事总轮不到我，知道解封我也没看到有人送来食物。</p>
+<h3 id="上海解封"><a href="#上海解封" class="headerlink" title="上海解封"></a>上海解封</h3><p>2022年3月底，上海市因疫情爆发而实行封城措施，时间长达两个月。封城期间，上海的经济活动几乎停滞，物流供应链受阻，市民生活受到极大影响。食品和医疗物资的短缺问题严重，许多居民难以维持正常生活。尽管封城措施在一定程度上遏制了病毒传播，但也引发了广泛的不满和抗议。6月1日，上海宣布解封，市民生活和经济活动逐渐恢复。</p>
+<p>上海这次解封，我认为是中央的指示，因为在经济下行，外资逃跑的巨大压力下，中央政府不得不做出决策，所以选择上海作为试点城市，因为这里是外资公司的重要驻扎地。上海解封后，意料之中的上千人感染了病毒，随后这些人带着病毒向全国扩散，导致其他城市的群众纷纷指责上海市政府。</p>
+<h3 id="上海再度封城"><a href="#上海再度封城" class="headerlink" title="上海再度封城"></a>上海再度封城</h3><p>随着疫情的反弹，其他地方对上海人的攻击不断增多，甚至在一些城市，上海车牌的汽车被拒绝加油或停车。上海在2022年秋季不得不再次实行封控措施。频繁的封控对上海的经济复苏产生了深远影响，尤其是对中小企业和服务业造成了巨大冲击。</p>
+<p>上海频繁的解封封控，造成了巨大的信用危机，但是市级领导没有一个被解雇，正如我所说的这是中央的指示，上海只能做个背锅侠。</p>
+<h3 id="乌鲁木齐火灾"><a href="#乌鲁木齐火灾" class="headerlink" title="乌鲁木齐火灾"></a>乌鲁木齐火灾</h3><p>2022年11月24日，乌鲁木齐市一栋高层住宅楼发生火灾，导致10人死亡。火灾发生时，楼内居民因疫情封控措施被限制在家，无法及时逃生。这一事件在全国范围内引发了巨大的愤怒和哀悼。公众质疑封控措施是否延误了救援行动，呼吁对防疫政策进行反思。从西安孕妇到乌鲁木齐火灾，不得不说网络舆论是个好东西，没有网络，人民群众也不会知道这些事，没有舆论，这些政府也不会道歉。</p>
+<h3 id="白纸运动"><a href="#白纸运动" class="headerlink" title="白纸运动"></a>白纸运动</h3><p>随着乌鲁木齐火灾事态的不断发酵，民众对新冠疫情清零政策积压已久的不满情绪瞬间爆棚。</p>
+<p>白纸运动在多个城市爆发，抗议者举着白纸，表达对言论自由和抗议压制的不满，象征着对疫情防控措施过度严苛的反对和对社会公正的呼唤。白纸运动反映了民众对公共政策的不满和对基本权利的诉求。可一如既往，这种新闻不会出现在中国互联网上，即使是象征现代社会新自由主义潮流的抖音也不行。在北京大学，学生们通过举起白纸表达他们的不满和抗议，学校领导和保安也没有对这些人进行驱逐，说明这所中国最高学府依然保留着它一定程度的学术自由和思想开放。尽管在更广泛的社会政治环境中可能面临严格的言论控制，北京大学此举表明，在中国的一些学术圈内，仍然努力维护学术独立和批判性思维的空间。白纸虽然没有字，但却但却承载着沉重的沉默和强烈的抗议意味，自由和幸福仍是我们的目标。</p>
+<h3 id="广州解封与全国结束动态清零"><a href="#广州解封与全国结束动态清零" class="headerlink" title="广州解封与全国结束动态清零"></a>广州解封与全国结束动态清零</h3><p>2022年12月，广州市宣布放松疫情防控措施，标志着中国防疫政策的重大转变。广州市在疫情控制稳定后，逐步解除封控措施，恢复正常的社会经济活动。随后，全国范围内也逐步结束了动态清零政策。2023年1月，国务院宣布全国范围内取消大规模核酸检测和集中隔离措施，转向精准防控。这一转变显示出中国政府在应对疫情防控与经济发展之间做出的调整。随着防控措施的放松，社会经济活动逐渐恢复正常，但也带来了疫情反弹的风险。</p>
+<h3 id="全球抗疫表现"><a href="#全球抗疫表现" class="headerlink" title="全球抗疫表现"></a>全球抗疫表现</h3><p>与中国的严控措施相比，全球其他国家的抗疫策略各有不同。欧美国家普遍采取了与病毒共存的策略，通过大规模疫苗接种和提高医疗承载能力来应对疫情。美国和欧洲在疫情初期因医疗资源紧张和防控措施不力导致了大量感染和死亡，但随着疫苗的普及和治疗手段的改进，疫情逐步得到控制。然而，这些国家也面临着社会分裂、经济衰退和长期健康影响等挑战。</p>
+<p>相比之下，中国的严控政策在早期成功遏制了病毒传播，但长期的高压防控也带来了经济和社会的双重压力。中国通过严厉的封控措施和全民核酸检测迅速控制了疫情，但经济增速放缓，消费市场疲软，中小企业生存困难。全球抗疫表现的差异反映了各国在公共卫生、经济发展和社会管理方面的不同选择和挑战。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>过去三年的疫情对中国社会和经济产生了深远影响。严苛的防控措施虽然有效控制了病毒传播，但也引发了民生问题和社会矛盾。疫情期间，一些基层治理的不足和公共卫生应急体系的短板暴露无遗。</p>
+<p>政府的宣传和媒体胡乱科普对群众在认知方面产生了误导，一开始大规模封城就让群众认识到这种病毒的可怕，到后面解封后又宣传没那么可怕，这种从极端的信息转变，不仅影响了民众的心理健康，也削弱了公众对政府的信任度。</p>
+<p>这三年通过大数据多少公司获取了民众的各种隐私，疫情过后呢，有没有删除，我们无从知晓。</p>
+<p>疫情后一年过去了，政府的政策宣传依旧是打谜语。</p>
 
     </div>
 
@@ -357,7 +304,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://www.special711.cn/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" title="k8s、gitlab、gitlab-runner自动化部署">https://www.special711.cn/k8s、gitlab、gitlab-runner自动化部署/</a>
+      <a href="https://www.special711.cn/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/" title="疫情三年的思考">https://www.special711.cn/疫情三年的思考/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
@@ -403,21 +350,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/k8s/" rel="tag"><i class="fa fa-tag"></i> k8s</a>
+              <a href="/tags/%E7%96%AB%E6%83%85/" rel="tag"><i class="fa fa-tag"></i> 疫情</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/JVM/" rel="prev" title="JVM">
-                  <i class="fa fa-angle-left"></i> JVM
+                <a href="/%E7%BC%96%E5%88%B6/" rel="prev" title="编制">
+                  <i class="fa fa-angle-left"></i> 编制
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/linux%E7%B3%BB%E7%BB%9F/" rel="next" title="linux系统">
-                  linux系统 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
