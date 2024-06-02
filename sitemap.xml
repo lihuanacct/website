@@ -164,6 +164,13 @@
 
   
   <url>
+    <loc>https://www.special711.cn/tags/docker/</loc>
+    <lastmod>2024-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.special711.cn/tags/gitlab/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -178,7 +185,7 @@
   </url>
   
   <url>
-    <loc>https://www.special711.cn/tags/docker/</loc>
+    <loc>https://www.special711.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -199,21 +206,14 @@
   </url>
   
   <url>
-    <loc>https://www.special711.cn/tags/linux/</loc>
-    <lastmod>2024-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.special711.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2024-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.special711.cn/tags/JVM/</loc>
+    <lastmod>2024-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.special711.cn/tags/linux/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -243,13 +243,6 @@
   </url>
   
   <url>
-    <loc>https://www.special711.cn/categories/linux/</loc>
-    <lastmod>2024-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://www.special711.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -264,6 +257,13 @@
   </url>
   
   <url>
+    <loc>https://www.special711.cn/categories/linux/</loc>
+    <lastmod>2024-06-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://www.special711.cn/categories/%E8%8A%82%E6%97%A5/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -271,14 +271,14 @@
   </url>
   
   <url>
-    <loc>https://www.special711.cn/categories/hexo/</loc>
+    <loc>https://www.special711.cn/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://www.special711.cn/categories/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://www.special711.cn/categories/hexo/</loc>
     <lastmod>2024-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
