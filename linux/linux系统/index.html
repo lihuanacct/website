@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.special711.cn","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"hide","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":true,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linux 的用户切换 ​	su - 用户名 ， ​		su - user">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="linux系统">
+<meta property="og:url" content="https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="星猫博客">
+<meta property="og:description" content="linux 的用户切换 ​	su - 用户名 ， ​		su - user">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-30T06:39:51.269Z">
+<meta property="article:modified_time" content="2024-05-30T15:49:31.465Z">
+<meta property="article:author" content="夜来风">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/","path":"linux/linux系统/","title":"linux系统"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>linux系统 | 星猫博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">星猫博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/162456684.png" alt="星猫博客">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夜来风"
+      src="https://bpic.588ku.com/element_origin_min_pic/16/08/05/1557a43e586e7bc.jpg">
+  <p class="site-author-name" itemprop="name">夜来风</p>
+  <div class="site-description" itemprop="description">The World The People</div>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly93ZWliby5jb20v" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;"><i class="fab fa-weibo fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOmV4YW1wbGVAMTYzLmNvbQ==" title="email → mailto:example@163.com"><i class="fas fa-envelope fa-fw"></i></span>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/big/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+<div class="cc-license animated" itemprop="sponsor">
+  <a href="https://www.netlify.com" class="cc-opacity" title="Deploy with Netlify → https://www.netlify.com" target="_blank"><img width="120" src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Netlify"></a>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://bpic.588ku.com/element_origin_min_pic/16/08/05/1557a43e586e7bc.jpg">
+      <meta itemprop="name" content="夜来风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="星猫博客">
+      <meta itemprop="description" content="The World The People">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="linux系统 | 星猫博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux系统
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 14:39:51 / 修改时间：23:49:31" itemprop="dateCreated datePublished" datetime="2024-05-30T14:39:51+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>16 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>linux 的用户切换</p>
+<p>​	su - 用户名 ，</p>
+<p>​		su - user</p>
+<p>​		su - 或 su - root ，可切换到 root用户 </p>
+<p>linux 的帮助信息</p>
+<p>​	xxx – help 命令  （会展示 xxx 命令的基本用法）</p>
+<p>​	man xxx命令（展示 xxx 命令、函数 的操作手册）</p>
+<p>​	info xxx命令 （展示更详细的文档）</p>
+<p>linux 关机命令</p>
+<p>​	sync ，将数据同步到硬盘中</p>
+<p>​	shutdown ， 关机</p>
+<p>​		shutdown -h ，可以设置关机时间</p>
+<p>​			shutdwon - h now ， 立刻关机</p>
+<p>​			shutdwon - h 20:11 ， 20:11 关机</p>
+<p>​	reboot ， 重启</p>
+<p>linux 文件权限</p>
+<p>​	用户和用户组</p>
+<p>​	ls -al 可显示文件或文件夹的详细信息和权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x.   2      root    root     6        6月 9 2021       crash</span><br><span class="line">权限         链接数   拥有者   用户组   文件容量     修改日期时间   文件或文件夹名</span><br></pre></td></tr></table></figure>
+
+<p>r ， 可读</p>
+<p>w ，可写</p>
+<p>X ，可执行</p>
+<p>权限开头的 - ，表示这是一个文件，</p>
+<p>​		    d ，表示这是一个文件夹</p>
+<p>权限里面的 - 表示无权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d      rwx           r-x          	r-x</span><br><span class="line">文件   拥有者权限     用户组权限     其他用户权限</span><br></pre></td></tr></table></figure>
+
+<p>权限可用数字表示，rwx 可看做三位二进制数 ，1 1 1，写成十进制就是7 ，- 表示二进制数 0 </p>
+<p>rwxr-xr-x ， 写位数字就是 7 5 5</p>
+<p>注：加入用户组的成员，只需要 r 权限就可以读到文件，其他用户需要 r 和 x 权限才可读到文件。</p>
+<p>如 ： -rw-r–r–  root root a.txt ，这个文件 这有root用户，和root用户组的人可以看到，其他用户看不到</p>
+<p>修改为 -rw-r–r-x ， 其他用户才可读到</p>
+<p>文件权限修改</p>
+<p>chgrp ， 修改文件或目录所属用户组</p>
+<p>chown ， 修改文件或目录拥有者</p>
+<p>chmod ，修改文件或目录权限</p>
+<p>1、chgrp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chgrp [-R] groupname a/b ，写上 -R ，表示将a/b下所有子目录及其文件用户组权限改为 groupname </span><br></pre></td></tr></table></figure>
+
+<p>2、chown</p>
+<p>​	chown 用法与chgrp类似</p>
+<p>​	chown 还可同时修改文件拥有者和用户组的权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown [-R] username:groupname a/b </span><br></pre></td></tr></table></figure>
+
+<p>3、chmod</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod [-R] 权限 a/b</span><br><span class="line">chmod [-R] drwxrwxrwx a/b 或 chmod [-R] 777 a/b</span><br></pre></td></tr></table></figure>
+
+
+
+<p>符号修改权限</p>
+<p>用户：u(user)、g(group)、o(other)、a(all)</p>
+<p>权限的修改：+、-、&#x3D;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+w a.txt ， 给所有用户加上可写的权限</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a-x a.txt ， 将所有用户的执行权限去掉</span><br></pre></td></tr></table></figure>
+
+
+
+<p>目录的操作</p>
+<p>cd  ，切换目录</p>
+<p>pwd  ， 显示当前目录</p>
+<p>mkdir ， 新建目录</p>
+<p>rmdir ， 删除目录</p>
+<p>1、pwd </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd [-P] ，可显示真实目录，而非链接目录</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、mkdir，只能建立不存在的目录，存在则报错</p>
+<p>mkdir ， 新建目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br></pre></td></tr></table></figure>
+
+<p>mkdir -m ，新建目录时添加权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -m 777 test</span><br></pre></td></tr></table></figure>
+
+<p>mkdir -p ，新建目录时，顺便建立上级目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p test1/test2/test</span><br></pre></td></tr></table></figure>
+
+<p>mkdir -mp ，新建目录时添加权限，顺便建立上级目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -mp 777 test1/test2/test	</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3、rmdir ， 只能删除存在的空目录，不存在则报错，目录不为空报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rmdir a/b</span><br><span class="line">rmdir -P a/b/c ， 删除所有空目录</span><br></pre></td></tr></table></figure>
+
+<p>要删除有文件的目录，需要使用 rm -r </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -r a</span><br><span class="line">删除a目录及目录下的文件</span><br></pre></td></tr></table></figure>
+
+
+
+<p>文件和目录管理</p>
+<p>ls， 查看文件和目录</p>
+<p>cp ，复制 文件或目录, 重命名文件</p>
+<p>rm ， 删除文件或目录</p>
+<p>mv ， 移动文件或目录或重命名</p>
+<p>1、ls</p>
+<p>​	ls ,  查看所有文件和目录，不包括隐藏文件</p>
+<p>​	ls -a , 查看全部文件和目录，及其隐藏文件，隐藏文件用 .文件名表示</p>
+<p>​	ls -l , 可写为 ll ,列出文件和目录的详细信息</p>
+<p>​	ls -al , 列出全部文件和目录及其隐藏文件的详细信息</p>
+<p>2、cp ， 复制 文件或目录, 重命名文件</p>
+<p>​	cp</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /var/log/a.log  /var/log/b.log , 将a.log文件复制到/var/log目录下，并重命名为b.log</span><br></pre></td></tr></table></figure>
+
+<p>​	cp -p , 复制文件，并复制属性和原本的权限</p>
+<p>​	cp -i ，若目标文件存在，也在复制前会询问</p>
+<p>​	cp -s ， 软连接，复制成符号链接文件，快捷方式</p>
+<p>​	cp -l ， 硬连接，源文件和目标文件将共享相同的 inode（索引节点），它们被视为同一个文件的不同引用。</p>
+<p>硬链接和软连接也可使用 ln 命令创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp -s 源文件  目标文件 </span><br><span class="line">cp -s /var/log/a.log  /var/log/b.log</span><br><span class="line">ll </span><br><span class="line">lrwxrwxrwx. 1 root   root   5   3月  31 22:05 /var/log/b.log -&gt; /var/log/a.log，快捷方式-&gt;源文件</span><br></pre></td></tr></table></figure>
+
+<p>​	</p>
+<p>硬连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -l 源文件  目标文件</span><br><span class="line">ln -l /var/a.txt  /var/b.txt</span><br></pre></td></tr></table></figure>
+
+<p>软连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s 源文件  目标文件</span><br><span class="line">ln -s /var/a.txt  /var/b.txt</span><br></pre></td></tr></table></figure>
+
+<p>注：硬链接是指向文件系统中同一数据块的新文件名，它们实际上指向同一个inode（文件的索引节点）。这意味着硬链接与原始文件在内容上完全相同，删除其中一个硬链接并不会影响其他硬链接或原始文件。只有当所有硬链接和原始文件都被删除后，数据块才会被释放。硬链接的一个主要限制是它们不能跨文件系统，并且只能为文件创建，而不能为目录创建。此外，硬链接的文件权限一定和源文件一样。</p>
+<p>​	软连接（也称为符号链接）是在文件系统中创建一个特殊文件，其中包含指向另一个文件的路径，类似于Windows系统中的快捷方式。软连接与原始文件不在同一inode，因此它们是两个不同的文件。软连接只是一个指向原始文件路径的文本链接，删除原始文件后，软连接仍然存在，但指向的路径将失效。软连接的一个主要优点是它可以跨文件系统，并且可以为文件和目录（允许不存在）创建链接。此外，软连接的文件权限可以和源文件不一样。可以使用软连接缩短路径地址。</p>
+<p>​	硬链接和软连接各有其特点和适用场景。硬链接主要用于文件备份、多人共享文件。软连接主要用于缩短路径，文件或目录的重定向。</p>
+<p>3、rm ， 删除文件或目录</p>
+<p>​	rm</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm a.txt ，存在则删除，不存在则报错</span><br><span class="line">rm /a/b ， 目录为空则删除，不为空则报错</span><br></pre></td></tr></table></figure>
+
+<p>​	rm -i ， 删除文件或目录，删除时询问</p>
+<p>​	rm -f ， 强制删除文件，忽略不存在的文件，不警告</p>
+<p>​	rm -r ， 删除目录及其下所有文件和子目录，不存在则报错，删除时询问</p>
+<p>4、mv ， 移动文件或目录，或重命名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv a/b.txt  c/d.txt ， 将 a/b.txt文件移动到 c 目录下，并重命名为 d.txt</span><br><span class="line">mv a b , 将 a 目录重命名为 b目录</span><br></pre></td></tr></table></figure>
+
+<p>​	mv -f ， 不管目标文件是否存在，都直接覆盖。</p>
+<p>​	mv -i ， 若目标文件存在，则询问</p>
+<p>​	</p>
+<p>文件内容查看</p>
+<p>cat ，从第一行开始显示所有内容</p>
+<p>tac ， 从最后一行显示所有内容</p>
+<p>nl ， 展示所以内容，并显示行号</p>
+<p>more ， 根据需要显示内容，一页一页显示</p>
+<p>less ， 与more类似，但可向前翻页</p>
+<p>head ， 只显示前几行</p>
+<p>tail ， 只显示后几行</p>
+<p>1、cat ， 从第一行开始显示所有内容</p>
+<p>​	cat -b ， 显示行号</p>
+<p>2、head ，  只显示前几行，默认显示前10行</p>
+<p>​	head -n 行号  文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显示前100行的内容</span><br><span class="line">head -n 100 a.txt</span><br><span class="line">只打印前100行的内容</span><br><span class="line">head -n -100 a.txt</span><br></pre></td></tr></table></figure>
+
+<p>3、tail ， 只显示后几行，默认显示后10行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">显示后100行的内容</span><br><span class="line">tail -n 100 a.txt</span><br><span class="line">只打印后100行的内容</span><br><span class="line">tail -n -100 a.txt</span><br></pre></td></tr></table></figure>
+
+<p>若要取第11行到20行 的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">先取前20行，再取后10行</span><br><span class="line">head -n 20 a.txt | tail -n 10 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>新建文件</p>
+<p>touch  file_name</p>
+<p>创建一个空文件，若目标文件存在，也不警告</p>
+<p>文件查找</p>
+<p>whereis ，查询速度快，但是只能查指定的几个目录，可用 whereis -l 查看有哪些目录可以查看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whrer 文件名</span><br></pre></td></tr></table></figure>
+
+<p>locate ， 查询速度快，但只能查已存在数据库的文件，数据库默认一天更新一次，所以需要手动更新，updatedb命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate 文件名</span><br></pre></td></tr></table></figure>
+
+<p>find </p>
+<p>​	find [目录]  -name 文件名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name http.txt</span><br><span class="line">find /var -name a.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	find 还可以用通配符查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find -name *tt*p.txt</span><br><span class="line">find /var -name scrip*.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>文件内容查找</p>
+<p>grep </p>
+<p>​	grep xxx  文件 ， 在指定文件中查找 xxx ，显示 a 所在行的一整行内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;a&#x27; /b.txt	</span><br></pre></td></tr></table></figure>
+
+<p>​	grep ^xxx  文件  ， 在指定文件中查找以 xxx 开头的行，并标明行号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;^a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	grep *xxx  文件 ， 在指定文件中查找以 xxx 结尾 的关键字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &#x27;*a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	grep -i  xxx  文件，忽略大小写查找</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i &#x27;a&#x27; /b.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	grep -r xxx 目录 ， 递归查找包含 xxx 的文件名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r &#x27;a&#x27; /var </span><br></pre></td></tr></table></figure>
+
+
+
+<p>删除指定的行</p>
+<p>1、删除指定包含 某个字符串的行。</p>
+<p>可以使用 grep -v 反向匹配其他不需要删除的行，将这些行放到新文件，再将新文件复制到原文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -v &#x27;关键字&#x27; a.txt &gt; aNew.txt &amp;&amp; mv aNew.txt a.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、删除具体的某一行，给出行号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;&lt;行号&gt;d&#x27; &lt;文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如要删除 a.txt 文件中的第 5 行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;5d&#x27; a.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>文件的打包压缩与解压</p>
+<p>​	常见的压缩工具为gzip、bzip2、xz，但是这些工具只能压缩单个文件，利用 tar 命令可以将多个文件或目录打包成一个文件或目录，也可以对这些打包后的文件目录压缩，tar 还可以解压缩。</p>
+<p>​	bzip、xz 是比 gzip 压缩比更高的工具，但是压缩时间也变长。与gzip 用法类似。</p>
+<p>gzip</p>
+<p>​	gzip 文件名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip a.txt</span><br></pre></td></tr></table></figure>
+
+<p>​	gip 会将源文件压缩为 带有 .gz 后缀的文件。同时源文件会被删除。</p>
+<p>​	如果源文件为纯文本文件，则可使用 zcat &#x2F; zmore &#x2F; zless &#x2F; zgrep 读取，用法与 cat &#x2F; more &#x2F; less &#x2F; grep 类似。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">解压文件</span><br><span class="line">gzip -d 文件，会将压缩文件解压成源文件，同时删除压缩文件。</span><br><span class="line">gzip -d a.txt.gz</span><br><span class="line">不解压，直接显示解压后的源文件内容</span><br><span class="line">zcat a.txt.gz </span><br><span class="line">不解压，在压缩文件中查找关键字</span><br><span class="line">zgrep &#x27;block&#x27; a.txt.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用tar 打包压缩</p>
+<p>由于tar 命令 的选项太过，简单写几个</p>
+<p>压缩</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zcvf 压缩后的文件名 源文件， -z 表示压缩为 .gz格式，表示将源文件打包成.gz格式，并查看被打包的文件名。</span><br><span class="line">tar -zcvf b.txt.tar.gz b.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果只是打包，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -cvf 打包后的文件名 源文件</span><br><span class="line">tar -cvf  b.txt.tar  b.txt</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf 压缩文件 -C 解压后存放的目录 ,-x 表示解压缩 ，-C 表示对特定目录解压缩。</span><br><span class="line">tar -zxvf b.txt.tar.gz /var</span><br></pre></td></tr></table></figure>
+
+
+
+<p>vim 编辑器</p>
+<p>vim 与 vi 基本用法相同，分为三种模式，一般命令模式、编辑模式、命令行模式</p>
+<p>一般命令模式</p>
+<p>​	可移动光标，复制、粘贴文本内容</p>
+<p>​	在一般命令模式，按下[ctrl]+[f] 可 向下翻页，[ctrl]+[b] 向上翻页。</p>
+<p>编辑模式</p>
+<p>​	在一般命令模式中，按下 i  会进入编辑模式，可以修改删除文本内容。</p>
+<p>​	在编辑模式中，修改后先按下【ESC】键，退出编辑模式，然后按下 [ : q ] 不保存退出 vim编辑器</p>
+<p>​	按下 [ : wq ] 保存退出 vim编辑器</p>
+<p>​	按下 [ : wq! ] 可在无权限时强制保存退出 vim编辑器</p>
+<p>命令行模式</p>
+<p>​	在一般命令模式中按下[ &#x2F; ] 直接将光标移动到最下面一行，这个模式可进行显示行号、查找数据等操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/aa ， 查找文件内容中的 aa</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Shell</p>
+<p>换行</p>
+<p>​	使用 [ &#x2F; ] 转义 回车键。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# vim /var/lo\</span><br><span class="line">&gt; g/boot.log</span><br></pre></td></tr></table></figure>
+
+<p>变量</p>
+<p>echo</p>
+<p>设置变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name=abc</span><br></pre></td></tr></table></figure>
+
+<p>读取变量，变量未设置时，读取内容为空</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $变量名 或者  echo $&#123;变量名&#125;</span><br><span class="line">echo $name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>变量的设置规则</p>
+<p>1、等号两边不能有空格，变量内容有空格，可使用 单引号[‘ ‘] 或 双引号 [“ “] 连起来。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# a=&#x27;a b&#x27;</span><br><span class="line">[root@localhost /]# echo $a </span><br><span class="line">a b</span><br></pre></td></tr></table></figure>
+
+<p>2、变量名称只能是英文或数字，数字不能作为开头字符。</p>
+<p>3、单引号内如有特殊符号（[Enter]、$、\、空格、’ 等），可使用 [ \ ]转义。单引号内的 <code>$(command)</code> 或反引号 <code>command</code> 不会被执行。在单引号内的内容被视为字面字符串，即 Bash 不会尝试解释其中的变量或命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost /]# a=&#x27;a\ b&#x27;</span><br><span class="line">[root@localhost /]# echo $a </span><br><span class="line">-&gt;a b</span><br><span class="line"></span><br><span class="line">name=he</span><br><span class="line">echo &#x27;its my $name&#x27;</span><br><span class="line">-&gt;its my $name</span><br></pre></td></tr></table></figure>
+
+<p>4、变量引用，双引号 [ “ “ ]，在双引号内，Bash 会解释变量，并用变量的值替换它。双引号内的 <code>$(command)</code> 或 <code>command</code> 会被执行，并替换为命令的输出。大多数特殊字符在双引号内仍具有特殊含义，但 $, &#96;&#96;, 和 \ 有特殊行为。其中，$ 用于变量替换，&#96; 用于命令替换，而 \ 用于转义下一个字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">name=abc</span><br><span class="line">myname=&quot;its $name&quot;</span><br><span class="line">echo myname</span><br><span class="line">-&gt;its abc</span><br><span class="line"></span><br><span class="line">now=$(date)</span><br><span class="line">echo &quot;today is $now&quot;</span><br><span class="line">-&gt;today is 年月日时间</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>5、环境变量的设置</p>
+<p>export  变量名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">将 name 变量 在其他子程序中执行，需要设置环境变量，其他进程才会获取到值。</span><br><span class="line">[root@localhost /]# name=***</span><br><span class="line">[root@localhost /]# bash 开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# 获取不到</span><br><span class="line">[root@localhost /]# exit 退出子进程</span><br><span class="line">[root@localhost /]# export name 设置环境变量</span><br><span class="line">[root@localhost /]# bash 重新开启子进程</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# ***</span><br></pre></td></tr></table></figure>
+
+
+
+<p>取消变量</p>
+<p>unset 变量名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset name</span><br></pre></td></tr></table></figure>
+
+
+
+<p>变量键盘读取</p>
+<p>read</p>
+<p>read [ -p description ]  [ -t 时间] 变量名 ， -p 是提示信息， -t 是限制时间，单位秒</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">需求： please input name:   在30秒内</span><br><span class="line">[root@localhost /]# read -p &quot;please input name:&quot; -t 30 name</span><br><span class="line">[root@localhost /]# please input name:aa</span><br><span class="line">[root@localhost /]# echo $name</span><br><span class="line">[root@localhost /]# aa</span><br></pre></td></tr></table></figure>
+
+<p>将字符串写入文件</p>
+<pre><code>覆盖文件中内容
+echo 字符串&gt;文件名 
+
+不覆盖文件中内容。
+echo 字符串&gt;&gt;文件名 
+</code></pre>
+<p>正则表达式</p>
+<p>查找特定字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;the&#x27; regularex.txt  在regularex.txt文件中查找有 the 的行，并显示行号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -in &#x27;the&#x27; regularex.txt  在regularex.txt文件中查找有 the 的行，忽略大小写，并显示行号</span><br></pre></td></tr></table></figure>
+
+<p>查找相似字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件中有test 、 taste 两个关键字，需要包含这两个关键字的行都找出来。</span><br><span class="line">grep -n &#x27;t[ea]st&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+<p>反向查找字符串 [^]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查找&#x27;oo&#x27;前不带&#x27;g&#x27;的字符串的行，显示行号</span><br><span class="line">grep -n &#x27;[^g]oo&#x27; regularex.txt</span><br><span class="line">查找&#x27;oo&#x27;前不带&#x27;a-z&#x27;小写字母的行，显示行号</span><br><span class="line">grep -n &#x27;[^a-z]oo&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+<p>行首和行尾 </p>
+<p>行首 ^</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">查找 以 the 开头的行</span><br><span class="line">grep -n &#x27;^the&#x27; regularex.txt</span><br><span class="line">查找 以a-z小写字母开头的行</span><br><span class="line">grep -n &#x27;^[a-z]&#x27; regularex.txt</span><br><span class="line">查找 以英文字母开头的行</span><br><span class="line">grep -n &#x27;^[a-zA-Z]&#x27; regularex.txt</span><br><span class="line">查找 不以英文字母开头的行</span><br><span class="line">grep -n &#x27;^[^[a-zA-Z]&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+<p>行尾 $</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查找以 o 结尾的行</span><br><span class="line">grep -n &#x27;o$&#x27; regularex.txt</span><br><span class="line">查找以 . 结尾的行</span><br><span class="line">grep -n &#x27;\.$&#x27; regularex.txt   ， .需要 \ 转义</span><br></pre></td></tr></table></figure>
+
+<p>查找空白行  ^$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -n &#x27;^$&#x27; regularex.txt </span><br></pre></td></tr></table></figure>
+
+<p>-v 也可以反向匹配</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找非空白行和非 # 开头的行</span><br><span class="line">grep -v &#x27;^$&#x27; regularex.txt | grep -vn &#x27;^#&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep -vn &#x27;^$&#x27; regularex.txt | grep -v &#x27;^#&#x27; 是错的，</span><br><span class="line">行号必须在最后一次的过滤再加，因为在开始加的话，后面的查询语句会将行号作为开头字符。</span><br></pre></td></tr></table></figure>
+
+<p>任意一个字符 .   与重复字符 *</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找 g??d ，以g开头，d结尾的四个字符的字符串所在行</span><br><span class="line">grep &#x27;g..d&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查找 包含 o 的行</span><br><span class="line">grep &#x27;o*&#x27; regularex.txt ，会查出来至少包含0个o的行</span><br><span class="line">查找 至少包含一个 o 的行</span><br><span class="line">grep &#x27;oo*&#x27; regularex.txt</span><br><span class="line">查找 两个 g 之间所有包含 o 的行</span><br><span class="line">grep &#x27;goo*g&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找包含g开头，g结尾的字符串的行</span><br><span class="line">grep &#x27;g.*g&#x27; regularex.txt</span><br></pre></td></tr></table></figure>
+
+
+
+<p>wc 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc 命令</span><br><span class="line">wc -l  统计行数</span><br><span class="line">   -m  统计字符数</span><br></pre></td></tr></table></figure>
+
+<p>统计行数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l &lt; a.txt   统计文本的行数  ，输出9</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -m &lt; a.txt   统计文本的字符数 ，输出 142</span><br></pre></td></tr></table></figure>
+
+<p>不加 &lt;  就会输出文件名， 如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l a.txt   ,输出9 a.txt</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>sed命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#x27;command&#x27; file(s) </span><br><span class="line"></span><br><span class="line">sed [options] -f scriptfile file(s)  这个命令是读取指定脚本文件scriptfile中的命令，用于指定的某个文件</span><br></pre></td></tr></table></figure>
+
+<p>[options] 中的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-e : 可以处理多个命令处理输入的文本文件；</span><br><span class="line">-f &lt;script文件&gt;或--file=&lt;script文件&gt;：以选项中指定的script脚本文件来处理输入的文本文件；</span><br><span class="line">-h或--help：显示帮助；</span><br><span class="line">-n或--quiet或——silent：仅显示script处理后的结果；</span><br><span class="line">-V或--version：显示版本信息。</span><br><span class="line">-i：编辑文件</span><br></pre></td></tr></table></figure>
+
+<p>command 参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">d 删除，删除选择的行。</span><br><span class="line">D 删除模板块的第一行。</span><br><span class="line">s 替换指定字符。</span><br></pre></td></tr></table></figure>
+
+<p>&#x3D;&#x3D;对于 sed  的所有命令，不加 -i ，就是输出修改后的文本内容，但不会保存到原文件&#x3D;&#x3D;</p>
+<p>文本替换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/../..&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;s/book/books&#x27; a.txt</span><br><span class="line">将a.txt 中的所有book 替换为books ，只是输出修改后的内容，但不会保存到原文件。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/book/books&#x27; a.txt</span><br><span class="line">将a.txt 中的所有book 替换为books ,并将修改保存到原文件。</span><br></pre></td></tr></table></figure>
+
+<p>删除行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/^$/d&#x27; a.txt</span><br><span class="line">删除 a.txt中的空白行</span><br><span class="line"></span><br><span class="line">sed &#x27;2d&#x27; a.txt  </span><br><span class="line">删除 a.txt中的第二行</span><br><span class="line"></span><br><span class="line">sed &#x27;2,$d&#x27; a.txt</span><br><span class="line">删除文件的第2行到末尾所有行</span><br><span class="line"></span><br><span class="line">sed &#x27;$d&#x27; file</span><br><span class="line">删除文件最后一行</span><br><span class="line"></span><br><span class="line">sed &#x27;/^test/&#x27;d file</span><br><span class="line">删除文件中所有开头是test的行</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;2d&#x27; a.txt</span><br><span class="line">删除a.txt中的第二行，并保存到原文件。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>执行多条命令，执行结果与顺序有关</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -e</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -e &#x27;1,5d&#x27; -e &#x27;s/test/check/&#x27; file</span><br><span class="line">删除file中的1-5行，然后再将test改为check</span><br></pre></td></tr></table></figure>
+
+
+
+<p>awk 命令</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>夜来风
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/" title="linux系统">https://www.special711.cn/linux/linux系统/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/username">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/channel_name">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="http://img1.baidu.com/it/u=3843244115,1358411576&fm=253&app=138&f=JPEG?w=1634&h=800">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" rel="prev" title="k8s、gitlab、gitlab-runner自动化部署">
+                  <i class="fa fa-angle-left"></i> k8s、gitlab、gitlab-runner自动化部署
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/" rel="next" title="linux系统的安装文档">
+                  linux系统的安装文档 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">夜来风</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">36k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:09</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <span class="exturl github-corner" data-url="aHR0cDovL2V4YW1wbGUuY29tLzQwNA==" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></span>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js","integrity":"sha256-stuqcu2FrjYCXDOytWFA5SoUE/r3nkp6gTglzNSlavU="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"lihuanacct/comment","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
