@@ -32,14 +32,14 @@ sed -i "4s/测试/${first_line1}/" $filename
 sed -i "5s/测试/${first_line2}/" $filename
 
 #测试分类中是否包含杂谈，包含则隐藏文章
-if grep -q "categories: 杂谈" --max-count=5 "$filename"; then  
-	echo "检测到分类为 '杂谈'." 
-	echo "该文章需要隐藏" 
-	echo "开始隐藏"
-	sed -i '3i\hidden: true' $filename
-else 
-	echo "无需隐藏"  
-fi
+#if grep -q "categories: 杂谈" --max-count=5 "$filename"; then  
+#	echo "检测到分类为 '杂谈'." 
+#	echo "该文章需要隐藏" 
+#	echo "开始隐藏"
+#	sed -i '3i\hidden: true' $filename
+#else 
+#	echo "无需隐藏"  
+#fi
 
 
 echo -e "\033[47;30m>>>>>>>>>>>>>>>>>>>>开始复制并删除原文件<<<<<<<<<<<<<<<<<<<<\033[0m"
