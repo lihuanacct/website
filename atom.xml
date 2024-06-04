@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>星猫博客</title>
+  <icon>https://www.special711.cn/fa%20fa-rss</icon>
+  
+  <link href="https://www.special711.cn/atom.xml" rel="self"/>
+  
+  <link href="https://www.special711.cn/"/>
+  <updated>2024-06-03T02:51:34.894Z</updated>
+  <id>https://www.special711.cn/</id>
+  
+  <author>
+    <name>夜来风</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不可见文章</title>
+    <link href="https://www.special711.cn/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/"/>
+    <id>https://www.special711.cn/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/</id>
+    <published>2024-06-02T01:14:46.519Z</published>
+    <updated>2024-06-03T02:51:34.894Z</updated>
+    
+    
+    <summary type="html">不可见文章是因为没有权限浏览，可联系我获取。</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>疫情三年的思考</title>
+    <link href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/</id>
+    <published>2024-06-01T07:59:20.894Z</published>
+    <updated>2024-06-03T02:47:31.038Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;吹哨人&quot;&gt;&lt;a href=&quot;#吹哨人&quot; class=&quot;headerlink&quot; title=&quot;吹哨人&quot;&gt;&lt;/a&gt;吹哨人&lt;/h3&gt;&lt;p&gt;2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的沟通机制，确保一线医务人员的声音能够被听到和重视。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="杂谈" scheme="https://www.special711.cn/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+    <category term="疫情" scheme="https://www.special711.cn/tags/%E7%96%AB%E6%83%85/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编制</title>
+    <link href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6/"/>
+    <id>https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6/</id>
+    <published>2024-06-01T04:04:58.908Z</published>
+    <updated>2024-06-03T02:47:21.884Z</updated>
+    
+    
+    <summary type="html">在中国，只要体制内的工作没有违法犯罪，就不会被解雇，这种观念在劳苦大众思想中根深蒂固。</summary>
+    
+    
+    
+    <category term="杂谈" scheme="https://www.special711.cn/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+    <category term="编制" scheme="https://www.special711.cn/tags/%E7%BC%96%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>儿童节</title>
+    <link href="https://www.special711.cn/%E8%8A%82%E6%97%A5/%E5%84%BF%E7%AB%A5%E8%8A%82/"/>
+    <id>https://www.special711.cn/%E8%8A%82%E6%97%A5/%E5%84%BF%E7%AB%A5%E8%8A%82/</id>
+    <published>2024-05-31T13:38:16.125Z</published>
+    <updated>2024-06-01T04:25:12.211Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;style&gt;  
+@keyframes bounce {  
+  0%, 100% { transform: translateY(0); }  
+  50% { transform: translateY(-20px); }  
+}  
+.bouncing-text { </summary>
+        
+      
+    
+    
+    
+    <category term="节日" scheme="https://www.special711.cn/categories/%E8%8A%82%E6%97%A5/"/>
+    
+    
+    <category term="儿童节" scheme="https://www.special711.cn/tags/%E5%84%BF%E7%AB%A5%E8%8A%82/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>文章发布脚本改进</title>
+    <link href="https://www.special711.cn/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/"/>
+    <id>https://www.special711.cn/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</id>
+    <published>2024-05-31T10:15:15.613Z</published>
+    <updated>2024-05-31T13:21:22.122Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="测试" scheme="https://www.special711.cn/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+    <category term="测试" scheme="https://www.special711.cn/tags/%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL数据库</title>
+    <link href="https://www.special711.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <id>https://www.special711.cn/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
+    <published>2024-05-30T06:39:51.314Z</published>
+    <updated>2024-05-30T15:49:43.841Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;MySQL&quot;&gt;&lt;a href=&quot;#MySQL&quot; class=&quot;headerlink&quot; title=&quot;MySQL&quot;&gt;&lt;/a&gt;MySQL&lt;/h2&gt;&lt;h3 id=&quot;sql语句的分类&quot;&gt;&lt;a href=&quot;#sql语句的分类&quot; class=&quot;headerlink&quot; title=&quot;sql语句的分类&quot;&gt;&lt;/a&gt;sql语句的分类&lt;/h3&gt;&lt;p&gt;DDL：数据定义语言。用来操作数据库，表，列等。&lt;br&gt;DML：数据操作语言。用来对数据库中表的数据进行增删改。&lt;br&gt;DQL：数据查询语言。用来查询数据库中表的记录（数据）。&lt;br&gt;DCL：数据控制语言。用来定义数据库的访问权限和安全级别，及创建用户。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="数据库" scheme="https://www.special711.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="数据库" scheme="https://www.special711.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL安装配置文档</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</id>
+    <published>2024-05-30T06:39:51.303Z</published>
+    <updated>2024-05-30T15:49:41.060Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;安装环境:Win10 64位&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;软件版本:MySQL 5.7.24 解压版&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;一、下载&quot;&gt;&lt;a href=&quot;#一、下载&quot; class=&quot;headerlink&quot; title=&quot;一、下载&quot;&gt;&lt;/a&gt;一、下载&lt;/h2&gt;&lt;p&gt;点开下面的链接：&lt;br&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9kb3dubG9hZHMubXlzcWwuY29tL2FyY2hpdmVzL2NvbW11bml0eS8=&quot;&gt;https://downloads.mysql.com/archives/community/&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="mysql" scheme="https://www.special711.cn/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux系统的网络配置文档</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</id>
+    <published>2024-05-30T06:39:51.288Z</published>
+    <updated>2024-05-30T15:49:38.414Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;进入虚拟网络编辑器&lt;/p&gt;
+&lt;p&gt;选择vmnet8模式，设置子网ip  子网掩码&lt;/p&gt;
+&lt;img src=&quot;https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png&quot; style=&quot;zoom:67%;&quot;&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="linux" scheme="https://www.special711.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux系统的安装文档</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</id>
+    <published>2024-05-30T06:39:51.278Z</published>
+    <updated>2024-05-30T15:49:33.916Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;安装虚拟机，vmware&lt;/p&gt;
+&lt;h3 id=&quot;Debian-安装&quot;&gt;&lt;a href=&quot;#Debian-安装&quot; class=&quot;headerlink&quot; title=&quot;Debian 安装&quot;&gt;&lt;/a&gt;Debian 安装&lt;/h3&gt;&lt;p&gt;下载debian iso镜像&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="linux" scheme="https://www.special711.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux系统</title>
+    <link href="https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://www.special711.cn/linux/linux%E7%B3%BB%E7%BB%9F/</id>
+    <published>2024-05-30T06:39:51.269Z</published>
+    <updated>2024-05-30T15:49:31.465Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;linux 的用户切换&lt;/p&gt;
+&lt;p&gt;​	su - 用户名 ，&lt;/p&gt;
+&lt;p&gt;​		su - user&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="linux" scheme="https://www.special711.cn/categories/linux/"/>
+    
+    
+    <category term="linux" scheme="https://www.special711.cn/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>k8s、gitlab、gitlab-runner自动化部署</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</id>
+    <published>2024-05-30T06:39:51.258Z</published>
+    <updated>2024-05-30T15:49:29.184Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;1、kubernetes 、组件安装及集群搭建教程&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;Dashboard 页面需要在firefox浏览器打开，如果要在chrome&#92;edge浏览器打开，需要安装SSL 证书&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="k8s" scheme="https://www.special711.cn/tags/k8s/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM</title>
+    <link href="https://www.special711.cn/JAVA%E5%9F%BA%E7%A1%80/JVM/"/>
+    <id>https://www.special711.cn/JAVA%E5%9F%BA%E7%A1%80/JVM/</id>
+    <published>2024-05-30T06:39:51.243Z</published>
+    <updated>2024-05-31T03:59:49.933Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;1-内存结构&quot;&gt;&lt;a href=&quot;#1-内存结构&quot; class=&quot;headerlink&quot; title=&quot;1 内存结构&quot;&gt;&lt;/a&gt;1 内存结构&lt;/h1&gt;&lt;h2 id=&quot;1、简述一下JVM的内存结构？-高频&quot;&gt;&lt;a href=&quot;#1、简述一下JVM的内存结构？-高频&quot; class=&quot;headerlink&quot; title=&quot;1、简述一下JVM的内存结构？(高频)&quot;&gt;&lt;/a&gt;1、简述一下JVM的内存结构？(高频)&lt;/h2&gt;&lt;p&gt;JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="JAVA基础" scheme="https://www.special711.cn/categories/JAVA%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="JVM" scheme="https://www.special711.cn/tags/JVM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://www.special711.cn/uncategorized/hello-world/"/>
+    <id>https://www.special711.cn/uncategorized/hello-world/</id>
+    <published>2024-05-30T06:39:51.237Z</published>
+    <updated>2024-05-30T15:49:24.767Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Welcome to &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;星猫博客&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;! This is your very first post. Check &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;documentation&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;troubleshooting&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; or you can ask me on &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tLw==&quot;&gt;GitHub&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;</summary>
+    
+    
+    
+    
+    <category term="世界" scheme="https://www.special711.cn/tags/%E4%B8%96%E7%95%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GitLab部署</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/GitLab%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/GitLab%E9%83%A8%E7%BD%B2/</id>
+    <published>2024-05-30T06:39:51.228Z</published>
+    <updated>2024-05-30T15:49:21.860Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;非私有化访问&lt;/p&gt;
+&lt;p&gt;方式：注册GitLab&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwNTQyODIzL2FydGljbGUvZGV0YWlscy8xMzU0OTU5Mjc=&quot;&gt;https://blog.csdn.net/m0_50542823/article/details/135495927&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="gitlab" scheme="https://www.special711.cn/tags/gitlab/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker、gitlab-runner</title>
+    <link href="https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Docker%E3%80%81gitlab-runner/"/>
+    <id>https://www.special711.cn/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Docker%E3%80%81gitlab-runner/</id>
+    <published>2024-05-30T06:39:51.213Z</published>
+    <updated>2024-05-30T15:42:26.954Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;下面是在master虚拟机进行&lt;br&gt;安装jdk&lt;br&gt;安装maven&lt;/p&gt;
+&lt;p&gt;在docker 中创建卷&lt;br&gt;在 Docker 中，卷是一种用于持久化数据的机制。它允许容器内的数据在容器被删除后仍然保留，并且可以被其他容器共享使用。&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-etc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-opt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+    
+    <category term="docker" scheme="https://www.special711.cn/tags/docker/"/>
+    
+    <category term="gitlab" scheme="https://www.special711.cn/tags/gitlab/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网页端出现的问题</title>
+    <link href="https://www.special711.cn/hexo/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://www.special711.cn/hexo/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2024-05-30T06:39:51.202Z</published>
+    <updated>2024-05-30T15:49:46.537Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;markdown 文件名不能有 + % 等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;或者 在配置中添加 layout: tags layout: categories&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;title: tags&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;date: $&amp;#123;date&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;type: tags&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;layout: &amp;quot;tags&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    
+    
+    
+    <category term="hexo" scheme="https://www.special711.cn/categories/hexo/"/>
+    
+    
+  </entry>
+  
+</feed>
