@@ -1118,11 +1118,6 @@ pre code {
   font-weight: 900;
   color: #d9534f;
 }
-.pdfobject-container iframe,
-.pdfobject-container embed {
-  height: 500px;
-  width: 100%;
-}
 .post-body .tabs {
   margin-bottom: 20px;
 }
@@ -1576,7 +1571,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #1788ff;
+    background: #e0ebff;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2798,9 +2793,6 @@ ul.breadcrumb li:last-child {
     border-bottom-color: #eee;
     color: #eee;
   }
-}
-.utterances {
-  max-width: unset;
 }
 .search-active {
   overflow: hidden;

@@ -328,9 +328,9 @@
     <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-    <category term="docker" scheme="https://www.special711.cn/tags/docker/"/>
-    
     <category term="gitlab" scheme="https://www.special711.cn/tags/gitlab/"/>
+    
+    <category term="docker" scheme="https://www.special711.cn/tags/docker/"/>
     
   </entry>
   
