@@ -1571,7 +1571,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #e0ebff;
+    background: #21ff6f;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1900,12 +1900,12 @@ pre code {
 }
 @media (min-width: 1200px) {
   .footer-inner {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .footer-inner {
-    width: 73%;
+    width: 85%;
   }
 }
 .use-motion .footer {
@@ -2916,7 +2916,7 @@ mark.search-keyword {
 }
 header.header {
   background: var(--content-bg-color);
-  border-radius: initial;
+  border-radius: 20px 20px 20px 20px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
 }
 @media (max-width: 991px) {
@@ -2938,12 +2938,12 @@ header.header {
 }
 @media (min-width: 1200px) {
   .main {
-    width: 1160px;
+    width: 70em;
   }
 }
 @media (min-width: 1600px) {
   .main {
-    width: 73%;
+    width: 85%;
   }
 }
 @media (max-width: 991px) {
@@ -2953,7 +2953,7 @@ header.header {
   }
 }
 .main-inner {
-  border-radius: initial;
+  border-radius: 20px 20px 20px 20px;
   box-sizing: border-box;
   width: calc(100% - 252px);
 }
@@ -3077,7 +3077,7 @@ header.header {
   }
   .sidebar-inner {
     background: var(--content-bg-color);
-    border-radius: initial;
+    border-radius: 20px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
     box-sizing: border-box;
     color: var(--text-color);
@@ -3136,11 +3136,11 @@ header.header {
 .main-inner .comment-position .comments,
 .main-inner .pagination {
   background: var(--content-bg-color);
-  border-radius: initial;
+  border-radius: 20px 20px 20px 20px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
 }
 .main-inner .post-block:not(:first-child):not(:first-child) {
-  border-radius: initial;
+  border-radius: 20px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin-top: 12px;
 }
@@ -3158,7 +3158,7 @@ header.header {
 .main-inner > .comments,
 .main-inner .comment-position .comments,
 .main-inner .pagination {
-  border-radius: initial;
+  border-radius: 20px;
   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
   margin-top: 12px;
 }
@@ -3228,4 +3228,11 @@ header.header {
   .sidebar {
     display: none;
   }
+}
+body {
+  background: url("https://i2.hdslb.com/bfs/archive/6b38ba4732cbafe2e843a667085d4043e1b7279a.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
