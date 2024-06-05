@@ -380,7 +380,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>9 分钟</span>
     </span>
 </div>
 
@@ -394,7 +394,6 @@
           <blockquote>
 <p><strong>中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。</strong></p>
 </blockquote>
-<h3 id="吹哨人"><a href="#吹哨人" class="headerlink" title="吹哨人"></a>吹哨人</h3><p>2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的沟通机制，确保一线医务人员的声音能够被听到和重视。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83/#more" rel="contents">
@@ -504,7 +503,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -648,9 +647,14 @@
 </style>  
 
 <p>今天是<span class="bouncing-text">儿童节</span>！</p>
-
-<p><img src="http://img2.baidu.com/it/u=2468907217,3090369167&fm=253&app=138&f=JPEG?w=1110&h=730" alt="儿童节图片" title="儿童节"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/%E8%8A%82%E6%97%A5/%E5%84%BF%E7%AB%A5%E8%8A%82/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -758,8 +762,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -855,7 +865,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
+      <span>37 分钟</span>
     </span>
 </div>
 
@@ -866,7 +876,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="sql语句的分类"><a href="#sql语句的分类" class="headerlink" title="sql语句的分类"></a>sql语句的分类</h3><p>DDL：数据定义语言。用来操作数据库，表，列等。<br>DML：数据操作语言。用来对数据库中表的数据进行增删改。<br>DQL：数据查询语言。用来查询数据库中表的记录（数据）。<br>DCL：数据控制语言。用来定义数据库的访问权限和安全级别，及创建用户。</p>
+          <h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
@@ -970,7 +980,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -984,7 +994,6 @@
           <blockquote>
 <p><strong>安装环境:Win10 64位</strong><br><strong>软件版本:MySQL 5.7.24 解压版</strong></p>
 </blockquote>
-<h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><p>点开下面的链接：<br><span class="exturl" data-url="aHR0cHM6Ly9kb3dubG9hZHMubXlzcWwuY29tL2FyY2hpdmVzL2NvbW11bml0eS8=">https://downloads.mysql.com/archives/community/<i class="fa fa-external-link-alt"></i></span></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#more" rel="contents">
@@ -1088,7 +1097,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1100,8 +1109,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>进入虚拟网络编辑器</p>
-<p>选择vmnet8模式，设置子网ip  子网掩码</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png" style="zoom:67%;">
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/#more" rel="contents">
@@ -1205,7 +1212,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1217,7 +1224,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>安装虚拟机，vmware</p>
-<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/#more" rel="contents">
@@ -1321,7 +1327,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>16 分钟</span>
     </span>
 </div>
 
@@ -1333,8 +1339,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>linux 的用户切换</p>
-<p>​	su - 用户名 ，</p>
-<p>​		su - user</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/linux/linux%E7%B3%BB%E7%BB%9F/#more" rel="contents">
@@ -1438,7 +1442,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1450,10 +1454,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>1、kubernetes 、组件安装及集群搭建教程</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
-
-
-<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/#more" rel="contents">
@@ -1563,7 +1563,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>10 分钟</span>
+      <span>40 分钟</span>
     </span>
 </div>
 
@@ -1574,7 +1574,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1><h2 id="1、简述一下JVM的内存结构？-高频"><a href="#1、简述一下JVM的内存结构？-高频" class="headerlink" title="1、简述一下JVM的内存结构？(高频)"></a>1、简述一下JVM的内存结构？(高频)</h2><p>JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。</p>
+          <h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/JAVA%E5%9F%BA%E7%A1%80/JVM/#more" rel="contents">
@@ -1681,7 +1681,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">星猫博客<i class="fa fa-external-link-alt"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">documentation<i class="fa fa-external-link-alt"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">troubleshooting<i class="fa fa-external-link-alt"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/uncategorized/hello-world/#more" rel="contents">
@@ -1785,7 +1784,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1797,8 +1796,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>非私有化访问</p>
-<p>方式：注册GitLab</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwNTQyODIzL2FydGljbGUvZGV0YWlscy8xMzU0OTU5Mjc=">https://blog.csdn.net/m0_50542823/article/details/135495927<i class="fa fa-external-link-alt"></i></span></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/GitLab%E9%83%A8%E7%BD%B2/#more" rel="contents">
@@ -1902,7 +1899,7 @@
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>6 分钟</span>
     </span>
 </div>
 
@@ -1914,8 +1911,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>下面是在master虚拟机进行<br>安装jdk<br>安装maven</p>
-<p>在docker 中创建卷<br>在 Docker 中，卷是一种用于持久化数据的机制。它允许容器内的数据在容器被删除后仍然保留，并且可以被其他容器共享使用。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker volume create gitlab-etc</span><br><span class="line">docker volume create gitlab-log</span><br><span class="line">docker volume create gitlab-opt</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/Docker%E3%80%81gitlab-runner/#more" rel="contents">
@@ -2033,13 +2028,6 @@
           <blockquote>
 <p>markdown 文件名不能有 + % 等</p>
 </blockquote>
-<blockquote>
-<p>如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。</p>
-<blockquote>
-<p>或者 在配置中添加 layout: tags layout: categories</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: tags</span><br><span class="line">date: $&#123;date&#125;</span><br><span class="line">type: tags</span><br><span class="line">layout: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/hexo/%E7%BD%91%E9%A1%B5%E7%AB%AF%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
@@ -2091,7 +2079,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">32 分钟</span>
+    <span title="站点阅读时长">2:09</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -2172,5 +2160,5 @@ document.addEventListener('page:loaded', () => {
 });
 </script>
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"live2d-widget-model-koharu  //使用的样式"},"display":{"position":"right","width":180,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/null"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
 </html>

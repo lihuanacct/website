@@ -41,8 +41,7 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;中国在过去三年经历了一场严重的疫情，对社会和经济造成了深远影响。&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;吹哨人&quot;&gt;&lt;a href=&quot;#吹哨人&quot; class=&quot;headerlink&quot; title=&quot;吹哨人&quot;&gt;&lt;/a&gt;吹哨人&lt;/h3&gt;&lt;p&gt;2019年12月，武汉市中心医院的眼科医生李文亮在一个微信群中向同事们发出警告，称有一批疑似SARS的病例出现。他随后被警方训诫，指责他“散布谣言”。1月10日，李文亮感染了新冠病毒并于2月7日去世，年仅34岁。李文亮事件促使中国政府在疫情防控政策上做出了一些调整，更加重视信息公开和舆论引导。医疗系统也开始反思和改进内部的沟通机制，确保一线医务人员的声音能够被听到和重视。&lt;/p&gt;</summary>
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -80,18 +79,18 @@
     <updated>2024-06-01T04:25:12.211Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;style&gt;  
 @keyframes bounce {  
   0%, 100% { transform: translateY(0); }  
   50% { transform: translateY(-20px); }  
 }  
-.bouncing-text { </summary>
-        
-      
+.bouncing-text {  
+  display: inline-block;  
+  animation: bounce 2s infinite;  
+} 
+&lt;/style&gt;  
+
+&lt;p&gt;今天是&lt;span class=&quot;bouncing-text&quot;&gt;儿童节&lt;/span&gt;！&lt;/p&gt;</summary>
     
     
     
@@ -110,13 +109,7 @@
     <updated>2024-05-31T13:21:22.122Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span</summary>
-        
-      
+    <summary type="html">&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;40&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;41&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;42&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;43&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;44&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;45&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;46&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd D:/Develop/workspace/javaworkspace/website/source/temp/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;获取文件名&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#!/bin/bash&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd D:/Develop/workspace/javaworkspace/website/source/temp/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#获取文件名&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;filename=$(ls *.md)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#去掉后缀&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;filename_no_ext=&amp;quot;$&amp;#123;filename%.*&amp;#125;&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;开始写入front-matter&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#获取第一行的内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;first_line1=$(sed -n &amp;#x27;1p&amp;#x27; $filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#获取第二行的内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;first_line2=$(sed -n &amp;#x27;2p&amp;#x27; $filename)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#删除第一行、第二行的内容&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1,2d&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#写入front-matter&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;&#92;n&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;---&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;categories: 测试&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;tags: 测试&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;date: $&amp;#123;date&amp;#125;&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;quot;1i&#92;&#92;title: $&amp;#123;filename_no_ext&amp;#125;&amp;quot; &amp;quot;$filename&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;#x27;1i&#92;---&amp;#x27; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;quot;4s/测试/$&amp;#123;first_line1&amp;#125;/&amp;quot; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sed -i &amp;quot;5s/测试/$&amp;#123;first_line2&amp;#125;/&amp;quot; $filename&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;开始复制并删除原文件&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;amp;&amp;amp; rm -f $(ls *.md)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;发布文章&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd D:/Develop/workspace/javaworkspace/website&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;hexo g&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;npx hexo g&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;echo -e &amp;quot;&#92;033[47;30m&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;hexo d&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&#92;033[0m&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;npx hexo d&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sleep 5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     
@@ -135,7 +128,7 @@
     <updated>2024-05-30T15:49:43.841Z</updated>
     
     
-    <summary type="html">&lt;h2 id=&quot;MySQL&quot;&gt;&lt;a href=&quot;#MySQL&quot; class=&quot;headerlink&quot; title=&quot;MySQL&quot;&gt;&lt;/a&gt;MySQL&lt;/h2&gt;&lt;h3 id=&quot;sql语句的分类&quot;&gt;&lt;a href=&quot;#sql语句的分类&quot; class=&quot;headerlink&quot; title=&quot;sql语句的分类&quot;&gt;&lt;/a&gt;sql语句的分类&lt;/h3&gt;&lt;p&gt;DDL：数据定义语言。用来操作数据库，表，列等。&lt;br&gt;DML：数据操作语言。用来对数据库中表的数据进行增删改。&lt;br&gt;DQL：数据查询语言。用来查询数据库中表的记录（数据）。&lt;br&gt;DCL：数据控制语言。用来定义数据库的访问权限和安全级别，及创建用户。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;MySQL&quot;&gt;&lt;a href=&quot;#MySQL&quot; class=&quot;headerlink&quot; title=&quot;MySQL&quot;&gt;&lt;/a&gt;MySQL&lt;/h2&gt;</summary>
     
     
     
@@ -156,8 +149,7 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;安装环境:Win10 64位&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;软件版本:MySQL 5.7.24 解压版&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;一、下载&quot;&gt;&lt;a href=&quot;#一、下载&quot; class=&quot;headerlink&quot; title=&quot;一、下载&quot;&gt;&lt;/a&gt;一、下载&lt;/h2&gt;&lt;p&gt;点开下面的链接：&lt;br&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9kb3dubG9hZHMubXlzcWwuY29tL2FyY2hpdmVzL2NvbW11bml0eS8=&quot;&gt;https://downloads.mysql.com/archives/community/&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;</summary>
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -176,9 +168,7 @@
     <updated>2024-05-30T15:49:38.414Z</updated>
     
     
-    <summary type="html">&lt;p&gt;进入虚拟网络编辑器&lt;/p&gt;
-&lt;p&gt;选择vmnet8模式，设置子网ip  子网掩码&lt;/p&gt;
-&lt;img src=&quot;https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202404051631873.png&quot; style=&quot;zoom:67%;&quot;&gt;</summary>
+    <summary type="html">&lt;p&gt;进入虚拟网络编辑器&lt;/p&gt;</summary>
     
     
     
@@ -197,8 +187,7 @@
     <updated>2024-05-30T15:49:33.916Z</updated>
     
     
-    <summary type="html">&lt;p&gt;安装虚拟机，vmware&lt;/p&gt;
-&lt;h3 id=&quot;Debian-安装&quot;&gt;&lt;a href=&quot;#Debian-安装&quot; class=&quot;headerlink&quot; title=&quot;Debian 安装&quot;&gt;&lt;/a&gt;Debian 安装&lt;/h3&gt;&lt;p&gt;下载debian iso镜像&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;安装虚拟机，vmware&lt;/p&gt;</summary>
     
     
     
@@ -217,9 +206,7 @@
     <updated>2024-05-30T15:49:31.465Z</updated>
     
     
-    <summary type="html">&lt;p&gt;linux 的用户切换&lt;/p&gt;
-&lt;p&gt;​	su - 用户名 ，&lt;/p&gt;
-&lt;p&gt;​		su - user&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;linux 的用户切换&lt;/p&gt;</summary>
     
     
     
@@ -238,11 +225,7 @@
     <updated>2024-05-30T15:49:29.184Z</updated>
     
     
-    <summary type="html">&lt;p&gt;1、kubernetes 、组件安装及集群搭建教程&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-
-&lt;p&gt;Dashboard 页面需要在firefox浏览器打开，如果要在chrome&#92;edge浏览器打开，需要安装SSL 证书&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;1、kubernetes 、组件安装及集群搭建教程&lt;/p&gt;</summary>
     
     
     
@@ -261,7 +244,7 @@
     <updated>2024-05-31T03:59:49.933Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;1-内存结构&quot;&gt;&lt;a href=&quot;#1-内存结构&quot; class=&quot;headerlink&quot; title=&quot;1 内存结构&quot;&gt;&lt;/a&gt;1 内存结构&lt;/h1&gt;&lt;h2 id=&quot;1、简述一下JVM的内存结构？-高频&quot;&gt;&lt;a href=&quot;#1、简述一下JVM的内存结构？-高频&quot; class=&quot;headerlink&quot; title=&quot;1、简述一下JVM的内存结构？(高频)&quot;&gt;&lt;/a&gt;1、简述一下JVM的内存结构？(高频)&lt;/h2&gt;&lt;p&gt;JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;1-内存结构&quot;&gt;&lt;a href=&quot;#1-内存结构&quot; class=&quot;headerlink&quot; title=&quot;1 内存结构&quot;&gt;&lt;/a&gt;1 内存结构&lt;/h1&gt;</summary>
     
     
     
@@ -280,8 +263,7 @@
     <updated>2024-05-30T15:49:24.767Z</updated>
     
     
-    <summary type="html">&lt;p&gt;Welcome to &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;星猫博客&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;! This is your very first post. Check &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;documentation&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;troubleshooting&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; or you can ask me on &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tLw==&quot;&gt;GitHub&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;</summary>
+    <summary type="html">&lt;p&gt;Welcome to &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;星猫博客&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;! This is your very first post. Check &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;documentation&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==&quot;&gt;troubleshooting&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt; or you can ask me on &lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9naXRodWIuY29tLw==&quot;&gt;GitHub&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;.&lt;/p&gt;</summary>
     
     
     
@@ -298,9 +280,7 @@
     <updated>2024-05-30T15:49:21.860Z</updated>
     
     
-    <summary type="html">&lt;p&gt;非私有化访问&lt;/p&gt;
-&lt;p&gt;方式：注册GitLab&lt;/p&gt;
-&lt;p&gt;&lt;span class=&quot;exturl&quot; data-url=&quot;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwNTQyODIzL2FydGljbGUvZGV0YWlscy8xMzU0OTU5Mjc=&quot;&gt;https://blog.csdn.net/m0_50542823/article/details/135495927&lt;i class=&quot;fa fa-external-link-alt&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;非私有化访问&lt;/p&gt;</summary>
     
     
     
@@ -319,18 +299,16 @@
     <updated>2024-05-30T15:42:26.954Z</updated>
     
     
-    <summary type="html">&lt;p&gt;下面是在master虚拟机进行&lt;br&gt;安装jdk&lt;br&gt;安装maven&lt;/p&gt;
-&lt;p&gt;在docker 中创建卷&lt;br&gt;在 Docker 中，卷是一种用于持久化数据的机制。它允许容器内的数据在容器被删除后仍然保留，并且可以被其他容器共享使用。&lt;/p&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-etc&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-log&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;docker volume create gitlab-opt&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+    <summary type="html">&lt;p&gt;下面是在master虚拟机进行&lt;br&gt;安装jdk&lt;br&gt;安装maven&lt;/p&gt;</summary>
     
     
     
     <category term="环境配置" scheme="https://www.special711.cn/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
     
-    <category term="gitlab" scheme="https://www.special711.cn/tags/gitlab/"/>
-    
     <category term="docker" scheme="https://www.special711.cn/tags/docker/"/>
+    
+    <category term="gitlab" scheme="https://www.special711.cn/tags/gitlab/"/>
     
   </entry>
   
@@ -344,14 +322,7 @@
     
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;markdown 文件名不能有 + % 等&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果出现tags、categories等页面无内容，请检查_config.yml文件，将tags、categories等配置项的path修改为正确的路径。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;或者 在配置中添加 layout: tags layout: categories&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;title: tags&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;date: $&amp;#123;date&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;type: tags&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;layout: &amp;quot;tags&amp;quot;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
+&lt;/blockquote&gt;</summary>
     
     
     
