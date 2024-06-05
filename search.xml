@@ -364,6 +364,27 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/uncategorized/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">星猫博客<i class="fa fa-external-link-alt"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">documentation<i class="fa fa-external-link-alt"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">troubleshooting<i class="fa fa-external-link-alt"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Writing<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Server<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Generating<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+
+<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Deployment<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <tags>
+        <tag>世界</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JVM</title>
     <url>/JAVA%E5%9F%BA%E7%A1%80/JVM/</url>
     <content><![CDATA[<h1 id="1-内存结构"><a href="#1-内存结构" class="headerlink" title="1 内存结构"></a>1 内存结构</h1><h2 id="1、简述一下JVM的内存结构？-高频"><a href="#1、简述一下JVM的内存结构？-高频" class="headerlink" title="1、简述一下JVM的内存结构？(高频)"></a>1、简述一下JVM的内存结构？(高频)</h2><p>JVM在执行Java程序时，会把它管理的内存划分为若干个的区域，每个区域都有自己的用途和创建销毁时间。如下图所示，可以分为两大部分，线程私有区和共享区。</p>
@@ -820,24 +841,86 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/uncategorized/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">星猫博客<i class="fa fa-external-link-alt"></i></span>! This is your very first post. Check <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">documentation<i class="fa fa-external-link-alt"></i></span> for more info. If you get any problems when using Hexo, you can find the answer in <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">troubleshooting<i class="fa fa-external-link-alt"></i></span> or you can ask me on <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLw==">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> youfile</span><br></pre></td></tr></table></figure>
+    <title>k8s、gitlab、gitlab-runner自动化部署</title>
+    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>1、kubernetes 、组件安装及集群搭建教程</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
 
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Writing<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ grep -v <span class="string">&#x27;^#&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
 
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Server<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
+<p>访问路径 <span class="exturl" data-url="aHR0cHM6Ly8xOTIuMTY4LjIyMy4xMjk6MzAwMDkv">https://192.168.223.129:30009<i class="fa fa-external-link-alt"></i></span></p>
+<p>3、gitlab安装</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[GitLab部署.md]: E:\***.md</span><br></pre></td></tr></table></figure>
 
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Generating<i class="fa fa-external-link-alt"></i></span></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">wc</span> <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> _config.yml</span><br></pre></td></tr></table></figure>
+<p>访问路径 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMjIzLjEyOTozMDA4MC8=">http://192.168.223.129:30080<i class="fa fa-external-link-alt"></i></span></p>
+<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
+<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
 
-<p>More info: <span class="exturl" data-url="aHR0cHM6Ly9zcGVjaWFsNzExLmNuLw==">Deployment<i class="fa fa-external-link-alt"></i></span></p>
+
+
+<p>4、gitlab-runner 安装</p>
+<p>vi docker-compose.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
+
+<p>安装java8</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9kb3dubG9hZHMvI2phdmE4">https://www.oracle.com/java/technologies/downloads/#java8<i class="fa fa-external-link-alt"></i></span></p>
+<p>选择 linux x64 tar.gz版本</p>
+<p>解压 包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
+
+<p>添加到环境变量</p>
+<p>vi &#x2F;etc&#x2F;profile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p>安装 maven</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
+
+<p>添加环境变量</p>
+<p>vi &#x2F;etc&#x2F;profile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注册 gitlab -runner</p>
+<p>1、获取token</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" alt="image-20240519092836328"></p>
+<p>注册</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" alt="image-20240519093114352"></p>
+<p>详细过程</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUxNTEwMjM2L2FydGljbGUvZGV0YWlscy8xMzQ4NzQzMjQ=">https://blog.csdn.net/m0_51510236/article/details/134874324<i class="fa fa-external-link-alt"></i></span></p>
+<p>vi dockerfile</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>构建镜像</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
+
+<p>远程推送镜像</p>
+<p>1、阿里云镜像仓库</p>
+<p>具体参考</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jci5jb25zb2xlLmFsaXl1bi5jb20vcmVwb3NpdG9yeS9jbi1oYW5nemhvdS9rOHMtaW1hZ2VzMDEvazhzLXRlc3QvZGV0YWlscw==">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details<i class="fa fa-external-link-alt"></i></span></p>
+<p>2、私有化镜像仓库部署</p>
 ]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
       <tags>
-        <tag>世界</tag>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -1797,89 +1880,6 @@
       </tags>
   </entry>
   <entry>
-    <title>k8s、gitlab、gitlab-runner自动化部署</title>
-    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/k8s%E3%80%81gitlab%E3%80%81gitlab-runner%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p>1、kubernetes 、组件安装及集群搭建教程</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://gitee.com/yooome/golang/blob/main/21-k8s%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/Kubernetes%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B.md#10-dashboard</span><br></pre></td></tr></table></figure>
-
-
-<p>Dashboard 页面需要在firefox浏览器打开，如果要在chrome\edge浏览器打开，需要安装SSL 证书</p>
-<p>访问路径 <span class="exturl" data-url="aHR0cHM6Ly8xOTIuMTY4LjIyMy4xMjk6MzAwMDkv">https://192.168.223.129:30009<i class="fa fa-external-link-alt"></i></span></p>
-<p>3、gitlab安装</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[GitLab部署.md]: E:\***.md</span><br></pre></td></tr></table></figure>
-
-<p>访问路径 <span class="exturl" data-url="aHR0cDovLzE5Mi4xNjguMjIzLjEyOTozMDA4MC8=">http://192.168.223.129:30080<i class="fa fa-external-link-alt"></i></span></p>
-<p>gitlab 部署完，需要设置ssh,可免密拉取代码。</p>
-<p>由于在 Docker 容器中，<code>gitlab-ctl</code> 并不直接暴露给宿主机，因为它在容器的内部环境中。所以需要使用 命令</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker exec -it 容器名或ID gitlab-ctl ***</span><br></pre></td></tr></table></figure>
-
-
-
-<p>4、gitlab-runner 安装</p>
-<p>vi docker-compose.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">service:  </span><br><span class="line">  gitlab-runner:</span><br><span class="line">    image: &#x27;gitlab/gitlab-runner:latest&#x27;</span><br><span class="line">    privileged: true</span><br><span class="line">    container_name: gitlab-runner</span><br><span class="line">    volumes:</span><br><span class="line">      - &#x27;/opt/store/gitlab-runner:/etc/gitlab-runner&#x27;</span><br><span class="line">      - &#x27;/var/run/docker.sock:/var/run/docker.sock&#x27; </span><br><span class="line">    networks:</span><br><span class="line">      - gitlab-runner_default</span><br><span class="line">    restart: always</span><br><span class="line">    </span><br><span class="line">networks:</span><br><span class="line">  gitlab-runner_default:</span><br></pre></td></tr></table></figure>
-
-<p>安装java8</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9kb3dubG9hZHMvI2phdmE4">https://www.oracle.com/java/technologies/downloads/#java8<i class="fa fa-external-link-alt"></i></span></p>
-<p>选择 linux x64 tar.gz版本</p>
-<p>解压 包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir /opt/environment</span><br><span class="line">tar -zxvf jdk-8u411-linux-x64.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加到环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set java environment</span><br><span class="line">JAVA_HOME=/opt/environment/jdk-1.8</span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export JAVA_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<p>安装 maven</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.8.8-bin.tar.gz -C /opt/environment</span><br></pre></td></tr></table></figure>
-
-<p>添加环境变量</p>
-<p>vi &#x2F;etc&#x2F;profile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Set maven environment</span><br><span class="line">MAVEN_HOME=/opt/environment/apache-maven-3.8.8</span><br><span class="line">PATH=$PATH:$MAVEN_HOME/bin</span><br><span class="line">export MAVEN_HOME PATH</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">source /etc/profile  生效</span><br></pre></td></tr></table></figure>
-
-<p>测试</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
-
-
-
-<p>注册 gitlab -runner</p>
-<p>1、获取token</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519092836328.png" alt="image-20240519092836328"></p>
-<p>注册</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gitlab-runner register</span><br><span class="line">因为 gitlab-runner 是通过docker 安装的，所以只能在gitlab-runner容器内运行这个命令</span><br><span class="line"></span><br><span class="line">docker exec -it 容器ID gitlab-runner register</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/image-20240519093114352.png" alt="image-20240519093114352"></p>
-<p>详细过程</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUxNTEwMjM2L2FydGljbGUvZGV0YWlscy8xMzQ4NzQzMjQ=">https://blog.csdn.net/m0_51510236/article/details/134874324<i class="fa fa-external-link-alt"></i></span></p>
-<p>vi dockerfile</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FROM openjdk:8-jdk-slim </span><br><span class="line">COPY ./k8s-test-0.0.1-SNAPSHOT.jar /tmp/app/app.jar</span><br><span class="line">EXPOSE 8090</span><br><span class="line"></span><br><span class="line"># 运行程序</span><br><span class="line">ENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/tmp/app.jar&quot;]</span><br></pre></td></tr></table></figure>
-
-<p>构建镜像</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker build -t k8s-test:1.0 .  后面的 . 代表Dockerfile 所在的目录为当前目录</span><br></pre></td></tr></table></figure>
-
-<p>远程推送镜像</p>
-<p>1、阿里云镜像仓库</p>
-<p>具体参考</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9jci5jb25zb2xlLmFsaXl1bi5jb20vcmVwb3NpdG9yeS9jbi1oYW5nemhvdS9rOHMtaW1hZ2VzMDEvazhzLXRlc3QvZGV0YWlscw==">https://cr.console.aliyun.com/repository/cn-hangzhou/k8s-images01/k8s-test/details<i class="fa fa-external-link-alt"></i></span></p>
-<p>2、私有化镜像仓库部署</p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux系统</title>
     <url>/linux/linux%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>linux 的用户切换</p>
@@ -2282,58 +2282,6 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>linux系统的安装文档</title>
-    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
-    <content><![CDATA[<p>安装虚拟机，vmware</p>
-<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
-<p>进入 debian官网 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGViaWFuLm9yZy8=">https://www.debian.org/<i class="fa fa-external-link-alt"></i></span></p>
-<p>点击其他下载链接</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png">
-
-
-
-<p>点击获取完整镜</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" alt="image-20240329160514227" style="zoom:67%;">
-
-<p>通过 HTTP 下载 CD&#x2F;DVD 映像文件</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" alt="image-20240329160619964" style="zoom:67%;">
-
-<p>选择DVD，amd64</p>
-<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" alt="image-20240329160702026"></p>
-<p>点击下载镜像</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" alt="image-20240329160733488" style="zoom:67%;">
-
-<p>进入vmware安装镜像</p>
-<p>第一步选择安装图像化界面 ，graphic install</p>
-<p>网络配置选择暂不配置</p>
-<p>磁盘分区，选择最大连续空间</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" alt="image-20240329162800220" style="zoom:67%;">
-
-<p>boot (启动)200M， swap (交换区) (虚拟机配置的内存大小，如配置了2G，这里写2G)&#x2F;  ，&#x2F; (根目录，数据存放，依据虚拟机配置的空间)</p>
-<p>也可以设置将所有文件放入同一个分区</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" alt="image-20240329161729770" style="zoom:67%;">
-
-<p>是否使用网络镜像点，选择否，系统自带默认镜像源为阿里云镜像源</p>
-<p>软件选择，桌面选KDE或GNOME</p>
-<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" alt="image-20240329161852601" style="zoom:67%;">
-
-<p>是否添加GRUB启动，选择是</p>
-<p>重启</p>
-<h3 id="U盘做启动盘安装CentOS7"><a href="#U盘做启动盘安装CentOS7" class="headerlink" title="U盘做启动盘安装CentOS7"></a>U盘做启动盘安装CentOS7</h3><p>镜像下载完毕后，插入U盘，用软碟通打开</p>
-<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_4/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
-<p>确认U盘后，选择写入，制作完毕后开始安装。</p>
-<h2 id><a href="#" class="headerlink" title></a></h2><p>插入U盘，进入BIOS设置，将启动顺序设置为USB启动。</p>
-<p>选择Install Centos 7 安装</p>
-<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_6/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
-]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux系统的网络配置文档</title>
     <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<p>进入虚拟网络编辑器</p>
@@ -2413,18 +2361,56 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>不可见文章</title>
-    <url>/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<ul>
-<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83">疫情三年的思考</a></p>
-</li>
-<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6">编制</a></p>
-</li>
-<li><p>未完待续 . . .</p>
-</li>
-</ul>
-<p>文章已被谷歌收录，已可见。</p>
+    <title>linux系统的安装文档</title>
+    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/linux%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<p>安装虚拟机，vmware</p>
+<h3 id="Debian-安装"><a href="#Debian-安装" class="headerlink" title="Debian 安装"></a>Debian 安装</h3><p>下载debian iso镜像</p>
+<p>进入 debian官网 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZGViaWFuLm9yZy8=">https://www.debian.org/<i class="fa fa-external-link-alt"></i></span></p>
+<p>点击其他下载链接</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605808.png">
+
+
+
+<p>点击获取完整镜</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291605303.png" alt="image-20240329160514227" style="zoom:67%;">
+
+<p>通过 HTTP 下载 CD&#x2F;DVD 映像文件</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291606033.png" alt="image-20240329160619964" style="zoom:67%;">
+
+<p>选择DVD，amd64</p>
+<p><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607100.png" alt="image-20240329160702026"></p>
+<p>点击下载镜像</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291607560.png" alt="image-20240329160733488" style="zoom:67%;">
+
+<p>进入vmware安装镜像</p>
+<p>第一步选择安装图像化界面 ，graphic install</p>
+<p>网络配置选择暂不配置</p>
+<p>磁盘分区，选择最大连续空间</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291628305.png" alt="image-20240329162800220" style="zoom:67%;">
+
+<p>boot (启动)200M， swap (交换区) (虚拟机配置的内存大小，如配置了2G，这里写2G)&#x2F;  ，&#x2F; (根目录，数据存放，依据虚拟机配置的空间)</p>
+<p>也可以设置将所有文件放入同一个分区</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291617845.png" alt="image-20240329161729770" style="zoom:67%;">
+
+<p>是否使用网络镜像点，选择否，系统自带默认镜像源为阿里云镜像源</p>
+<p>软件选择，桌面选KDE或GNOME</p>
+<img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403291618689.png" alt="image-20240329161852601" style="zoom:67%;">
+
+<p>是否添加GRUB启动，选择是</p>
+<p>重启</p>
+<h3 id="U盘做启动盘安装CentOS7"><a href="#U盘做启动盘安装CentOS7" class="headerlink" title="U盘做启动盘安装CentOS7"></a>U盘做启动盘安装CentOS7</h3><p>镜像下载完毕后，插入U盘，用软碟通打开</p>
+<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_4/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053754.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
+<p>确认U盘后，选择写入，制作完毕后开始安装。</p>
+<h2 id><a href="#" class="headerlink" title></a></h2><p>插入U盘，进入BIOS设置，将启动顺序设置为USB启动。</p>
+<p>选择Install Centos 7 安装</p>
+<p><a href="https://post.smzdm.com/p/akk9mwe4/pic_6/"><img src="https://picgo-1311649419.cos.ap-guangzhou.myqcloud.com/picgo/202403310053298.png" alt="CentOS 安装全过程，手把手教你打造企业级服务器！"></a></p>
 ]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+      </tags>
   </entry>
   <entry>
     <title>儿童节</title>
@@ -2452,17 +2438,18 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>文章发布脚本改进</title>
-    <url>/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <title>不可见文章</title>
+    <url>/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<ul>
+<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83">疫情三年的思考</a></p>
+</li>
+<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6">编制</a></p>
+</li>
+<li><p>未完待续 . . .</p>
+</li>
+</ul>
+<p>文章已被谷歌收录，已可见。</p>
 ]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
-      </tags>
   </entry>
   <entry>
     <title>疫情三年的思考</title>
@@ -2489,6 +2476,19 @@ echo 字符串&gt;&gt;文件名
       </categories>
       <tags>
         <tag>疫情</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>文章发布脚本改进</title>
+    <url>/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
       </tags>
   </entry>
   <entry>
