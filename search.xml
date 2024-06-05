@@ -212,6 +212,52 @@
       </tags>
   </entry>
   <entry>
+    <title>GitLab部署</title>
+    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/GitLab%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>非私有化访问</p>
+<p>方式：注册GitLab</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwNTQyODIzL2FydGljbGUvZGV0YWlscy8xMzU0OTU5Mjc=">https://blog.csdn.net/m0_50542823/article/details/135495927<i class="fa fa-external-link-alt"></i></span></p>
+<p>私有化部署</p>
+<p>1、使用 docker-compose 配置 gitlab</p>
+<p>安装docker-compose 之前需安装 docker </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>删除 docker</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、安装 docker-compose</p>
+<p>使用 pip安装 docker-compose</p>
+<p>pip install –upgrade pip -i <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuYWxpeXVuLmNvbS9weXBpL3NpbXBsZQ==">http://mirrors.aliyun.com/pypi/simple<i class="fa fa-external-link-alt"></i></span> –trusted-host mirrors.aliyun.com<br>pip install -i <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuYWxpeXVuLmNvbS9weXBpL3NpbXBsZQ==">http://mirrors.aliyun.com/pypi/simple<i class="fa fa-external-link-alt"></i></span> docker-compose –trusted-host mirrors.aliyun.com</p>
+<p>3、安装gitlab</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MzAyMzMwNTczMzgwNjk4MTI0P3NlYXJjaElkPTIwMjQwNTE1MjEwNjE0NDZFQTgwRDE5M0YxRTZCRDExOEUjaGVhZGluZy00">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4<i class="fa fa-external-link-alt"></i></span></p>
+<p>修改 docker-compose.yml 文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
+
+<p>修改 gitlab.rb文件 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启动 docker-compose</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
+
+<p>启动成功后，在网页中打开gitlab</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
+
+<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
+<p>部署过程</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MzQxMzE1MTEzMTU4NTQxMzI3P3NlYXJjaElkPTIwMjQwNTE2MDk0MDQ1RjFBNkVCMDhFRDlFNDRGQzgyQkU=">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>gitlab</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL安装配置文档</title>
     <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/MySQL%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<blockquote>
@@ -2367,50 +2413,18 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>GitLab部署</title>
-    <url>/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/GitLab%E9%83%A8%E7%BD%B2/</url>
-    <content><![CDATA[<p>非私有化访问</p>
-<p>方式：注册GitLab</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwNTQyODIzL2FydGljbGUvZGV0YWlscy8xMzU0OTU5Mjc=">https://blog.csdn.net/m0_50542823/article/details/135495927<i class="fa fa-external-link-alt"></i></span></p>
-<p>私有化部署</p>
-<p>1、使用 docker-compose 配置 gitlab</p>
-<p>安装docker-compose 之前需安装 docker </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo  添加镜像源</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-cli-18.09.3-3.el7.x86_64.rpm  先安装docker-ce-cli，因为先安装docker-ce，会自动升级为新版本</span><br><span class="line"></span><br><span class="line">yum install -y https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/edge/Packages/docker-ce-18.09.3-3.el7.x86_64.rpm</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>删除 docker</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">yum remove -y docker-ce containerd.io </span><br><span class="line">yum remove -y docker-ce-cli containerd.io </span><br><span class="line">yum remove -y docker-ce docker-ce-cli </span><br><span class="line"></span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line">sudo rm -rf /etc/docker</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2、安装 docker-compose</p>
-<p>使用 pip安装 docker-compose</p>
-<p>pip install –upgrade pip -i <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuYWxpeXVuLmNvbS9weXBpL3NpbXBsZQ==">http://mirrors.aliyun.com/pypi/simple<i class="fa fa-external-link-alt"></i></span> –trusted-host mirrors.aliyun.com<br>pip install -i <span class="exturl" data-url="aHR0cDovL21pcnJvcnMuYWxpeXVuLmNvbS9weXBpL3NpbXBsZQ==">http://mirrors.aliyun.com/pypi/simple<i class="fa fa-external-link-alt"></i></span> docker-compose –trusted-host mirrors.aliyun.com</p>
-<p>3、安装gitlab</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MzAyMzMwNTczMzgwNjk4MTI0P3NlYXJjaElkPTIwMjQwNTE1MjEwNjE0NDZFQTgwRDE5M0YxRTZCRDExOEUjaGVhZGluZy00">https://juejin.cn/post/7302330573380698124?searchId=2024051521061446EA80D193F1E6BD118E#heading-4<i class="fa fa-external-link-alt"></i></span></p>
-<p>修改 docker-compose.yml 文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">version: &#x27;3&#x27;  </span><br><span class="line">services:  </span><br><span class="line">  gitlab:  </span><br><span class="line">    image: &#x27;gitlab/gitlab-ce:latest&#x27;  </span><br><span class="line">    container_name: gitlab  </span><br><span class="line">    restart: always </span><br><span class="line">    hostname: &#x27;127.0.0.1&#x27;   </span><br><span class="line">    privileged: true  </span><br><span class="line">    environment:  </span><br><span class="line">      TZ: &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_OMNIBUS_CONFIG: |  </span><br><span class="line">        external_url &#x27;http://192.168.223.129:30080&#x27; # 将&lt;YOUR_HOST_OR_IP&gt;替换为宿主机的IP或域名  </span><br><span class="line">        gitlab_rails[&#x27;registry_external_url&#x27;] = &#x27;http://192.168.223.129:30080&#x27; # 修正registry_external_url的语法  </span><br><span class="line">        gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27;  </span><br><span class="line">      GITLAB_ROOT_PASSWORD: &#x27;***&#x27;  </span><br><span class="line">    ports:  </span><br><span class="line">      - &#x27;30080:30080&#x27; </span><br><span class="line">      - &#x27;443:443&#x27; # 如果你打算使用HTTPS，确保你的证书和配置都正确设置  </span><br><span class="line">      - &#x27;2222:22&#x27;</span><br><span class="line">    volumes:  </span><br><span class="line">      - &#x27;./gitlab/config:/etc/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/logs:/var/log/gitlab&#x27;  </span><br><span class="line">      - &#x27;./gitlab/data:/var/opt/gitlab&#x27;  </span><br><span class="line">    shm_size: &#x27;256m&#x27; </span><br><span class="line"></span><br><span class="line">在Docker Compose文件中，端口映射的格式是 宿主机端口:容器端口。在你给出的配置中，- &#x27;30080:80&#x27; 表示将宿主机的30080端口映射到容器的80端口。</span><br><span class="line"></span><br><span class="line">30080 是宿主机端口（Host port）：这是你希望外部系统（例如你的电脑、网络中的其他计算机或服务）访问GitLab时所使用的端口。</span><br><span class="line">80 是容器端口（Container port）：这是GitLab容器内部监听HTTP请求的端口。GitLab默认使用80端口作为HTTP服务的端口（当然，这可以通过GitLab的配置进行更改）。</span><br></pre></td></tr></table></figure>
-
-<p>修改 gitlab.rb文件 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vi /etc/gitlab/gitlab.rb</span><br><span class="line"></span><br><span class="line">修改以下</span><br><span class="line">external_url &#x27;http://192.168.223.129:30080&#x27;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>启动 docker-compose</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">docker-compose up -d 在docker-compose.yaml文件所在目录启动</span><br></pre></td></tr></table></figure>
-
-<p>启动成功后，在网页中打开gitlab</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://192.168.223.129:30080/  宿主机IP:30080</span><br></pre></td></tr></table></figure>
-
-<p>账号 root 密码 为 docker-compose.yml 中配置的密码</p>
-<p>部署过程</p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC83MzQxMzE1MTEzMTU4NTQxMzI3P3NlYXJjaElkPTIwMjQwNTE2MDk0MDQ1RjFBNkVCMDhFRDlFNDRGQzgyQkU=">https://juejin.cn/post/7341315113158541327?searchId=20240516094045F1A6EB08ED9E44FC82BE<i class="fa fa-external-link-alt"></i></span></p>
+    <title>不可见文章</title>
+    <url>/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/</url>
+    <content><![CDATA[<ul>
+<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83">疫情三年的思考</a></p>
+</li>
+<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6">编制</a></p>
+</li>
+<li><p>未完待续 . . .</p>
+</li>
+</ul>
+<p>文章已被谷歌收录，已可见。</p>
 ]]></content>
-      <categories>
-        <category>环境配置</category>
-      </categories>
-      <tags>
-        <tag>gitlab</tag>
-      </tags>
   </entry>
   <entry>
     <title>儿童节</title>
@@ -2438,18 +2452,17 @@ echo 字符串&gt;&gt;文件名
       </tags>
   </entry>
   <entry>
-    <title>不可见文章</title>
-    <url>/uncategorized/%E4%B8%8D%E5%8F%AF%E8%A7%81%E6%96%87%E7%AB%A0/</url>
-    <content><![CDATA[<ul>
-<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%96%AB%E6%83%85%E4%B8%89%E5%B9%B4%E7%9A%84%E6%80%9D%E8%80%83">疫情三年的思考</a></p>
-</li>
-<li><p><a href="https://www.special711.cn/%E6%9D%82%E8%B0%88/%E7%BC%96%E5%88%B6">编制</a></p>
-</li>
-<li><p>未完待续 . . .</p>
-</li>
-</ul>
-<p>文章已被谷歌收录，已可见。</p>
+    <title>文章发布脚本改进</title>
+    <url>/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
+      <categories>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>测试</tag>
+      </tags>
   </entry>
   <entry>
     <title>疫情三年的思考</title>
@@ -2476,19 +2489,6 @@ echo 字符串&gt;&gt;文件名
       </categories>
       <tags>
         <tag>疫情</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文章发布脚本改进</title>
-    <url>/%E6%B5%8B%E8%AF%95/%E6%96%87%E7%AB%A0%E5%8F%91%E5%B8%83%E8%84%9A%E6%9C%AC%E6%94%B9%E8%BF%9B/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;获取文件名&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website/source/temp/</span><br><span class="line">#获取文件名</span><br><span class="line">filename=$(ls *.md)</span><br><span class="line">#去掉后缀</span><br><span class="line">filename_no_ext=&quot;$&#123;filename%.*&#125;&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始写入front-matter&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">#获取第一行的内容</span><br><span class="line">first_line1=$(sed -n &#x27;1p&#x27; $filename)</span><br><span class="line">#获取第二行的内容</span><br><span class="line">first_line2=$(sed -n &#x27;2p&#x27; $filename)</span><br><span class="line"></span><br><span class="line">#删除第一行、第二行的内容</span><br><span class="line">sed -i &#x27;1,2d&#x27; $filename</span><br><span class="line"></span><br><span class="line">#写入front-matter</span><br><span class="line">sed -i &#x27;1i\\n&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\categories: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\tags: 测试&#x27; $filename</span><br><span class="line">sed -i &#x27;1i\date: $&#123;date&#125;&#x27; $filename</span><br><span class="line">sed -i &quot;1i\\title: $&#123;filename_no_ext&#125;&quot; &quot;$filename&quot;</span><br><span class="line">sed -i &#x27;1i\---&#x27; $filename</span><br><span class="line"></span><br><span class="line">#</span><br><span class="line">sed -i &quot;4s/测试/$&#123;first_line1&#125;/&quot; $filename</span><br><span class="line">sed -i &quot;5s/测试/$&#123;first_line2&#125;/&quot; $filename</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;开始复制并删除原文件&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cp $(ls *.md) D:/Develop/workspace/javaworkspace/website/source/_posts/ &amp;&amp; rm -f $(ls *.md)</span><br><span class="line"></span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;发布文章&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line"></span><br><span class="line">cd D:/Develop/workspace/javaworkspace/website</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">npx hexo d</span><br><span class="line">sleep 5</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
       </tags>
   </entry>
   <entry>
